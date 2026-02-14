@@ -82,10 +82,10 @@ Execute in order. Each step is done only after your consent. Code will be optimi
 
 **Goal:** Login endpoint and simple admin login page; JWT-based; no CRUD yet.
 
-- [ ] 5.1 In `apps/api`: `User` or admin credentials (e.g. env-based admin user + bcrypt hashed password); `POST /api/auth/login` (body: username/password); returns JWT; Zod validation.
-- [ ] 5.2 Auth middleware: verify JWT on `/api/admin/*`; return 401 if invalid.
-- [ ] 5.3 In `apps/web`: route `app/admin/` (or `/admin`); login page form; call login API; store token (httpOnly cookie or memory/localStorage); redirect to dashboard on success; show error on failure.
-- [ ] 5.4 Simple protected layout: if no token, redirect to admin login.
+- [x] 5.1 In `apps/api`: env-based admin (ADMIN_USERNAME, ADMIN_PASSWORD_HASH); `POST /api/auth/login` (bcrypt, jose JWT); Zod validation.
+- [x] 5.2 Auth middleware: verify JWT on `/api/admin/*`; return 401 if invalid; `GET /api/admin/me`.
+- [x] 5.3 In `apps/web`: `/admin/login` form; call login API; store token in localStorage; redirect to `/admin` on success.
+- [x] 5.4 AdminGuard in `app/admin/layout.tsx`; redirect to `/admin/login` if no token (except on login page).
 
 **Deliverable:** Admin can log in; API admin routes protected by JWT.
 
