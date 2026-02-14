@@ -70,8 +70,8 @@ Execute in order. Each step is done only after your consent. Code will be optimi
 
 **Goal:** GitHub Actions build and deploy static site to GitHub Pages; docs for custom domain.
 
-- [ ] 4.1 Add `.github/workflows/deploy-pages.yml`: build `apps/web` (static export), upload artifact, deploy to GitHub Pages.
-- [ ] 4.2 Document in README: how to set Pages source to GitHub Actions; Namecheap CNAME for sameerqadri.me.
+- [x] 4.1 Add `.github/workflows/deploy-pages.yml`: build `apps/web` (static export), upload artifact, deploy to GitHub Pages.
+- [x] 4.2 Document in README: how to set Pages source to GitHub Actions; Namecheap CNAME for sameerqadri.me.
 - [ ] 4.3 (You run) Push to GitHub; enable Pages; optionally add custom domain.
 
 **Deliverable:** One-click deploy to GitHub Pages from main branch.

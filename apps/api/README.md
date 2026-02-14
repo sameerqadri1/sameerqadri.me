@@ -8,6 +8,9 @@ Create `apps/api/.env` or set in the project root `.env`:
 
 - `DATABASE_URL` — PostgreSQL connection string (Neon or local).
 - `API_PORT` — Default 3001.
+- `JWT_SECRET` — Secret for signing JWTs (use a long random string in production).
+- `ADMIN_USERNAME` — Admin login username (default: `admin`).
+- `ADMIN_PASSWORD_HASH` — bcrypt hash of the admin password. Generate with: `node -e "require('bcrypt').hash('your-password', 10).then(h => console.log(h))"` (run from `apps/api` after `npm install`).
 
 ## Commands
 
@@ -30,3 +33,5 @@ Create `apps/api/.env` or set in the project root `.env`:
 - `GET /api/health` — Health check (DB connectivity).
 - `GET /api/case-studies` — List (query: `published`, `featured`, `page`, `limit`).
 - `GET /api/case-studies/:slug` — Single case study by slug.
+- `POST /api/auth/login` — Body: `{ "username", "password" }`. Returns `{ success, data: { token, username } }`.
+- `GET /api/admin/me` — Requires `Authorization: Bearer <token>`. Returns current admin user.

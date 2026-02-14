@@ -1,8 +1,10 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
+import { authRouter } from './routes/auth.js';
 import { caseStudiesRouter } from './routes/case-studies.js';
 import { healthRouter } from './routes/health.js';
+import { adminRouter } from './routes/admin/index.js';
 
 const app = express();
 const PORT = process.env.API_PORT ?? 3001;
@@ -26,7 +28,9 @@ app.use(
 app.use(express.json());
 
 app.use('/api/health', healthRouter);
+app.use('/api/auth', authRouter);
 app.use('/api/case-studies', caseStudiesRouter);
+app.use('/api/admin', adminRouter);
 
 app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   console.error(err);

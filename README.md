@@ -19,6 +19,12 @@ TypeScript frontend (Next.js, static export) + Node.js backend (Express, Prisma)
 
 **Build cache:** The first `next build` may show “No build cache found”; this is normal. Later builds use `.next/cache`. For CI (e.g. GitHub Actions), persist `.next/cache` per [Next.js CI build caching](https://nextjs.org/docs/app/guides/ci-build-caching).
 
+## Deploy (GitHub Pages)
+
+1. **Enable Pages:** Repo → **Settings** → **Pages** → **Build and deployment** → Source: **GitHub Actions**.
+2. Push to `main` (or run the workflow manually); the **Deploy to GitHub Pages** workflow builds the static site and deploys it.
+3. **Custom domain (Namecheap):** In GitHub **Settings → Pages**, set **Custom domain** to `sameerqadri.me`. In Namecheap: **Advanced DNS** → add **CNAME Record**: Host `@`, Value `sameerqadri1.github.io` (or your Pages URL from GitHub). For `www`, add CNAME Host `www`, Value `sameerqadri1.github.io`. Enforce HTTPS in GitHub after DNS propagates.
+
 ## Domain
 
 Custom domain: **sameerqadri.me** (Namecheap) → GitHub Pages.
