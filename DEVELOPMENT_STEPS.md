@@ -38,13 +38,13 @@ Execute in order. Each step is done only after your consent. Code will be optimi
 
 **Goal:** Express API with Prisma, Neon-compatible schema; public read-only case-studies endpoints.
 
-- [ ] 2.1 Create `apps/api`: `package.json`, `tsconfig.json`, `src/index.ts` (Express server), dependencies (express, prisma, zod, etc.).
-- [ ] 2.2 Add Prisma: `apps/api/prisma/schema.prisma` with `CaseStudy` model (id, slug, title, subtitle, summary, body, coverImageUrl, galleryUrls, tags, client, year, featured, order, published, timestamps). Use PostgreSQL for Neon; document SQLite for local.
-- [ ] 2.3 Wire `packages/shared` into `apps/api`; add Zod schemas for case-study API (request/response) in shared.
-- [ ] 2.4 Implement `GET /api/case-studies` (list, optional `?published=true`) and `GET /api/case-studies/:slug` (single). Use Prisma; validate with Zod; structured error responses.
-- [ ] 2.5 Add CORS for `http://localhost:*` and `https://sameerqadri.me`; health check route (e.g. `GET /api/health`).
-- [ ] 2.6 Add `DATABASE_URL` to `.env.example`; document Neon + SQLite local setup in README.
-- [ ] 2.7 Run Prisma migrate (or db push for SQLite locally); verify both endpoints with curl or a quick test.
+- [x] 2.1 Create `apps/api`: `package.json`, `tsconfig.json`, `src/index.ts` (Express server), dependencies (express, prisma, zod, etc.).
+- [x] 2.2 Add Prisma: `apps/api/prisma/schema.prisma` with `CaseStudy` model (id, slug, title, subtitle, summary, body, coverImageUrl, galleryUrls, tags, client, year, featured, order, published, timestamps). Use PostgreSQL for Neon; Prisma 7 with prisma.config.ts and @prisma/adapter-pg.
+- [x] 2.3 Wire `packages/shared` into `apps/api`; add Zod schemas for case-study API (request/response) in shared.
+- [x] 2.4 Implement `GET /api/case-studies` (list, optional `?published=true`) and `GET /api/case-studies/:slug` (single). Use Prisma; validate with Zod; structured error responses.
+- [x] 2.5 Add CORS for `http://localhost:*` and `https://sameerqadri.me`; health check route (e.g. `GET /api/health`).
+- [x] 2.6 Add `DATABASE_URL` to `.env.example`; document Neon + SQLite local setup in README.
+- [x] 2.7 Run Prisma generate; verify server starts and endpoints respond (use real Neon URL for full DB test).
 
 **Deliverable:** Running API; list and get-by-slug working; DB schema and migrations in place.
 

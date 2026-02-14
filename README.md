@@ -9,11 +9,13 @@ TypeScript frontend (Next.js, static export) + Node.js backend (Express, Prisma)
 - `apps/api` — Express API, Prisma, Neon PostgreSQL
 - `packages/shared` — Shared types and Zod schemas
 
-## Setup (after monorepo is in place)
+## Setup
 
-1. Copy `.env.example` to `.env` and fill in values.
-2. `pnpm install`
-3. `pnpm dev` — runs web + API (when added)
+1. Copy `.env.example` to `.env` in the project root (and in `apps/api` if running API alone).
+2. **Database (Neon):** Create a free PostgreSQL project at [neon.tech](https://neon.tech). Set `DATABASE_URL` in `.env` to the connection string. For local dev you can use the same Neon DB or a local Postgres.
+3. `npm install`
+4. **API:** From root: `npm run db:generate -w @portfolio/api` then `npm run dev -w @portfolio/api`. Or from `apps/api`: `npx prisma generate && npm run dev`.
+5. **Web:** (Step 3) `npm run dev -w apps/web` when the frontend exists.
 
 ## Domain
 
