@@ -21,9 +21,10 @@ TypeScript frontend (Next.js, static export) + Node.js backend (Express, Prisma)
 
 ## Deploy (GitHub Pages)
 
-1. **Enable Pages:** Repo → **Settings** → **Pages** → **Build and deployment** → Source: **GitHub Actions**.
-2. Push to `main` (or run the workflow manually); the **Deploy to GitHub Pages** workflow builds the static site and deploys it.
-3. **Custom domain (Namecheap):** In GitHub **Settings → Pages**, set **Custom domain** to `sameerqadri.me`. In Namecheap: **Advanced DNS** → add **CNAME Record**: Host `@`, Value `sameerqadri1.github.io` (or your Pages URL from GitHub). For `www`, add CNAME Host `www`, Value `sameerqadri1.github.io`. Enforce HTTPS in GitHub after DNS propagates.
+**You must enable Pages before the workflow can deploy.** Otherwise you get a 404 from the deploy step.
+
+1. **Enable Pages:** Repo → **Settings** → **Pages** → **Build and deployment** → Source: **GitHub Actions**. Then push to `main` or run the **Deploy to GitHub Pages** workflow from the Actions tab.
+2. **Custom domain:** In **Settings → Pages** set Custom domain to `sameerqadri.me`; in Namecheap add CNAME for `@` and `www` to `sameerqadri1.github.io`. See **[DEPLOY.md](DEPLOY.md)** for step-by-step and DNS details.
 
 ## Domain
 

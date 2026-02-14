@@ -1,3 +1,7 @@
+# Deploy static site to GitHub Pages.
+# Before first run: enable Pages in repo Settings → Pages → Source: GitHub Actions.
+# See DEPLOY.md for full steps and custom domain (sameerqadri.me).
+
 name: Deploy to GitHub Pages
 
 on:
