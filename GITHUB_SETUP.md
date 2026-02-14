@@ -23,25 +23,17 @@ Use `--global` to set for all repos. To fix the initial commit author: `git comm
 
 ## 2. Connect this folder to the new repo
 
-In the project root (`portfolio-website`), run (replace with your username and repo name):
+**Done.** The remote is set to SSH:
 
-```bash
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-```
+- **origin:** `git@github.com:sameerqadri1/sameerqadri.me.git`
 
-Example:
+## 3. Push the initial commit (run this on your machine)
 
-```bash
-git remote add origin https://github.com/sameerqadri/portfolio-website.git
-```
-
-## 3. Push the initial commit
+In your project folder, run (SSH key must be added to GitHub):
 
 ```bash
 git push -u origin main
 ```
-
-If GitHub prompts for auth, use a **Personal Access Token** (Settings → Developer settings → Personal access tokens) or SSH (add your SSH key to GitHub and use `git@github.com:YOUR_USERNAME/YOUR_REPO_NAME.git` as remote).
 
 ## 4. Verify
 

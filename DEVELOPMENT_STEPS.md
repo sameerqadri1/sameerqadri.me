@@ -8,14 +8,14 @@ Execute in order. Each step is done only after your consent. Code will be optimi
 
 **Goal:** Dev environment ready (Node, pnpm, Git); repo created and connected so all work lives on GitHub from the start.
 
-- [ ] 0.1 **Environment:** Ensure Node.js (v20+ or v22 LTS recommended) and npm are installed. Install pnpm globally if needed (`npm install -g pnpm`). Verify with `node -v`, `pnpm -v`.
-- [ ] 0.2 **Git:** Initialize Git in the project root if not already (`git init`). Set `user.name` and `user.email` if needed for this machine.
+- [x] 0.1 **Environment:** Ensure Node.js (v20+ or v22 LTS recommended) and npm are installed. Install pnpm globally if needed (`npm install -g pnpm`). Verify with `node -v`, `pnpm -v`.
+- [x] 0.2 **Git:** Initialize Git in the project root if not already (`git init`). Set `user.name` and `user.email` if needed for this machine.
 - [ ] 0.3 **GitHub repo:** Create a new **private** repository on GitHub (e.g. `portfolio-website` or `sameerqadri.me`). Do not add a README, .gitignore, or license (we will add them).
 - [ ] 0.4 **Connect local to GitHub:** Add the GitHub repo as remote (`git remote add origin https://github.com/<your-username>/<repo-name>.git`). Ensure `main` is the default branch.
-- [ ] 0.5 **Initial commit and push:** Add a minimal `.gitignore` (at least `node_modules`, `.env`) and an initial `README.md`; commit and push to `main` so the repo is in sync.
+- [x] 0.5 **Initial commit and push:** Add a minimal `.gitignore` (at least `node_modules`, `.env`) and an initial `README.md`; commit and push to `main` so the repo is in sync.
 - [ ] 0.6 Verify: `git status` clean after push; repo visible on GitHub as private.
 
-**Deliverable:** Local environment ready; project connected to your private GitHub repo; first push done. All later steps will be committed and pushed to this repo.
+**Deliverable:** Local environment ready; initial commit done. **You:** create private GitHub repo, add remote, push (see [GITHUB_SETUP.md](GITHUB_SETUP.md)). After that, all later steps will be committed and pushed to this repo.
 
 ---
 
