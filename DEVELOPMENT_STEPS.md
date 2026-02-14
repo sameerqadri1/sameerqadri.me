@@ -54,13 +54,13 @@ Execute in order. Each step is done only after your consent. Code will be optimi
 
 **Goal:** Next.js app with static export, Tailwind, dark theme, home page structure (Dark Model Homepage Detailed placeholders).
 
-- [ ] 3.1 Create `apps/web`: Next.js 16 (App Router), `output: 'export'`, TypeScript, Tailwind 4.
-- [ ] 3.2 Add `packages/shared` as workspace dependency; `NEXT_PUBLIC_API_URL` in env.
-- [ ] 3.3 Global layout: dark theme (background, text, accent), root layout with metadata and font.
-- [ ] 3.4 Home page sections (placeholders): Hero, About/Intro, Featured case studies (static or fetch from API at build/client), CTA, Footer. Semantic HTML and Tailwind; no hardcoded case data yet if API not called.
-- [ ] 3.5 Shared components: `Section`, `Button`, `Card` (or similar) for reuse.
+- [x] 3.1 Create `apps/web`: Next.js 15 (App Router), `output: 'export'`, TypeScript, Tailwind 4.
+- [x] 3.2 Add `packages/shared` as workspace dependency; `NEXT_PUBLIC_API_URL` in env.
+- [x] 3.3 Global layout: dark theme (background, text, accent), root layout with metadata and font.
+- [x] 3.4 Home page sections (placeholders): Hero, About/Intro, Featured case studies (static or fetch from API at build/client), CTA, Footer. Semantic HTML and Tailwind; no hardcoded case data yet if API not called.
+- [x] 3.5 Shared components: `Section`, `Button`, `Card` (or similar) for reuse.
 - [ ] 3.6 Fetch case studies from API (client-side or build-time) for the “featured” block; handle loading and error states.
-- [ ] 3.7 Verify: `pnpm build` in `apps/web` produces static export; no server-only APIs used.
+- [x] 3.7 Verify: `npm run build` in `apps/web` produces static export; no server-only APIs used.
 
 **Deliverable:** Static exportable Next.js app; dark homepage with sections; optional case studies from API.
 
