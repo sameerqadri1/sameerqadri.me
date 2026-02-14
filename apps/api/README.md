@@ -35,3 +35,8 @@ Create `apps/api/.env` or set in the project root `.env`:
 - `GET /api/case-studies/:slug` — Single case study by slug.
 - `POST /api/auth/login` — Body: `{ "username", "password" }`. Returns `{ success, data: { token, username } }`.
 - `GET /api/admin/me` — Requires `Authorization: Bearer <token>`. Returns current admin user.
+- `GET /api/admin/case-studies` — List all case studies (admin).
+- `GET /api/admin/case-studies/:id` — Get one by id.
+- `POST /api/admin/case-studies` — Create (body: CaseStudyCreate).
+- `PUT /api/admin/case-studies/:id` — Update (body: CaseStudyUpdate).
+- `DELETE /api/admin/case-studies/:id` — Delete.

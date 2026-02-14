@@ -95,9 +95,9 @@ Execute in order. Each step is done only after your consent. Code will be optimi
 
 **Goal:** Admin UI to list, create, edit, delete case studies; API endpoints for admin.
 
-- [ ] 6.1 API: `GET/POST /api/admin/case-studies`, `GET/PUT/DELETE /api/admin/case-studies/:id`. All protected; validate body with Zod; slug uniqueness.
-- [ ] 6.2 Admin pages: list (table or cards), create form, edit form (load by id/slug); delete with confirmation. Wire to API with TanStack Query (or fetch) and error handling.
-- [ ] 6.3 Form fields: title, subtitle, slug, summary, body (textarea or markdown), cover image URL (Step 7 will add upload), gallery URLs, tags, client, year, featured, order, published.
+- [x] 6.1 API: `GET/POST /api/admin/case-studies`, `GET/PUT/DELETE /api/admin/case-studies/:id`. All protected; validate body with Zod; slug uniqueness.
+- [x] 6.2 Admin pages: list (table), create form, edit form (query ?id=); delete with confirmation. Wire to API with fetch and error handling.
+- [x] 6.3 Form fields: title, subtitle, slug, summary, body (textarea), cover image URL, gallery URLs, tags, client, year, featured, order, published.
 
 **Deliverable:** Full admin CRUD for case studies; public API still read-only.
 
