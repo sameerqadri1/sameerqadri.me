@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import { cn } from '../lib/utils';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -8,11 +9,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Sameer Qadri | Portfolio',
-  description: 'Portfolio and case studies — sameerqadri.me',
+  title: 'Senior Full-Stack Developer | Digital Business Builder',
+  description:
+    'Transforming complex requirements into high-conversion Shopify Plus and custom full-stack ecosystems. Scaling brands from 0 to 10k+ daily orders.',
   openGraph: {
-    title: 'Sameer Qadri | Portfolio',
-    description: 'Portfolio and case studies — sameerqadri.me',
+    title: 'Senior Full-Stack Developer | Digital Business Builder',
+    description:
+      'Transforming complex requirements into high-conversion Shopify Plus and custom full-stack ecosystems.',
   },
 };
 
@@ -23,8 +26,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body
-        className={`${inter.variable} font-sans antialiased bg-[var(--color-bg)] text-[var(--color-text)] min-h-screen`}
+        className={cn(
+          'min-h-screen bg-background text-foreground font-sans antialiased',
+          inter.variable,
+        )}
       >
         {children}
       </body>
