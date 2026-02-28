@@ -16,32 +16,26 @@ export default function AdminDashboardPage() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-12">
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <h1 className="text-2xl font-semibold text-[var(--color-text)]">
-          Admin
-        </h1>
+        <h1 className="text-2xl font-semibold text-foreground">Admin</h1>
         <div className="flex gap-4">
-          <Link
-            href="/admin/case-studies/"
-            className="text-[var(--color-accent)] hover:underline"
-          >
+          <Link href="/admin/case-studies/" className="text-primary hover:underline">
             Case studies
           </Link>
           <button
             type="button"
             onClick={handleLogout}
-            className="text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+            className="text-muted-foreground hover:text-foreground"
           >
             Log out
           </button>
         </div>
       </div>
-      <p className="mt-6 text-[var(--color-text-muted)]">
-        You&apos;re logged in. Use the links above to manage case studies (CRUD
-        coming in the next step).
+      <p className="mt-6 text-muted-foreground">
+        You&apos;re logged in. Use the links above to manage case studies.
       </p>
       <Link
         href="/"
-        className="mt-6 inline-block text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+        className="mt-6 inline-block text-sm text-muted-foreground hover:text-foreground"
       >
         ← Back to site
       </Link>

@@ -44,14 +44,12 @@ export default function AdminLoginPage() {
 
   return (
     <div className="mx-auto flex min-h-[80vh] max-w-sm flex-col justify-center px-6">
-      <h1 className="text-2xl font-semibold text-[var(--color-text)]">
-        Admin login
-      </h1>
+      <h1 className="text-2xl font-semibold text-foreground">Admin login</h1>
       <form onSubmit={handleSubmit} className="mt-8 space-y-6">
         <div>
           <label
             htmlFor="username"
-            className="block text-sm font-medium text-[var(--color-text-muted)]"
+            className="block text-sm font-medium text-muted-foreground"
           >
             Username
           </label>
@@ -62,13 +60,13 @@ export default function AdminLoginPage() {
             onChange={(e) => setUsername(e.target.value)}
             required
             autoComplete="username"
-            className="mt-2 w-full rounded-lg border border-white/20 bg-[var(--color-bg-elevated)] px-4 py-3 text-[var(--color-text)] focus:border-[var(--color-accent)] focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)]"
+            className="mt-2 w-full rounded-lg border border-border bg-card px-4 py-3 text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
           />
         </div>
         <div>
           <label
             htmlFor="password"
-            className="block text-sm font-medium text-[var(--color-text-muted)]"
+            className="block text-sm font-medium text-muted-foreground"
           >
             Password
           </label>
@@ -79,7 +77,7 @@ export default function AdminLoginPage() {
             onChange={(e) => setPassword(e.target.value)}
             required
             autoComplete="current-password"
-            className="mt-2 w-full rounded-lg border border-white/20 bg-[var(--color-bg-elevated)] px-4 py-3 text-[var(--color-text)] focus:border-[var(--color-accent)] focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)]"
+            className="mt-2 w-full rounded-lg border border-border bg-card px-4 py-3 text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
           />
         </div>
         {error && (
@@ -90,14 +88,14 @@ export default function AdminLoginPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded-lg bg-[var(--color-accent)] px-4 py-3 font-medium text-white hover:bg-[var(--color-accent-hover)] disabled:opacity-50"
+          className="w-full rounded-lg bg-primary px-4 py-3 font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
         >
           {loading ? 'Signing in…' : 'Sign in'}
         </button>
       </form>
       <Link
         href="/"
-        className="mt-6 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+        className="mt-6 text-sm text-muted-foreground hover:text-foreground"
       >
         ← Back to site
       </Link>

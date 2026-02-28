@@ -7,9 +7,7 @@ export default function AdminLayout({
 }) {
   return (
     <AdminGuard>
-      <div className="min-h-screen bg-[var(--color-bg)]">
-        {children}
-      </div>
+      <div className="min-h-screen bg-background">{children}</div>
     </AdminGuard>
   );
 }

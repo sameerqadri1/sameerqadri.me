@@ -49,16 +49,19 @@ export default function NewCaseStudyPage() {
     setError('');
     setLoading(true);
     try {
-      const slug = (form.slug as string)?.trim() || (form.title as string)?.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') || 'untitled';
-      const title = (form.title as string)?.trim() || 'Untitled';
-      const summary = (form.summary as string)?.trim() || '';
-      const body = (form.body as string)?.trim() || '';
+      const slug =
+        (form.slug as string)?.trim() ||
+        (form.title as string)
+          ?.toLowerCase()
+          .replace(/\s+/g, '-')
+          .replace(/[^a-z0-9-]/g, '') ||
+        'untitled';
       const payload: CaseStudyCreate = {
         ...form,
         slug,
-        title,
-        summary,
-        body,
+        title: (form.title as string)?.trim() || 'Untitled',
+        summary: (form.summary as string)?.trim() || '',
+        body: (form.body as string)?.trim() || '',
         subtitle: (form.subtitle as string)?.trim() || undefined,
         coverImageUrl: (form.coverImageUrl as string)?.trim() || undefined,
         galleryUrls: Array.isArray(form.galleryUrls)
@@ -80,13 +83,10 @@ export default function NewCaseStudyPage() {
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-12">
-      <Link
-        href="/admin/case-studies/"
-        className="text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
-      >
+      <Link href="/admin/case-studies/" className="text-muted-foreground hover:text-foreground">
         ← Case studies
       </Link>
-      <h1 className="mt-6 text-2xl font-semibold text-[var(--color-text)]">
+      <h1 className="mt-6 text-2xl font-semibold text-foreground">
         New case study
       </h1>
       {error && (
@@ -150,7 +150,10 @@ export default function NewCaseStudyPage() {
             onChange={(e) =>
               update(
                 'tags',
-                e.target.value.split(',').map((s) => s.trim()).filter(Boolean)
+                e.target.value
+                  .split(',')
+                  .map((s) => s.trim())
+                  .filter(Boolean)
               )
             }
             placeholder="web, design, branding"
@@ -183,7 +186,7 @@ export default function NewCaseStudyPage() {
               checked={form.featured}
               onChange={(e) => update('featured', e.target.checked)}
             />
-            <span className="text-[var(--color-text)]">Featured</span>
+            <span className="text-foreground">Featured</span>
           </label>
           <label className="flex items-center gap-2">
             <input
@@ -191,7 +194,7 @@ export default function NewCaseStudyPage() {
               checked={form.published}
               onChange={(e) => update('published', e.target.checked)}
             />
-            <span className="text-[var(--color-text)]">Published</span>
+            <span className="text-foreground">Published</span>
           </label>
         </div>
         <Field label="Order (number for sorting)">
@@ -206,13 +209,13 @@ export default function NewCaseStudyPage() {
           <button
             type="submit"
             disabled={loading}
-            className="rounded-lg bg-[var(--color-accent)] px-6 py-2 font-medium text-white hover:bg-[var(--color-accent-hover)] disabled:opacity-50"
+            className="rounded-lg bg-primary px-6 py-2 font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
           >
             {loading ? 'Creating…' : 'Create'}
           </button>
           <Link
             href="/admin/case-studies/"
-            className="rounded-lg border border-white/20 px-6 py-2 font-medium text-[var(--color-text)] hover:border-white/40"
+            className="rounded-lg border border-border px-6 py-2 font-medium text-foreground hover:border-border/80"
           >
             Cancel
           </Link>
@@ -233,11 +236,11 @@ function Field({
 }) {
   return (
     <div>
-      <label className="mb-1 block text-sm font-medium text-[var(--color-text-muted)]">
+      <label className="mb-1 block text-sm font-medium text-muted-foreground">
         {label}
         {required && ' *'}
       </label>
-      <div className="mt-1 [&_.input]:w-full [&_.input]:rounded-lg [&_.input]:border [&_.input]:border-white/20 [&_.input]:bg-[var(--color-bg-elevated)] [&_.input]:px-4 [&_.input]:py-2 [&_.input]:text-[var(--color-text)] [&_.input]:focus:border-[var(--color-accent)] [&_.input]:focus:outline-none [&_.input]:focus:ring-1 [&_.input]:focus:ring-[var(--color-accent)]">
+      <div className="mt-1 [&_.input]:w-full [&_.input]:rounded-lg [&_.input]:border [&_.input]:border-border [&_.input]:bg-card [&_.input]:px-4 [&_.input]:py-2 [&_.input]:text-foreground [&_.input]:focus:border-primary [&_.input]:focus:outline-none [&_.input]:focus:ring-1 [&_.input]:focus:ring-primary">
         {children}
       </div>
     </div>

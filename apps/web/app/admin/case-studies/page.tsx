@@ -40,18 +40,18 @@ export default function AdminCaseStudiesPage() {
       <div className="flex flex-wrap items-center justify-between gap-4">
         <Link
           href="/admin/"
-          className="text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+          className="text-muted-foreground hover:text-foreground"
         >
           ← Dashboard
         </Link>
         <Link
           href="/admin/case-studies/new/"
-          className="rounded-lg bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--color-accent-hover)]"
+          className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
         >
           New case study
         </Link>
       </div>
-      <h1 className="mt-6 text-2xl font-semibold text-[var(--color-text)]">
+      <h1 className="mt-6 text-2xl font-semibold text-foreground">
         Case studies
       </h1>
 
@@ -62,11 +62,11 @@ export default function AdminCaseStudiesPage() {
       )}
 
       {loading && (
-        <p className="mt-6 text-[var(--color-text-muted)]">Loading…</p>
+        <p className="mt-6 text-muted-foreground">Loading…</p>
       )}
 
       {!loading && items.length === 0 && (
-        <p className="mt-6 text-[var(--color-text-muted)]">
+        <p className="mt-6 text-muted-foreground">
           No case studies yet. Create one to get started.
         </p>
       )}
@@ -75,20 +75,20 @@ export default function AdminCaseStudiesPage() {
         <div className="mt-6 overflow-x-auto">
           <table className="w-full border-collapse text-left text-sm">
             <thead>
-              <tr className="border-b border-white/10">
-                <th className="pb-3 pr-4 font-medium text-[var(--color-text-muted)]">
+              <tr className="border-b border-border">
+                <th className="pb-3 pr-4 font-medium text-muted-foreground">
                   Title
                 </th>
-                <th className="pb-3 pr-4 font-medium text-[var(--color-text-muted)]">
+                <th className="pb-3 pr-4 font-medium text-muted-foreground">
                   Slug
                 </th>
-                <th className="pb-3 pr-4 font-medium text-[var(--color-text-muted)]">
+                <th className="pb-3 pr-4 font-medium text-muted-foreground">
                   Status
                 </th>
-                <th className="pb-3 pr-4 font-medium text-[var(--color-text-muted)]">
+                <th className="pb-3 pr-4 font-medium text-muted-foreground">
                   Featured
                 </th>
-                <th className="pb-3 font-medium text-[var(--color-text-muted)]">
+                <th className="pb-3 font-medium text-muted-foreground">
                   Actions
                 </th>
               </tr>
@@ -97,32 +97,28 @@ export default function AdminCaseStudiesPage() {
               {items.map((study) => (
                 <tr
                   key={study.id}
-                  className="border-b border-white/5 hover:bg-white/5"
+                  className="border-b border-border/40 hover:bg-card/60"
                 >
-                  <td className="py-3 pr-4 text-[var(--color-text)]">
-                    {study.title}
-                  </td>
-                  <td className="py-3 pr-4 text-[var(--color-text-muted)]">
+                  <td className="py-3 pr-4 text-foreground">{study.title}</td>
+                  <td className="py-3 pr-4 text-muted-foreground">
                     {study.slug}
                   </td>
                   <td className="py-3 pr-4">
                     <span
                       className={
-                        study.published
-                          ? 'text-green-400'
-                          : 'text-[var(--color-text-muted)]'
+                        study.published ? 'text-green-400' : 'text-muted-foreground'
                       }
                     >
                       {study.published ? 'Published' : 'Draft'}
                     </span>
                   </td>
-                  <td className="py-3 pr-4 text-[var(--color-text-muted)]">
+                  <td className="py-3 pr-4 text-muted-foreground">
                     {study.featured ? 'Yes' : '—'}
                   </td>
                   <td className="py-3">
                     <Link
                       href={`/admin/case-studies/edit/?id=${encodeURIComponent(study.id)}`}
-                      className="mr-3 text-[var(--color-accent)] hover:underline"
+                      className="mr-3 text-primary hover:underline"
                     >
                       Edit
                     </Link>

@@ -101,13 +101,10 @@ function EditForm() {
   if (!id) {
     return (
       <div className="mx-auto max-w-2xl px-6 py-12">
-        <Link
-          href="/admin/case-studies/"
-          className="text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
-        >
+        <Link href="/admin/case-studies/" className="text-muted-foreground hover:text-foreground">
           ← Case studies
         </Link>
-        <p className="mt-6 text-[var(--color-text-muted)]">
+        <p className="mt-6 text-muted-foreground">
           Missing id. Open edit from the case studies list.
         </p>
       </div>
@@ -117,10 +114,7 @@ function EditForm() {
   if (error && !study) {
     return (
       <div className="mx-auto max-w-2xl px-6 py-12">
-        <Link
-          href="/admin/case-studies/"
-          className="text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
-        >
+        <Link href="/admin/case-studies/" className="text-muted-foreground hover:text-foreground">
           ← Case studies
         </Link>
         <p className="mt-6 text-red-400">{error}</p>
@@ -131,20 +125,17 @@ function EditForm() {
   if (!study) {
     return (
       <div className="mx-auto max-w-2xl px-6 py-12">
-        <p className="text-[var(--color-text-muted)]">Loading…</p>
+        <p className="text-muted-foreground">Loading…</p>
       </div>
     );
   }
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-12">
-      <Link
-        href="/admin/case-studies/"
-        className="text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
-      >
+      <Link href="/admin/case-studies/" className="text-muted-foreground hover:text-foreground">
         ← Case studies
       </Link>
-      <h1 className="mt-6 text-2xl font-semibold text-[var(--color-text)]">
+      <h1 className="mt-6 text-2xl font-semibold text-foreground">
         Edit: {study.title}
       </h1>
       {error && (
@@ -207,7 +198,10 @@ function EditForm() {
             onChange={(e) =>
               update(
                 'tags',
-                e.target.value.split(',').map((s) => s.trim()).filter(Boolean)
+                e.target.value
+                  .split(',')
+                  .map((s) => s.trim())
+                  .filter(Boolean)
               )
             }
             className="input"
@@ -239,7 +233,7 @@ function EditForm() {
               checked={!!form.featured}
               onChange={(e) => update('featured', e.target.checked)}
             />
-            <span className="text-[var(--color-text)]">Featured</span>
+            <span className="text-foreground">Featured</span>
           </label>
           <label className="flex items-center gap-2">
             <input
@@ -247,7 +241,7 @@ function EditForm() {
               checked={!!form.published}
               onChange={(e) => update('published', e.target.checked)}
             />
-            <span className="text-[var(--color-text)]">Published</span>
+            <span className="text-foreground">Published</span>
           </label>
         </div>
         <Field label="Order">
@@ -262,13 +256,13 @@ function EditForm() {
           <button
             type="submit"
             disabled={loading}
-            className="rounded-lg bg-[var(--color-accent)] px-6 py-2 font-medium text-white hover:bg-[var(--color-accent-hover)] disabled:opacity-50"
+            className="rounded-lg bg-primary px-6 py-2 font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
           >
             {loading ? 'Saving…' : 'Save'}
           </button>
           <Link
             href="/admin/case-studies/"
-            className="rounded-lg border border-white/20 px-6 py-2 font-medium text-[var(--color-text)] hover:border-white/40"
+            className="rounded-lg border border-border px-6 py-2 font-medium text-foreground hover:border-border/80"
           >
             Cancel
           </Link>
@@ -297,11 +291,11 @@ function Field({
 }) {
   return (
     <div>
-      <label className="mb-1 block text-sm font-medium text-[var(--color-text-muted)]">
+      <label className="mb-1 block text-sm font-medium text-muted-foreground">
         {label}
         {required && ' *'}
       </label>
-      <div className="mt-1 [&_.input]:w-full [&_.input]:rounded-lg [&_.input]:border [&_.input]:border-white/20 [&_.input]:bg-[var(--color-bg-elevated)] [&_.input]:px-4 [&_.input]:py-2 [&_.input]:text-[var(--color-text)] [&_.input]:focus:border-[var(--color-accent)] [&_.input]:focus:outline-none [&_.input]:focus:ring-1 [&_.input]:focus:ring-[var(--color-accent)]">
+      <div className="mt-1 [&_.input]:w-full [&_.input]:rounded-lg [&_.input]:border [&_.input]:border-border [&_.input]:bg-card [&_.input]:px-4 [&_.input]:py-2 [&_.input]:text-foreground [&_.input]:focus:border-primary [&_.input]:focus:outline-none [&_.input]:focus:ring-1 [&_.input]:focus:ring-primary">
         {children}
       </div>
     </div>
@@ -313,7 +307,7 @@ export default function EditCaseStudyPage() {
     <Suspense
       fallback={
         <div className="mx-auto max-w-2xl px-6 py-12">
-          <p className="text-[var(--color-text-muted)]">Loading…</p>
+          <p className="text-muted-foreground">Loading…</p>
         </div>
       }
     >

@@ -25,7 +25,7 @@ export function AdminGuard({ children }: { children: React.ReactNode }) {
   if (!ready && !isLoginPage) {
     return (
       <div className="flex min-h-[50vh] items-center justify-center">
-        <p className="text-[var(--color-text-muted)]">Loading…</p>
+        <p className="text-muted-foreground">Loading…</p>
       </div>
     );
   }

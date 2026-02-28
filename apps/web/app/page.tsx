@@ -10,10 +10,12 @@ import { Testimonials } from '@/components/home/Testimonials';
 import { FAQ } from '@/components/home/FAQ';
 import { Contact } from '@/components/home/Contact';
 import { Footer } from '@/components/home/Footer';
+import { ScrollHandler } from '@/components/ScrollHandler';
 
 export default function HomePage() {
   return (
     <>
+      <ScrollHandler />
       <Nav />
       <Hero />
       <Stats />
