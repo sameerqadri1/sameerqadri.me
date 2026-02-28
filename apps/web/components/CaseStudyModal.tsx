@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 
 interface CaseStudy {
   id: string;
@@ -36,6 +36,7 @@ export function CaseStudyModal({ slug, onClose }: Props) {
   const [study, setStudy] = useState<CaseStudy | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!slug || !API_URL) return;
@@ -66,6 +67,7 @@ export function CaseStudyModal({ slug, onClose }: Props) {
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
     document.body.style.overflow = 'hidden';
+    closeRef.current?.focus();
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = '';
@@ -75,19 +77,21 @@ export function CaseStudyModal({ slug, onClose }: Props) {
   if (!slug) return null;
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-start justify-center">
+    <div className="fixed inset-0 z-[60] flex items-start justify-center" role="dialog" aria-modal="true" aria-labelledby="case-study-title">
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-background/80 backdrop-blur-sm animate-enter"
         onClick={onClose}
+        aria-hidden
       />
 
       {/* Panel */}
       <div className="relative z-10 w-full max-w-3xl mx-4 my-8 sm:my-16 max-h-[calc(100vh-4rem)] overflow-y-auto rounded-2xl border border-border bg-card shadow-2xl animate-enter">
         {/* Close button */}
         <button
+          ref={closeRef}
           onClick={onClose}
-          className="sticky top-4 float-right mr-4 mt-4 z-20 w-9 h-9 rounded-full bg-background/80 backdrop-blur border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+          className="sticky top-4 float-right mr-4 mt-4 z-20 w-9 h-9 rounded-full bg-background/80 backdrop-blur border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           aria-label="Close"
         >
           <span className="material-icons text-lg">close</span>
@@ -134,7 +138,7 @@ export function CaseStudyModal({ slug, onClose }: Props) {
                     {study.year ? ` · ${study.year}` : ''}
                   </p>
                 )}
-                <h2 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight">
+                <h2 id="case-study-title" className="text-2xl sm:text-3xl font-bold text-foreground leading-tight">
                   {study.title}
                 </h2>
                 {study.subtitle && (
@@ -176,7 +180,7 @@ export function CaseStudyModal({ slug, onClose }: Props) {
               <div className="pt-4 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
                 <button
                   onClick={onClose}
-                  className="text-muted-foreground hover:text-foreground transition-colors text-sm flex items-center gap-2"
+                  className="text-muted-foreground hover:text-foreground transition-colors text-sm flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded"
                 >
                   <span className="material-icons text-base">arrow_back</span>
                   Back to projects
@@ -190,7 +194,7 @@ export function CaseStudyModal({ slug, onClose }: Props) {
                       document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                     }, 100);
                   }}
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-colors text-sm shadow-lg shadow-primary/20"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-colors text-sm shadow-lg shadow-primary/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   Start a similar project
                   <span className="material-icons text-sm">arrow_forward</span>
