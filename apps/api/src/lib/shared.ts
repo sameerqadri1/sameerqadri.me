@@ -48,7 +48,7 @@ export const caseStudySchema = z.object({
   subtitle: z.string().max(300).optional(),
   summary: z.string().min(1).max(500),
   body: z.string().min(1),
-  coverImageUrl: z.string().url().optional(),
+  coverImageUrl: z.string().url().optional().or(z.literal('')).transform(v => v || undefined),
   galleryUrls: z.array(z.string().url()).default([]),
   tags: z.array(z.string()).default([]),
   client: z.string().max(100).optional(),

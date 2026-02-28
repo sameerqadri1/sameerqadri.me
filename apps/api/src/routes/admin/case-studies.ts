@@ -117,10 +117,11 @@ adminCaseStudiesRouter.post('/', async (req: Request & { auth?: AuthPayload }, r
     });
     res.status(201).json({ success: true, data: toResponse(study) });
   } catch (e) {
-    console.error(e);
+    console.error('Create case study error:', e);
+    const msg = e instanceof Error ? e.message : 'Failed to create case study';
     res.status(500).json({
       success: false,
-      error: { message: 'Failed to create case study' },
+      error: { message: msg },
     });
   }
 });
