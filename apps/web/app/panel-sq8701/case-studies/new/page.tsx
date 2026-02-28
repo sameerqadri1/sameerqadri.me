@@ -73,7 +73,7 @@ export default function NewCaseStudyPage() {
         year: form.year ? Number(form.year) : undefined,
       };
       await createCaseStudy(payload);
-      router.push('/admin/case-studies/');
+      router.push('/panel-sq8701/case-studies/');
       router.refresh();
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Failed to create');
@@ -84,7 +84,7 @@ export default function NewCaseStudyPage() {
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-12">
-      <Link href="/admin/case-studies/" className="text-muted-foreground hover:text-foreground">
+      <Link href="/panel-sq8701/case-studies/" className="text-muted-foreground hover:text-foreground">
         ← Case studies
       </Link>
       <h1 className="mt-6 text-2xl font-semibold text-foreground">
@@ -218,7 +218,7 @@ export default function NewCaseStudyPage() {
             {loading ? 'Creating…' : 'Create'}
           </button>
           <Link
-            href="/admin/case-studies/"
+            href="/panel-sq8701/case-studies/"
             className="rounded-lg border border-border px-6 py-2 font-medium text-foreground hover:border-border/80"
           >
             Cancel

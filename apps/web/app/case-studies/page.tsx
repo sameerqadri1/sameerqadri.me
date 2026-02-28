@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { Nav } from '@/components/home/Nav';
 import { Footer } from '@/components/home/Footer';
 import { CaseStudyModal } from '@/components/CaseStudyModal';
@@ -48,13 +47,6 @@ export default function CaseStudiesPage() {
       <main className="min-h-screen bg-background pt-28 pb-24">
         <div className="container mx-auto px-6">
           <div className="max-w-2xl mb-16 animate-enter">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-8"
-            >
-              <span className="material-icons text-base">arrow_back</span>
-              Back to home
-            </Link>
             <p className="text-primary font-bold tracking-[0.3em] uppercase text-sm mb-4">
               Work
             </p>

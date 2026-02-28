@@ -30,7 +30,7 @@ export default function AdminSetupPage() {
 
   return (
     <div className="mx-auto max-w-xl px-6 py-12">
-      <Link href="/admin/login/" className="text-muted-foreground hover:text-foreground text-sm">
+      <Link href="/panel-sq8701/login/" className="text-muted-foreground hover:text-foreground text-sm">
         ← Back to login
       </Link>
 
@@ -90,7 +90,7 @@ export default function AdminSetupPage() {
                 <li>Set <code className="text-primary text-xs bg-background px-1 rounded">ADMIN_PASSWORD_HASH</code> to the copied hash above</li>
                 <li>Set <code className="text-primary text-xs bg-background px-1 rounded">ADMIN_USERNAME</code> to your desired username (e.g. <code className="text-xs">admin</code>)</li>
                 <li>Click <strong className="text-foreground">Save</strong> then <strong className="text-foreground">Redeploy</strong> the API project</li>
-                <li>Return to <Link href="/admin/login/" className="text-primary hover:underline">Admin Login</Link> and sign in</li>
+                <li>Return to <Link href="/panel-sq8701/login/" className="text-primary hover:underline">Admin Login</Link> and sign in</li>
               </ol>
             </div>
           </div>

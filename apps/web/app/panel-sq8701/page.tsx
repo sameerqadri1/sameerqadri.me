@@ -9,7 +9,7 @@ export default function AdminDashboardPage() {
 
   function handleLogout() {
     clearAdminToken();
-    router.push('/admin/login/');
+    router.push('/panel-sq8701/login/');
     router.refresh();
   }
 
@@ -18,7 +18,7 @@ export default function AdminDashboardPage() {
       <div className="flex flex-wrap items-center justify-between gap-4">
         <h1 className="text-2xl font-semibold text-foreground">Admin</h1>
         <div className="flex gap-4">
-          <Link href="/admin/case-studies/" className="text-primary hover:underline">
+          <Link href="/panel-sq8701/case-studies/" className="text-primary hover:underline">
             Case studies
           </Link>
           <button

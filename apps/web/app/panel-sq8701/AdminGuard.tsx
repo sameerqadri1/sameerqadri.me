@@ -11,16 +11,16 @@ export function AdminGuard({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = useState(false);
 
   const isLoginPage =
-    pathname === '/admin/login' ||
-    pathname === '/admin/login/' ||
-    pathname === '/admin/setup' ||
-    pathname === '/admin/setup/';
+    pathname === '/panel-sq8701/login' ||
+    pathname === '/panel-sq8701/login/' ||
+    pathname === '/panel-sq8701/setup' ||
+    pathname === '/panel-sq8701/setup/';
 
   useEffect(() => {
     const token =
       typeof window !== 'undefined' ? window.localStorage.getItem(TOKEN_KEY) : null;
     if (!isLoginPage && !token) {
-      router.replace('/admin/login/');
+      router.replace('/panel-sq8701/login/');
       return;
     }
     setReady(true);

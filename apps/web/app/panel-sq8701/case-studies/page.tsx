@@ -39,13 +39,13 @@ export default function AdminCaseStudiesPage() {
     <div className="mx-auto max-w-5xl px-6 py-12">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <Link
-          href="/admin/"
+          href="/panel-sq8701/"
           className="text-muted-foreground hover:text-foreground"
         >
           ← Dashboard
         </Link>
         <Link
-          href="/admin/case-studies/new/"
+          href="/panel-sq8701/case-studies/new/"
           className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
         >
           New case study
@@ -117,7 +117,7 @@ export default function AdminCaseStudiesPage() {
                   </td>
                   <td className="py-3">
                     <Link
-                      href={`/admin/case-studies/edit/?id=${encodeURIComponent(study.id)}`}
+                      href={`/panel-sq8701/case-studies/edit/?id=${encodeURIComponent(study.id)}`}
                       className="mr-3 text-primary hover:underline"
                     >
                       Edit

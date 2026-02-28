@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
@@ -12,15 +12,6 @@ export default function AdminLoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [configured, setConfigured] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    if (!API_URL) return;
-    fetch(`${API_URL}/api/auth/check-configured`)
-      .then((r) => r.json())
-      .then((d) => setConfigured(d?.data?.configured ?? false))
-      .catch(() => setConfigured(null));
-  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -41,7 +32,7 @@ export default function AdminLoginPage() {
         if (typeof window !== 'undefined') {
           window.localStorage.setItem('admin_token', data.data.token);
         }
-        router.push('/admin/');
+        router.push('/panel-sq8701/case-studies/');
         router.refresh();
       }
     } catch {
@@ -54,18 +45,6 @@ export default function AdminLoginPage() {
   return (
     <div className="mx-auto flex min-h-[80vh] max-w-sm flex-col justify-center px-6">
       <h1 className="text-2xl font-semibold text-foreground">Admin login</h1>
-
-      {configured === false && (
-        <div className="mt-4 rounded-xl border border-amber-400/30 bg-amber-400/10 px-4 py-3 text-sm text-amber-400">
-          <p className="font-semibold">Admin not configured yet.</p>
-          <p className="mt-1 text-amber-400/80">
-            You need to generate a password hash and set it in Vercel.{' '}
-            <Link href="/admin/setup/" className="underline hover:text-amber-300">
-              Go to setup →
-            </Link>
-          </p>
-        </div>
-      )}
 
       <form onSubmit={handleSubmit} className="mt-8 space-y-6">
         <div>
@@ -110,12 +89,9 @@ export default function AdminLoginPage() {
         </button>
       </form>
 
-      <div className="mt-6 flex items-center justify-between text-sm">
+      <div className="mt-6 text-sm">
         <Link href="/" className="text-muted-foreground hover:text-foreground">
           ← Back to site
-        </Link>
-        <Link href="/admin/setup/" className="text-primary/70 hover:text-primary">
-          Setup / Reset password
         </Link>
       </div>
     </div>
