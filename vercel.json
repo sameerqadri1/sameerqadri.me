@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build -w @portfolio/shared && npm run build -w @portfolio/api",
+  "installCommand": "npm install",
+  "builds": [
+    {
+      "src": "apps/api/dist/vercel.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/apps/api/dist/vercel.js" }
+  ]
+}
