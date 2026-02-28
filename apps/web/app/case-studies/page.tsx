@@ -45,9 +45,10 @@ export default function CaseStudiesPage() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`${API_URL}/api/case-studies?published=true&limit=100`, {
+      const res = await fetch(`${API_URL}/api/case-studies?published=true&limit=100&_t=${Date.now()}`, {
         method: 'GET',
         headers: { Accept: 'application/json' },
+        cache: 'no-store',
       });
       const json = (await res.json()) as ApiResponse;
       if (!res.ok) {
@@ -140,22 +141,31 @@ export default function CaseStudiesPage() {
           )}
 
           {!loading && !error && items.length === 0 && (
-            <div className="text-center py-24 max-w-md mx-auto animate-enter">
+            <div className="text-center py-24 max-w-lg mx-auto animate-enter">
               <span className="material-icons text-primary/30 text-6xl mb-4 block" aria-hidden>
                 folder_open
               </span>
               <p className="text-muted-foreground text-lg mb-2">
-                No case studies yet.
+                No published case studies showing.
               </p>
-              <p className="text-muted-foreground/80 text-sm mb-8">
-                Case studies must be marked <strong className="text-foreground/80">Published</strong> in the admin panel to appear here.
+              <p className="text-muted-foreground/80 text-sm mb-4">
+                The API returned 0 published items. In the admin panel, open each case study, check <strong className="text-foreground/80">Published</strong>, and click Save. Then click Retry below.
               </p>
-              <a
-                href="/#contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              >
-                Get in touch
-              </a>
+              <div className="flex flex-wrap justify-center gap-3">
+                <button
+                  type="button"
+                  onClick={fetchCaseStudies}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                >
+                  Retry
+                </button>
+                <a
+                  href="/#contact"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border bg-card font-semibold text-foreground hover:bg-muted/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                >
+                  Get in touch
+                </a>
+              </div>
             </div>
           )}
 
