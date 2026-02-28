@@ -47,7 +47,7 @@ export default function CaseStudiesPage() {
       <Nav />
       <main className="min-h-screen bg-background pt-28 pb-24">
         <div className="container mx-auto px-6">
-          <div className="max-w-2xl mb-16 animate-fade-up">
+          <div className="max-w-2xl mb-16 animate-enter">
             <Link
               href="/"
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-8"
