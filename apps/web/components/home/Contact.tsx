@@ -204,7 +204,7 @@ export function Contact() {
                 src="https://calendly.com/sameerqadri/30min"
                 width="100%"
                 height="700"
-                frameBorder="0"
+                style={{ border: 0 }}
                 title="Book a 30-minute call with Sameer Qadri"
               />
             </div>
