@@ -68,15 +68,25 @@ export const caseStudyCreateSchema = caseStudySchema.omit({
 
 export const caseStudyUpdateSchema = caseStudyCreateSchema.partial();
 
+function parseBool(val: unknown): boolean | undefined {
+  if (val === undefined || val === null) return undefined;
+  if (val === true) return true;
+  if (val === false) return false;
+  const s = String(val).toLowerCase();
+  if (s === 'true') return true;
+  if (s === 'false') return false;
+  return undefined;
+}
+
 export const caseStudyQuerySchema = z.object({
   published: z
-    .string()
+    .union([z.string(), z.boolean()])
     .optional()
-    .transform((val) => val === 'true'),
+    .transform(parseBool),
   featured: z
-    .string()
+    .union([z.string(), z.boolean()])
     .optional()
-    .transform((val) => val === 'true'),
+    .transform(parseBool),
   page: z
     .string()
     .optional()

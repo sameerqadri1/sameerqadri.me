@@ -45,10 +45,9 @@ export default function CaseStudiesPage() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`${API_URL}/api/case-studies?published=true&limit=100&_t=${Date.now()}`, {
+      const res = await fetch(`${API_URL}/api/case-studies?published=true&limit=100`, {
         method: 'GET',
         headers: { Accept: 'application/json' },
-        cache: 'no-store',
       });
       const json = (await res.json()) as ApiResponse;
       if (!res.ok) {
