@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { Suspense, useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Nav } from '@/components/home/Nav';
 import { Footer } from '@/components/home/Footer';
@@ -23,8 +23,10 @@ interface ApiResponse {
   data?: CaseStudy;
 }
 
-export function CaseStudyDetail() {
-  const { slug } = useParams<{ slug: string }>();
+function CaseStudyDetailContent() {
+  const searchParams = useSearchParams();
+  const slug = searchParams.get('slug');
+
   const [study, setStudy] = useState<CaseStudy | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -54,7 +56,7 @@ export function CaseStudyDetail() {
       <main className="min-h-screen bg-background pt-28 pb-24">
         <div className="container mx-auto px-6 max-w-4xl">
           <Link
-            href="/case-studies"
+            href="/case-studies/"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-10"
           >
             <span className="material-icons text-base">arrow_back</span>
@@ -81,7 +83,22 @@ export function CaseStudyDetail() {
               </span>
               <p className="text-muted-foreground text-lg mb-6">{error}</p>
               <Link
-                href="/case-studies"
+                href="/case-studies/"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-colors text-sm"
+              >
+                <span className="material-icons text-sm">arrow_back</span>
+                View all case studies
+              </Link>
+            </div>
+          )}
+
+          {!loading && !error && !slug && (
+            <div className="text-center py-24">
+              <p className="text-muted-foreground text-lg mb-6">
+                No case study selected.
+              </p>
+              <Link
+                href="/case-studies/"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-colors text-sm"
               >
                 <span className="material-icons text-sm">arrow_back</span>
@@ -137,7 +154,7 @@ export function CaseStudyDetail() {
 
               <div className="mt-16 pt-10 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-6">
                 <Link
-                  href="/case-studies"
+                  href="/case-studies/"
                   className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm"
                 >
                   <span className="material-icons text-base">arrow_back</span>
@@ -157,5 +174,13 @@ export function CaseStudyDetail() {
       </main>
       <Footer />
     </>
+  );
+}
+
+export default function CaseStudyDetailPage() {
+  return (
+    <Suspense>
+      <CaseStudyDetailContent />
+    </Suspense>
   );
 }

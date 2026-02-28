@@ -98,7 +98,7 @@ export default function CaseStudiesPage() {
               {items.map((study, index) => (
                 <Link
                   key={study.id}
-                  href={`/case-studies/${study.slug}/`}
+                  href={`/case-studies/detail/?slug=${study.slug}`}
                   className="group cursor-pointer animate-fade-up"
                   style={{ animationDelay: `${index * 0.05}s` }}
                 >
