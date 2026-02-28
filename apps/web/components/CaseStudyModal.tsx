@@ -25,6 +25,7 @@ export function CaseStudyModal({ slug, onClose }: Props) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const scrollBodyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!slug || !API_URL) return;
@@ -62,6 +63,11 @@ export function CaseStudyModal({ slug, onClose }: Props) {
     };
   }, [handleKeyDown]);
 
+  // Scroll modal content to top when opening or when slug/study changes
+  useEffect(() => {
+    if (scrollBodyRef.current) scrollBodyRef.current.scrollTop = 0;
+  }, [slug, study]);
+
   if (!slug) return null;
 
   return (
@@ -87,7 +93,7 @@ export function CaseStudyModal({ slug, onClose }: Props) {
           </button>
         </div>
         {/* Scrollable body */}
-        <div className="flex-1 min-h-0 overflow-y-auto px-4 pb-4 pt-2">
+        <div ref={scrollBodyRef} className="flex-1 min-h-0 overflow-y-auto px-4 pb-4 pt-2">
         {loading && (
           <div className="p-8 space-y-6">
             <div className="w-full aspect-video bg-muted rounded-xl animate-pulse" />

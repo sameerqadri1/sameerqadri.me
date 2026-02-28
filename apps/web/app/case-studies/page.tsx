@@ -1,22 +1,61 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { Suspense, useEffect, useState, useCallback } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { Nav } from '@/components/home/Nav';
 import { Footer } from '@/components/home/Footer';
 import { CaseStudyModal } from '@/components/CaseStudyModal';
+import { ContactForm } from '@/components/ContactForm';
 import type { CaseStudy, CaseStudyListResponse } from '@/lib/types';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
 type SortOption = 'newest' | 'oldest' | 'title';
 
-export default function CaseStudiesPage() {
+function parseSort(s: string | null): SortOption {
+  if (s === 'newest' || s === 'oldest' || s === 'title') return s;
+  return 'newest';
+}
+
+function CaseStudiesPageFallback() {
+  return (
+    <>
+      <Nav />
+      <main className="min-h-screen bg-background pt-28 pb-24">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <header className="max-w-2xl mb-16">
+            <p className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4">Work</p>
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">All Case Studies</h1>
+            <p className="text-muted-foreground text-lg">Loading…</p>
+          </header>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" aria-busy="true">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="h-80 rounded-2xl bg-card/40 border border-border/60 animate-pulse" />
+            ))}
+          </div>
+        </div>
+      </main>
+      <Footer />
+    </>
+  );
+}
+
+function CaseStudiesContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [items, setItems] = useState<CaseStudy[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [sort, setSort] = useState<SortOption>('newest');
+
+  // Sync URL -> state (e.g. browser back, shared link)
+  useEffect(() => {
+    const tag = searchParams.get('tag');
+    setSelectedTag(tag);
+    setSort(parseSort(searchParams.get('sort')));
+  }, [searchParams]);
 
   const fetchCaseStudies = useCallback(async () => {
     if (!API_URL) {
@@ -73,6 +112,24 @@ export default function CaseStudiesPage() {
     const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
     return sort === 'newest' ? dateB - dateA : dateA - dateB;
   });
+
+  function updateUrl(tag: string | null, sortVal: SortOption) {
+    const params = new URLSearchParams();
+    if (tag) params.set('tag', tag);
+    if (sortVal !== 'newest') params.set('sort', sortVal);
+    const qs = params.toString();
+    router.replace(qs ? `/case-studies?${qs}` : '/case-studies', { scroll: false });
+  }
+
+  function handleTagSelect(tag: string | null) {
+    setSelectedTag(tag);
+    updateUrl(tag, sort);
+  }
+
+  function handleSortChange(sortVal: SortOption) {
+    setSort(sortVal);
+    updateUrl(selectedTag, sortVal);
+  }
 
   return (
     <>
@@ -160,7 +217,7 @@ export default function CaseStudiesPage() {
                       <span className="ml-2">
                         · <button
                           type="button"
-                          onClick={() => setSelectedTag(null)}
+                          onClick={() => handleTagSelect(null)}
                           className="text-primary hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded"
                         >
                           Clear filter
@@ -175,7 +232,7 @@ export default function CaseStudiesPage() {
                     <select
                       id="sort-case-studies"
                       value={sort}
-                      onChange={(e) => setSort(e.target.value as SortOption)}
+                      onChange={(e) => handleSortChange(e.target.value as SortOption)}
                       className="rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground focus:border-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                     >
                       <option value="newest">Newest first</option>
@@ -189,7 +246,7 @@ export default function CaseStudiesPage() {
                   <div className="flex flex-wrap gap-2 mb-10" role="tablist" aria-label="Filter by category">
                     <button
                       type="button"
-                      onClick={() => setSelectedTag(null)}
+                      onClick={() => handleTagSelect(null)}
                       className={`px-4 py-2 rounded-full text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
                         !selectedTag
                           ? 'bg-primary text-primary-foreground'
@@ -202,7 +259,7 @@ export default function CaseStudiesPage() {
                       <button
                         key={tag}
                         type="button"
-                        onClick={() => setSelectedTag(tag)}
+                        onClick={() => handleTagSelect(tag)}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
                           selectedTag === tag
                             ? 'bg-primary text-primary-foreground'
@@ -215,6 +272,20 @@ export default function CaseStudiesPage() {
                   </div>
                 )}
 
+                {selectedTag && filteredItems.length === 0 ? (
+                  <div className="py-12 text-center rounded-2xl border border-border bg-card/50 animate-enter" role="status">
+                    <p className="text-muted-foreground mb-2">
+                      No projects with the &quot;{selectedTag}&quot; tag.
+                    </p>
+                        <button
+                          type="button"
+                          onClick={() => handleTagSelect(null)}
+                          className="text-primary font-semibold hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded"
+                        >
+                          Clear filter and show all
+                        </button>
+                  </div>
+                ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {sortedItems.map((study, index) => (
                     <button
@@ -271,9 +342,26 @@ export default function CaseStudiesPage() {
                     </button>
                   ))}
                 </div>
+                )}
               </section>
 
-              <CaseStudiesCTAForm />
+              <section className="mt-24 pt-20 border-t border-border/60 animate-enter" aria-labelledby="cta-heading">
+                <div className="max-w-2xl mx-auto text-center">
+                  <h2 id="cta-heading" className="text-2xl md:text-3xl font-bold text-foreground mb-2">
+                    Have a similar project?
+                  </h2>
+                  <p className="text-muted-foreground mb-8">
+                    Tell me about your idea and I&apos;ll get back within 12 hours.
+                  </p>
+                  <ContactForm
+                    idPrefix="cta"
+                    showCompany={false}
+                    variant="compact"
+                    showCalendlyOnSuccess
+                    className="text-left"
+                  />
+                </div>
+              </section>
             </>
           )}
         </div>
@@ -287,136 +375,10 @@ export default function CaseStudiesPage() {
   );
 }
 
-function CaseStudiesCTAForm() {
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [website, setWebsite] = useState('');
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (website) return;
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await fetch(`${API_URL}/api/contact`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, message, company: '' }),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error((data as { error?: { message?: string } })?.error?.message || 'Failed to send');
-      setSubmitted(true);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Something went wrong.');
-    } finally {
-      setLoading(false);
-    }
-  }
-
+export default function CaseStudiesPage() {
   return (
-    <section className="mt-24 pt-20 border-t border-border/60 animate-enter" aria-labelledby="cta-heading">
-      <div className="max-w-2xl mx-auto text-center">
-        <h2 id="cta-heading" className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-          Have a similar project?
-        </h2>
-        <p className="text-muted-foreground mb-8">
-          Tell me about your idea and I&apos;ll get back within 12 hours.
-        </p>
-        {submitted ? (
-          <div className="animate-enter">
-            <div className="text-center mb-10">
-              <div className="w-16 h-16 bg-primary/10 border border-primary/30 rounded-full flex items-center justify-center mx-auto mb-5">
-                <span className="material-icons text-primary text-3xl" aria-hidden>
-                  check_circle
-                </span>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
-                Message received!
-              </h2>
-              <p className="text-muted-foreground text-lg max-w-md mx-auto">
-                Thanks{name ? `, ${name}` : ''}. I&apos;ll be in touch within 12 hours. In the meantime, book a 30-minute discovery call below — let&apos;s talk through your project.
-              </p>
-            </div>
-            <div className="max-w-2xl mx-auto rounded-2xl overflow-hidden border border-border shadow-xl">
-              <iframe
-                src="https://calendly.com/sameerqadri/30min"
-                width="100%"
-                height="700"
-                style={{ border: 0 }}
-                title="Book a 30-minute call with Sameer Qadri"
-              />
-            </div>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-4 text-left">
-            <input
-              type="text"
-              name="website"
-              value={website}
-              onChange={(e) => setWebsite(e.target.value)}
-              className="absolute -left-[9999px]"
-              tabIndex={-1}
-              autoComplete="off"
-              aria-hidden
-            />
-            <div>
-              <label htmlFor="cta-name" className="block text-sm font-medium text-muted-foreground mb-1">Name</label>
-              <input
-                id="cta-name"
-                type="text"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full rounded-lg border border-border bg-card px-4 py-3 text-foreground focus:border-primary focus:outline-none focus-visible:ring-1 focus-visible:ring-primary"
-              />
-            </div>
-            <div>
-              <label htmlFor="cta-email" className="block text-sm font-medium text-muted-foreground mb-1">Email</label>
-              <input
-                id="cta-email"
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-lg border border-border bg-card px-4 py-3 text-foreground focus:border-primary focus:outline-none focus-visible:ring-1 focus-visible:ring-primary"
-              />
-            </div>
-            <div>
-              <label htmlFor="cta-message" className="block text-sm font-medium text-muted-foreground mb-1">Message</label>
-              <textarea
-                id="cta-message"
-                required
-                rows={4}
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                className="w-full rounded-lg border border-border bg-card px-4 py-3 text-foreground focus:border-primary focus:outline-none focus-visible:ring-1 focus-visible:ring-primary resize-none"
-              />
-            </div>
-            {error && <p className="text-sm text-destructive">{error}</p>}
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground hover:bg-primary/90 disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background flex items-center justify-center gap-2"
-            >
-              {loading ? (
-                <>
-                  <span className="material-icons text-sm animate-spin" aria-hidden>sync</span>
-                  Sending…
-                </>
-              ) : (
-                <>
-                  Send Message &amp; Book a Call
-                  <span className="material-icons text-sm" aria-hidden>send</span>
-                </>
-              )}
-            </button>
-          </form>
-        )}
-      </div>
-    </section>
+    <Suspense fallback={<CaseStudiesPageFallback />}>
+      <CaseStudiesContent />
+    </Suspense>
   );
 }

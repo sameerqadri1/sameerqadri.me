@@ -19,6 +19,11 @@ TypeScript frontend (Next.js, static export) + Node.js backend (Express, Prisma)
 
 **Build cache:** The first `next build` may show “No build cache found”; this is normal. Later builds use `.next/cache`. For CI (e.g. GitHub Actions), persist `.next/cache` per [Next.js CI build caching](https://nextjs.org/docs/app/guides/ci-build-caching).
 
+### Environment variables
+
+- **Web (`apps/web/.env.local`):** Copy from `apps/web/.env.example`. `NEXT_PUBLIC_API_URL` must point to your API (local or production). It is baked into the client at build time — change it and rebuild for production.
+- **API:** Set `DATABASE_URL`, `JWT_SECRET`, `ADMIN_USERNAME`, `ADMIN_PASSWORD_HASH`, and optionally `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `BLOB_READ_WRITE_TOKEN` where you run or deploy the API. Health check: `GET /api/health` returns 200 when the app and DB are OK.
+
 ## Deploy (GitHub Pages)
 
 **You must enable Pages before the workflow can deploy.** Otherwise you get a 404 from the deploy step.
