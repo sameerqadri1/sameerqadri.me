@@ -84,8 +84,8 @@ export function CaseStudiesSection() {
                   key={study.id}
                   type="button"
                   onClick={() => setActiveSlug(study.slug)}
-                  className="group cursor-pointer animate-fade-up text-left"
-                  style={{ animationDelay: `${0.1 + index * 0.05}s` }}
+                  className="group cursor-pointer animate-enter text-left"
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className="rounded-2xl overflow-hidden border border-border/70 bg-card mb-6 relative shadow-sm">
                     {study.coverImageUrl ? (
