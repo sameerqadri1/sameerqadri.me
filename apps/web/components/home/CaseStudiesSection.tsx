@@ -51,7 +51,7 @@ export function CaseStudiesSection() {
             </h3>
           </div>
           <Link
-            className="px-6 py-3 bg-white/5 border border-white/10 text-white rounded-lg hover:bg-white/10 transition-colors font-bold"
+            className="px-6 py-3 bg-secondary border border-border text-foreground rounded-lg hover:bg-secondary/70 transition-colors font-bold"
             href="/case-studies"
           >
             View All 20+ Case Studies

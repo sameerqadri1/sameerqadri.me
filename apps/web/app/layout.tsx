@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { cn } from '../lib/utils';
+import { RevealObserver } from '../components/RevealObserver';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -9,13 +10,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Senior Full-Stack Developer | Digital Business Builder',
+  title: 'Sameer Qadri — Full Stack Engineer',
   description:
-    'Transforming complex requirements into high-conversion Shopify Plus and custom full-stack ecosystems. Scaling brands from 0 to 10k+ daily orders.',
+    'Full Stack Engineer specializing in headless systems, AI agents, and SaaS products. 50+ projects delivered across 10+ countries.',
   openGraph: {
-    title: 'Senior Full-Stack Developer | Digital Business Builder',
+    title: 'Sameer Qadri — Full Stack Engineer',
     description:
-      'Transforming complex requirements into high-conversion Shopify Plus and custom full-stack ecosystems.',
+      'Full Stack Engineer specializing in headless systems, AI agents, and SaaS products. 50+ projects delivered across 10+ countries.',
   },
 };
 
@@ -42,6 +43,7 @@ export default function RootLayout({
           inter.variable,
         )}
       >
+        <RevealObserver />
         {children}
       </body>
     </html>

@@ -31,8 +31,8 @@ export function Testimonials() {
       className="relative py-24 bg-muted overflow-hidden"
       id="testimonials"
     >
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none opacity-20">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[var(--color-primary)] rounded-full filter blur-[120px]" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none opacity-30">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary rounded-full filter blur-[120px]" />
       </div>
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16 animate-fade-up">
@@ -43,7 +43,7 @@ export function Testimonials() {
             Proven <span className="text-gradient">Reliability</span>
           </h3>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {QUOTES.map(({ quote, name, role, avatar }, index) => (
             <div
               key={name}
@@ -57,7 +57,7 @@ export function Testimonials() {
                 {quote}
               </p>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full border border-blue-500/30 p-1">
+                <div className="w-12 h-12 rounded-full border border-primary/40 p-1">
                   <img
                     alt=""
                     className="w-full h-full rounded-full object-cover"

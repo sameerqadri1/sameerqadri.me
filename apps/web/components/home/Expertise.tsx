@@ -1,27 +1,27 @@
 const ITEMS = [
   {
-    icon: 'shopping_cart',
-    title: 'Shopify Plus',
+    icon: 'layers',
+    title: 'Headless Systems',
     description:
-      'Custom theme development, complex Liquid logic, and private app integrations for high-volume stores.',
+      'Decoupled frontends using Next.js connected to robust backend APIs — fast, scalable, and fully custom.',
+  },
+  {
+    icon: 'smart_toy',
+    title: 'AI Agents',
+    description:
+      'Intelligent automation pipelines, LLM-powered tools, and AI-driven workflows that save time and scale operations.',
+  },
+  {
+    icon: 'rocket_launch',
+    title: 'SaaS Products',
+    description:
+      'End-to-end SaaS development from architecture to launch — multi-tenant apps, billing, auth, and beyond.',
   },
   {
     icon: 'speed',
     title: 'Performance Audit',
     description:
-      'Systematic optimization of Core Web Vitals, reducing TTI and improving conversion rates significantly.',
-  },
-  {
-    icon: 'layers',
-    title: 'Headless Systems',
-    description:
-      'Decoupled frontends using Next.js or Hydrogen, connected to robust backend APIs for maximum flexibility.',
-  },
-  {
-    icon: 'settings',
-    title: 'Custom Apps',
-    description:
-      'Tailored SaaS solutions and internal tools built with Node.js, GraphQL, and reliable cloud infrastructure.',
+      'Systematic optimization of Core Web Vitals, reducing TTI and improving conversion rates with measurable results.',
   },
 ];
 
@@ -29,7 +29,7 @@ export function Expertise() {
   return (
     <section className="py-24 bg-muted" id="expertise">
       <div className="container mx-auto px-6">
-        <div className="mb-16 animate-fade-up text-center md:text-left">
+        <div className="mb-16 animate-fade-up text-center">
           <h2 className="text-primary font-bold tracking-[0.3em] uppercase text-sm mb-4">
             Service Menu
           </h2>
@@ -41,7 +41,7 @@ export function Expertise() {
           {ITEMS.map(({ icon, title, description }, index) => (
             <div
               key={title}
-              className="glow-card p-8 rounded-2xl animate-fade-up"
+              className="glow-card p-6 md:p-8 rounded-2xl animate-fade-up"
               style={{ animationDelay: `${index * 0.05}s` }}
             >
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-6">
