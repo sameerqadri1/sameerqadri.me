@@ -3,24 +3,10 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { CaseStudyModal } from '@/components/CaseStudyModal';
-
-interface ApiResponse {
-  success: boolean;
-  data?: {
-    id: string;
-    slug: string;
-    title: string;
-    summary: string;
-    client?: string | null;
-    coverImageUrl?: string | null;
-  }[];
-  pagination?: { total: number };
-}
-
-type CaseStudyItem = NonNullable<ApiResponse['data']>[number];
+import type { CaseStudy, CaseStudyListResponse } from '@/lib/types';
 
 export function CaseStudiesSection() {
-  const [items, setItems] = useState<CaseStudyItem[]>([]);
+  const [items, setItems] = useState<CaseStudy[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
@@ -32,7 +18,7 @@ export function CaseStudiesSection() {
       return;
     }
     fetch(`${apiUrl}/api/case-studies?published=true&featured=true&limit=3`)
-      .then((res) => res.json() as Promise<ApiResponse>)
+      .then((res) => res.json() as Promise<CaseStudyListResponse>)
       .then((json) => {
         if (json.success && json.data) setItems(json.data);
       })
@@ -43,18 +29,18 @@ export function CaseStudiesSection() {
   return (
     <>
       <section className="py-24" id="projects">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 animate-fade-up">
-            <div>
-              <h2 className="text-primary font-bold tracking-[0.3em] uppercase text-sm mb-4">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="flex flex-col items-center text-center md:flex-row md:justify-between md:items-end md:text-left gap-6 mb-16 animate-fade-up">
+            <div className="min-w-0">
+              <h2 className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4">
                 Work
               </h2>
-              <h3 className="text-4xl md:text-5xl font-bold text-foreground">
+              <h3 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">
                 Case Studies
               </h3>
             </div>
             <Link
-              className="px-6 py-3 bg-secondary border border-border text-foreground rounded-lg hover:bg-secondary/70 transition-colors font-bold"
+              className="w-fit px-6 py-3 bg-secondary border border-border text-foreground rounded-lg hover:bg-secondary/70 transition-colors font-bold shrink-0"
               href="/case-studies"
             >
               View All Case Studies
@@ -84,7 +70,7 @@ export function CaseStudiesSection() {
                   key={study.id}
                   type="button"
                   onClick={() => setActiveSlug(study.slug)}
-                  className="group cursor-pointer animate-enter text-left"
+                  className="group cursor-pointer animate-enter text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-2xl"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className="rounded-2xl overflow-hidden border border-border/70 bg-card mb-6 relative shadow-sm">

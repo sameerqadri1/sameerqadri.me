@@ -1,19 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback, useRef } from 'react';
-
-interface CaseStudy {
-  id: string;
-  slug: string;
-  title: string;
-  subtitle?: string | null;
-  summary: string;
-  body: string;
-  coverImageUrl?: string | null;
-  tags?: string[];
-  client?: string | null;
-  year?: number | null;
-}
+import type { CaseStudy } from '@/lib/types';
 
 interface Props {
   slug: string | null;
@@ -85,18 +73,21 @@ export function CaseStudyModal({ slug, onClose }: Props) {
         aria-hidden
       />
 
-      {/* Panel */}
-      <div className="relative z-10 w-full max-w-3xl mx-4 my-8 sm:my-16 max-h-[calc(100vh-4rem)] overflow-y-auto rounded-2xl border border-border bg-card shadow-2xl animate-enter">
-        {/* Close button */}
-        <button
-          ref={closeRef}
-          onClick={onClose}
-          className="sticky top-4 float-right mr-4 mt-4 z-20 w-9 h-9 rounded-full bg-background/80 backdrop-blur border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-          aria-label="Close"
-        >
-          <span className="material-icons text-lg">close</span>
-        </button>
-
+      {/* Panel: flex column so close button stays visible; only body scrolls */}
+      <div className="relative z-10 flex w-full max-w-3xl max-h-[85vh] mx-4 my-8 sm:my-16 flex-col rounded-2xl border border-border bg-card shadow-2xl animate-enter overflow-hidden">
+        {/* Close button - always visible above scroll area */}
+        <div className="flex flex-none items-start justify-end p-4 pb-0">
+          <button
+            ref={closeRef}
+            onClick={onClose}
+            className="w-9 h-9 rounded-full bg-background/80 backdrop-blur border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            aria-label="Close"
+          >
+            <span className="material-icons text-lg">close</span>
+          </button>
+        </div>
+        {/* Scrollable body */}
+        <div className="flex-1 min-h-0 overflow-y-auto px-4 pb-4 pt-2">
         {loading && (
           <div className="p-8 space-y-6">
             <div className="w-full aspect-video bg-muted rounded-xl animate-pulse" />
@@ -180,7 +171,7 @@ export function CaseStudyModal({ slug, onClose }: Props) {
               <div className="pt-4 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
                 <button
                   onClick={onClose}
-                  className="text-muted-foreground hover:text-foreground transition-colors text-sm flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded"
+                  className="text-muted-foreground hover:text-foreground transition-colors text-sm flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded"
                 >
                   <span className="material-icons text-base">arrow_back</span>
                   Back to projects
@@ -203,6 +194,7 @@ export function CaseStudyModal({ slug, onClose }: Props) {
             </div>
           </div>
         )}
+        </div>
       </div>
     </div>
   );

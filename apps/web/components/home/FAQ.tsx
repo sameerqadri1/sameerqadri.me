@@ -37,7 +37,7 @@ export function FAQ() {
     <section className="py-24 bg-muted" id="faq">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 animate-fade-up">
-          <p className="text-primary font-bold tracking-[0.3em] uppercase text-sm mb-4">
+          <p className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4">
             FAQ
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground">

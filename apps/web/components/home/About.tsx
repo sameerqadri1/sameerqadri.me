@@ -32,7 +32,7 @@ export function About() {
           {/* Bio */}
           <div className="space-y-6 animate-fade-up">
             <div>
-              <p className="text-primary font-bold tracking-[0.3em] uppercase text-sm mb-4">
+              <p className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4">
                 About Me
               </p>
               <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight mb-6">

@@ -71,7 +71,7 @@ export function Contact() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <div className="space-y-8 animate-fade-up">
               <div>
-                <p className="text-primary font-bold tracking-[0.3em] uppercase text-sm mb-4">
+                <p className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4">
                   Contact
                 </p>
                 <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">

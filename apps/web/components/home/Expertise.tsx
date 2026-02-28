@@ -30,7 +30,7 @@ export function Expertise() {
     <section className="py-24 bg-muted" id="expertise">
       <div className="container mx-auto px-6">
         <div className="mb-16 animate-fade-up text-center">
-          <h2 className="text-primary font-bold tracking-[0.3em] uppercase text-sm mb-4">
+          <h2 className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4">
             Service Menu
           </h2>
           <h3 className="text-4xl md:text-5xl font-bold text-foreground">

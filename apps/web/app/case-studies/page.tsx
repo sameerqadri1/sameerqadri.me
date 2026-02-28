@@ -4,25 +4,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { Nav } from '@/components/home/Nav';
 import { Footer } from '@/components/home/Footer';
 import { CaseStudyModal } from '@/components/CaseStudyModal';
-
-interface CaseStudy {
-  id: string;
-  slug: string;
-  title: string;
-  summary: string;
-  client?: string | null;
-  coverImageUrl?: string | null;
-  tags?: string[];
-  createdAt?: string;
-  order?: number;
-}
-
-interface ApiResponse {
-  success: boolean;
-  data?: CaseStudy[];
-  pagination?: { total: number };
-  error?: { message?: string };
-}
+import type { CaseStudy, CaseStudyListResponse } from '@/lib/types';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
@@ -49,7 +31,7 @@ export default function CaseStudiesPage() {
         method: 'GET',
         headers: { Accept: 'application/json' },
       });
-      const json = (await res.json()) as ApiResponse;
+      const json = (await res.json()) as CaseStudyListResponse;
       if (!res.ok) {
         setError(json.error?.message || `Request failed (${res.status})`);
         setItems([]);
@@ -98,7 +80,7 @@ export default function CaseStudiesPage() {
       <main className="min-h-screen bg-background pt-28 pb-24">
         <div className="container mx-auto px-6 max-w-6xl">
           <header className="max-w-2xl mb-16 animate-enter">
-            <p className="text-primary font-bold tracking-[0.3em] uppercase text-sm mb-4">
+            <p className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4">
               Work
             </p>
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">
@@ -194,7 +176,7 @@ export default function CaseStudiesPage() {
                       id="sort-case-studies"
                       value={sort}
                       onChange={(e) => setSort(e.target.value as SortOption)}
-                      className="rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground focus:border-primary focus:outline-none focus-visible:ring-1 focus-visible:ring-primary"
+                      className="rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground focus:border-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                     >
                       <option value="newest">Newest first</option>
                       <option value="oldest">Oldest first</option>
@@ -345,8 +327,29 @@ function CaseStudiesCTAForm() {
           Tell me about your idea and I&apos;ll get back within 12 hours.
         </p>
         {submitted ? (
-          <div className="rounded-xl border border-primary/30 bg-primary/10 px-6 py-8 text-primary font-medium">
-            Thanks! I&apos;ll be in touch soon.
+          <div className="animate-enter">
+            <div className="text-center mb-10">
+              <div className="w-16 h-16 bg-primary/10 border border-primary/30 rounded-full flex items-center justify-center mx-auto mb-5">
+                <span className="material-icons text-primary text-3xl" aria-hidden>
+                  check_circle
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+                Message received!
+              </h2>
+              <p className="text-muted-foreground text-lg max-w-md mx-auto">
+                Thanks{name ? `, ${name}` : ''}. I&apos;ll be in touch within 12 hours. In the meantime, book a 30-minute discovery call below — let&apos;s talk through your project.
+              </p>
+            </div>
+            <div className="max-w-2xl mx-auto rounded-2xl overflow-hidden border border-border shadow-xl">
+              <iframe
+                src="https://calendly.com/sameerqadri/30min"
+                width="100%"
+                height="700"
+                style={{ border: 0 }}
+                title="Book a 30-minute call with Sameer Qadri"
+              />
+            </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4 text-left">
@@ -397,9 +400,19 @@ function CaseStudiesCTAForm() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground hover:bg-primary/90 disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="w-full rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground hover:bg-primary/90 disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background flex items-center justify-center gap-2"
             >
-              {loading ? 'Sending…' : 'Send message'}
+              {loading ? (
+                <>
+                  <span className="material-icons text-sm animate-spin" aria-hidden>sync</span>
+                  Sending…
+                </>
+              ) : (
+                <>
+                  Send Message &amp; Book a Call
+                  <span className="material-icons text-sm" aria-hidden>send</span>
+                </>
+              )}
             </button>
           </form>
         )}
