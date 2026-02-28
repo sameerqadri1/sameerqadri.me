@@ -22,6 +22,16 @@ interface Props {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
+function formatBody(raw: string): string {
+  const trimmed = raw.trim();
+  if (/<[a-z][\s\S]*>/i.test(trimmed)) return trimmed;
+
+  return trimmed
+    .split(/\n{2,}/)
+    .map((block) => `<p>${block.replace(/\n/g, '<br />')}</p>`)
+    .join('');
+}
+
 export function CaseStudyModal({ slug, onClose }: Props) {
   const [study, setStudy] = useState<CaseStudy | null>(null);
   const [loading, setLoading] = useState(true);
@@ -157,7 +167,7 @@ export function CaseStudyModal({ slug, onClose }: Props) {
               {study.body && (
                 <div className="prose prose-invert prose-sm max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-a:text-primary border-t border-border pt-6">
                   <div
-                    dangerouslySetInnerHTML={{ __html: study.body }}
+                    dangerouslySetInnerHTML={{ __html: formatBody(study.body) }}
                   />
                 </div>
               )}
