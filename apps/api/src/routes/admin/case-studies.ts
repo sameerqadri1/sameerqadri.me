@@ -3,7 +3,7 @@ import type { Request } from 'express';
 import {
   caseStudyCreateSchema,
   caseStudyUpdateSchema,
-} from '@portfolio/shared';
+} from '../../lib/shared.js';
 import type { AuthPayload } from '../../middleware/auth.js';
 import { prisma } from '../../lib/prisma.js';
 

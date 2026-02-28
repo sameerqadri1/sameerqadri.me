@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { caseStudyQuerySchema } from '@portfolio/shared';
+import { caseStudyQuerySchema } from '../lib/shared.js';
 import type { CaseStudy } from '../generated/prisma/client.js';
 import { prisma } from '../lib/prisma.js';
 

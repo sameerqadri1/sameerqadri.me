@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import bcrypt from 'bcrypt';
 import { SignJWT } from 'jose';
-import { loginSchema } from '@portfolio/shared';
+import { loginSchema } from '../lib/shared.js';
 
 export const authRouter = Router();
 
