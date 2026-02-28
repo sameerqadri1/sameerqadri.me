@@ -10,7 +10,11 @@ export function AdminGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const [ready, setReady] = useState(false);
 
-  const isLoginPage = pathname === '/admin/login' || pathname === '/admin/login/';
+  const isLoginPage =
+    pathname === '/admin/login' ||
+    pathname === '/admin/login/' ||
+    pathname === '/admin/setup' ||
+    pathname === '/admin/setup/';
 
   useEffect(() => {
     const token =

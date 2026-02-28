@@ -67,11 +67,17 @@
     @apply relative overflow-hidden bg-card border border-border transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_24px_var(--glow-color)];
   }
   .marquee-container {
-    @apply flex overflow-hidden select-none gap-12 py-8 border-y border-border/50 bg-muted;
+    @apply flex overflow-hidden select-none gap-16 py-8 border-y border-border/50 bg-muted;
   }
   .marquee-content {
-    @apply flex shrink-0 justify-around min-w-full gap-12 items-center;
-    animation: scroll 30s linear infinite;
+    /* min-w-max keeps natural item widths — no justify-around spreading */
+    @apply flex shrink-0 min-w-max gap-16 items-center;
+    animation: scroll 35s linear infinite;
+  }
+
+  /* Auto-running fade-up for dynamically rendered content (no JS observer needed) */
+  .animate-enter {
+    animation: fade-up-in 0.6s ease-out forwards;
   }
 
   .animate-fade-up {
@@ -109,6 +115,17 @@
   }
   to {
     transform: translateX(-100%);
+  }
+}
+
+@keyframes fade-up-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

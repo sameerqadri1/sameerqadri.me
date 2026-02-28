@@ -55,16 +55,14 @@ function MarqueeRow() {
       {TECH_ITEMS.map(({ label, logoSrc }) => (
         <span
           key={label}
-          className="flex items-center gap-4 text-foreground font-semibold text-lg"
+          className="flex items-center gap-3 text-foreground font-semibold text-base whitespace-nowrap"
         >
-          <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-card border border-border">
-            <img
-              src={logoSrc}
-              alt={`${label} logo`}
-              className="h-6 w-6 object-contain"
-              loading="lazy"
-            />
-          </span>
+          <img
+            src={logoSrc}
+            alt={`${label} logo`}
+            className="h-7 w-7 object-contain flex-shrink-0"
+            loading="lazy"
+          />
           <span>{label}</span>
         </span>
       ))}

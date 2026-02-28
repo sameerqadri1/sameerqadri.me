@@ -1,41 +1,35 @@
 const STEPS = [
   {
-    number: '01',
     icon: 'search',
     title: 'Discovery',
     description:
       'We start with a deep-dive into your goals, constraints, and existing systems. I ask the uncomfortable questions early so we build the right thing.',
   },
   {
-    number: '02',
     icon: 'architecture',
     title: 'Scope',
     description:
       'Together we define a clear scope, stack decisions, and timeline. No surprises later — everything is agreed before a single line of code is written.',
   },
   {
-    number: '03',
     icon: 'code',
     title: 'Build',
     description:
       'I build iteratively with regular check-ins. You see real progress every week, not a big reveal at the end. Clean code, tested, documented.',
   },
   {
-    number: '04',
     icon: 'rate_review',
     title: 'Review',
     description:
       'A structured review phase where we test edge cases, gather feedback, and polish the experience before going live.',
   },
   {
-    number: '05',
     icon: 'rocket_launch',
     title: 'Launch',
     description:
       'Smooth deployment with proper monitoring in place. I stay close around launch day to handle anything that comes up immediately.',
   },
   {
-    number: '06',
     icon: 'autorenew',
     title: 'Iterate',
     description:
@@ -66,7 +60,7 @@ export function Process() {
           <div className="hidden lg:block absolute top-10 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {STEPS.map(({ number, icon, title, description, optional }, index) => (
+            {STEPS.map(({ icon, title, description, optional }, index) => (
               <div
                 key={title}
                 className="relative glow-card p-6 rounded-2xl animate-fade-up group"
@@ -77,11 +71,8 @@ export function Process() {
                     Optional
                   </span>
                 )}
-                <div className="flex items-start gap-4 mb-4">
-                  <span className="text-xs font-bold text-primary/50 tabular-nums mt-0.5">
-                    {number}
-                  </span>
-                  <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
+                <div className="mb-4">
+                  <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
                     <span className="material-symbols-outlined text-xl">
                       {icon}
                     </span>

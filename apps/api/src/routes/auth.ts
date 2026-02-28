@@ -9,6 +9,16 @@ const JWT_SECRET = process.env.JWT_SECRET ?? 'change-me-in-production';
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME ?? 'admin';
 const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH ?? '';
 
+/** Safe check: tells the frontend if admin credentials are configured. */
+authRouter.get('/check-configured', (_req, res) => {
+  res.json({
+    success: true,
+    data: {
+      configured: Boolean(ADMIN_PASSWORD_HASH && ADMIN_PASSWORD_HASH.startsWith('$2')),
+    },
+  });
+});
+
 authRouter.post('/login', async (req, res) => {
   try {
     const parsed = loginSchema.safeParse(req.body);

@@ -1,6 +1,10 @@
-import Link from 'next/link';
+'use client';
 
 export function Hero() {
+  function scrollTo(id: string) {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   return (
     <section className="relative min-h-screen flex items-center pt-28 pb-24 overflow-hidden">
       <div className="pointer-events-none absolute top-0 right-0 w-[600px] h-[600px] bg-primary/15 rounded-full blur-[140px] -translate-y-1/3 translate-x-1/4" />
@@ -29,19 +33,19 @@ export function Hero() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <Link
-              className="px-8 py-4 bg-primary text-primary-foreground font-bold rounded-xl shadow-xl shadow-primary/25 hover:bg-primary/90 transition-all flex items-center gap-2 text-sm"
-              href="#contact"
+            <button
+              onClick={() => scrollTo('contact')}
+              className="px-8 py-4 bg-primary text-primary-foreground font-bold rounded-xl shadow-xl shadow-primary/25 hover:bg-primary/90 transition-all flex items-center gap-2 text-sm cursor-pointer"
             >
               Start a Project
               <span className="material-icons text-base">arrow_forward</span>
-            </Link>
-            <Link
-              className="px-8 py-4 bg-secondary text-secondary-foreground font-bold rounded-xl border border-border/70 hover:bg-secondary/80 transition-all text-sm"
-              href="#projects"
+            </button>
+            <button
+              onClick={() => scrollTo('projects')}
+              className="px-8 py-4 bg-secondary text-secondary-foreground font-bold rounded-xl border border-border/70 hover:bg-secondary/80 transition-all text-sm cursor-pointer"
             >
               View Case Studies
-            </Link>
+            </button>
           </div>
 
           {/* Social links */}

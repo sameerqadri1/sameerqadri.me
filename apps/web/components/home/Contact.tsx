@@ -7,17 +7,21 @@ interface FormData {
   company: string;
   email: string;
   message: string;
+  website: string; // honeypot — must stay empty
 }
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? '';
 
 export function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState<FormData>({
     name: '',
     company: '',
     email: '',
     message: '',
+    website: '', // honeypot
   });
 
   function handleChange(
@@ -28,17 +32,36 @@ export function Contact() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    // Fire-and-forget POST to API — show Calendly regardless of result
-    if (API_URL) {
-      fetch(`${API_URL}/api/contact`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      }).catch(() => {
-        // Silently ignore — Calendly still shows
-      });
+
+    // Honeypot — bots fill this, humans don't
+    if (form.website) return;
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      if (API_URL) {
+        const res = await fetch(`${API_URL}/api/contact`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: form.name,
+            company: form.company,
+            email: form.email,
+            message: form.message,
+          }),
+        });
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data?.error?.message || 'Failed to send. Please try again.');
+        }
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please email me directly.');
+    } finally {
+      setLoading(false);
     }
-    setSubmitted(true);
   }
 
   return (
@@ -99,6 +122,21 @@ export function Contact() {
                 Responds within 12h
               </div>
               <form onSubmit={handleSubmit} className="space-y-5">
+                {/* Honeypot — visually hidden, must be empty on submit */}
+                <div
+                  aria-hidden="true"
+                  style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, overflow: 'hidden' }}
+                  tabIndex={-1}
+                >
+                  <input
+                    name="website"
+                    value={form.website}
+                    onChange={handleChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-2">
                     <label
@@ -172,18 +210,36 @@ export function Contact() {
                     rows={4}
                   />
                 </div>
+
+                {error && (
+                  <p className="text-sm text-red-400 bg-red-400/10 border border-red-400/20 rounded-xl px-4 py-3" role="alert">
+                    {error}
+                  </p>
+                )}
+
                 <button
-                  className="w-full py-4 bg-primary text-primary-foreground font-bold rounded-xl shadow-xl shadow-primary/20 hover:bg-primary/90 transition-all flex items-center justify-center gap-2 text-sm"
+                  className="w-full py-4 bg-primary text-primary-foreground font-bold rounded-xl shadow-xl shadow-primary/20 hover:bg-primary/90 transition-all flex items-center justify-center gap-2 text-sm disabled:opacity-60 disabled:cursor-not-allowed"
                   type="submit"
+                  disabled={loading}
                 >
-                  Send Message &amp; Book a Call
-                  <span className="material-icons text-sm">send</span>
+                  {loading ? (
+                    <>
+                      <span className="material-icons text-sm animate-spin">sync</span>
+                      Sending…
+                    </>
+                  ) : (
+                    <>
+                      Send Message &amp; Book a Call
+                      <span className="material-icons text-sm">send</span>
+                    </>
+                  )}
                 </button>
               </form>
             </div>
           </div>
         ) : (
-          <div className="animate-fade-up">
+          /* animate-enter uses CSS keyframes — works without JS observer */
+          <div className="animate-enter">
             <div className="text-center mb-10">
               <div className="w-16 h-16 bg-primary/10 border border-primary/30 rounded-full flex items-center justify-center mx-auto mb-5">
                 <span className="material-icons text-primary text-3xl">
