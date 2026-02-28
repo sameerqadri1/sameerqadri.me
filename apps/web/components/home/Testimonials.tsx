@@ -4,25 +4,28 @@ const QUOTES = [
       '"The performance optimization on our Shopify store was transformative. Our conversion rate increased by 24% within the first month."',
     name: 'James Mitchell',
     role: 'CEO, TrendFlow',
-    avatar:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuCw5-7D4MiFz7S1Gwnm9lmSUEFFiVKwiTIhEjaGrAmtrcGRLmaGIziNjdRCRFHwB84VRrEmU1CBWDYgcGvnl8T8Tywboyi9rCV4KgNU4V1s1D2bKGcHPsMfQ1NryZ_RBBsutdLnZesrONsrDrh5hExMrWrpb0lv_XEvcSFVxuOD1p-22pXK891ngoVTZhNZMbm9NdMJKg5o7vSXuzCfTa3ENcZxp3Fem77sQb42oiAjOyzeSAgTleHdDH47vUeLZ6wlwzWb1NitjJA',
+    initials: 'JM',
   },
   {
     quote:
       '"A rare talent who understands both technical architecture and the commercial needs of a high-growth media agency."',
     name: 'Sarah Chen',
     role: 'Product Lead, NexaMedia',
-    avatar:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuCj4KFh7BeOlLRO0VHqmw6HkOlVcABmGN6mRZT-is8IU0TcXjgDTvjUIJ7JTkR1imafaAhQK9vcjemVjKprkhN_CukcUC_SuCS34huao8WmyOyw8I-uTbSRCz5lGMUIeTIAcvvh5oZiy-nlykvnQqoVLCBVO4QmhxQpZ-MWIJuV8KbDr5X7Gzy3RJ1Bcip1ADP1cA7Kjw9XV-P41RyYQVrc9sDqNICDYtoqiHtSdIhLgWrk_yToYAlwIcc1fR7lSGrjOGvL-_Ow-cI',
+    initials: 'SC',
   },
   {
     quote:
       '"The migration to headless was flawless. Our PageSpeed score is now 100/100, and mobile conversion is up 32%."',
     name: 'Marcus Thorne',
     role: 'Founder, CoreRetail',
-    avatar:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuCpW4DjL3GsUkpOUNK76lO8H6_L5UV2QdNDdWKOrkul8CnITDLGJvlfKvXHJ3eUJ5pSHXnQHK1GrEn91JLSw6MINfex6s1GWhVKaGLPTUW4UYVlyAAs0voqkqMlt_YWHoq6YavPXdW6312hWIjrnJdyTJ-E8nTLaW5lTyojsgXwNHoJ2gMLk8PhQWVuDmKVZMlcQ9EzRFBz5UP3bJA93OfFwxhQgiVw4n6C-lz_gcHbzlJsI_-FKVeFbtyWLpxE0kWj27VOxG8Dl4w',
+    initials: 'MT',
   },
+];
+
+const AVATAR_COLORS = [
+  'from-violet-500 to-purple-600',
+  'from-sky-500 to-indigo-600',
+  'from-emerald-500 to-teal-600',
 ];
 
 export function Testimonials() {
@@ -44,7 +47,7 @@ export function Testimonials() {
           </h3>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {QUOTES.map(({ quote, name, role, avatar }, index) => (
+          {QUOTES.map(({ quote, name, role, initials }, index) => (
             <div
               key={name}
               className="bg-card border border-border p-8 rounded-2xl shadow-sm animate-fade-up"
@@ -57,12 +60,10 @@ export function Testimonials() {
                 {quote}
               </p>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full border border-primary/40 p-1">
-                  <img
-                    alt=""
-                    className="w-full h-full rounded-full object-cover"
-                    src={avatar}
-                  />
+                <div
+                  className={`w-12 h-12 rounded-full bg-gradient-to-br ${AVATAR_COLORS[index % AVATAR_COLORS.length]} flex items-center justify-center text-white font-bold text-sm shadow-lg`}
+                >
+                  {initials}
                 </div>
                 <div>
                   <h4 className="font-bold text-foreground">{name}</h4>

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Nav } from '@/components/home/Nav';
 import { Footer } from '@/components/home/Footer';
+import { CaseStudyModal } from '@/components/CaseStudyModal';
 
 interface CaseStudy {
   id: string;
@@ -24,6 +25,7 @@ export default function CaseStudiesPage() {
   const [items, setItems] = useState<CaseStudy[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [activeSlug, setActiveSlug] = useState<string | null>(null);
 
   useEffect(() => {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
@@ -96,10 +98,11 @@ export default function CaseStudiesPage() {
           {!loading && !error && items.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {items.map((study, index) => (
-                <Link
+                <button
                   key={study.id}
-                  href={`/case-studies/detail/?slug=${study.slug}`}
-                  className="group cursor-pointer animate-fade-up"
+                  type="button"
+                  onClick={() => setActiveSlug(study.slug)}
+                  className="group cursor-pointer animate-fade-up text-left"
                   style={{ animationDelay: `${index * 0.05}s` }}
                 >
                   <div className="rounded-2xl overflow-hidden border border-border/70 bg-card mb-4 relative shadow-sm">
@@ -119,9 +122,7 @@ export default function CaseStudiesPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                       <span className="text-white font-bold flex items-center gap-2 text-sm">
                         View Case Study
-                        <span className="material-icons text-sm">
-                          open_in_new
-                        </span>
+                        <span className="material-icons text-sm">open_in_new</span>
                       </span>
                     </div>
                   </div>
@@ -134,13 +135,17 @@ export default function CaseStudiesPage() {
                   <p className="text-muted-foreground text-sm line-clamp-2">
                     {study.summary}
                   </p>
-                </Link>
+                </button>
               ))}
             </div>
           )}
         </div>
       </main>
       <Footer />
+
+      {activeSlug && (
+        <CaseStudyModal slug={activeSlug} onClose={() => setActiveSlug(null)} />
+      )}
     </>
   );
 }

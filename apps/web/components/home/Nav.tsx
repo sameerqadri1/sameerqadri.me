@@ -5,12 +5,12 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
 const NAV_LINKS = [
-  { label: 'About', href: '/#about', section: 'about' },
-  { label: 'Expertise', href: '/#expertise', section: 'expertise' },
-  { label: 'Process', href: '/#process', section: 'process' },
-  { label: 'Projects', href: '/#projects', section: 'projects' },
-  { label: 'Testimonials', href: '/#testimonials', section: 'testimonials' },
-  { label: 'FAQ', href: '/#faq', section: 'faq' },
+  { label: 'About', section: 'about' },
+  { label: 'Expertise', section: 'expertise' },
+  { label: 'Process', section: 'process' },
+  { label: 'Projects', section: 'projects' },
+  { label: 'Testimonials', section: 'testimonials' },
+  { label: 'FAQ', section: 'faq' },
 ];
 
 export function Nav() {
@@ -30,43 +30,13 @@ export function Nav() {
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
-  function scrollToSection(sectionId: string) {
-    const el = document.getElementById(sectionId);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }
-
-  function handleNavClick(
-    e: MouseEvent<HTMLAnchorElement>,
-    section: string,
-    href: string
-  ) {
+  function navigateToSection(e: MouseEvent, section: string) {
+    e.preventDefault();
     if (pathname === '/') {
-      e.preventDefault();
-      scrollToSection(section);
+      document.getElementById(section)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
-      // Navigate to home, then scroll after the page mounts
-      e.preventDefault();
+      sessionStorage.setItem('scrollTo', section);
       router.push('/');
-      // Store target section so home page can scroll on mount
-      if (typeof window !== 'undefined') {
-        sessionStorage.setItem('scrollTo', section);
-      }
-    }
-    setMenuOpen(false);
-  }
-
-  function handleContactClick(e: MouseEvent<HTMLAnchorElement>) {
-    if (pathname === '/') {
-      e.preventDefault();
-      scrollToSection('contact');
-    } else {
-      e.preventDefault();
-      router.push('/');
-      if (typeof window !== 'undefined') {
-        sessionStorage.setItem('scrollTo', 'contact');
-      }
     }
     setMenuOpen(false);
   }
@@ -89,7 +59,6 @@ export function Nav() {
         >
           {/* Desktop */}
           <div className="hidden md:flex w-full items-center justify-between gap-2">
-            {/* Logo / brand */}
             <Link
               href="/"
               className="text-sm font-bold text-foreground tracking-tight flex-shrink-0 hover:text-primary transition-colors pr-2"
@@ -98,13 +67,13 @@ export function Nav() {
             </Link>
 
             <div className="flex items-center gap-1">
-              {NAV_LINKS.map(({ label, href, section }) => (
+              {NAV_LINKS.map(({ label, section }) => (
                 <a
                   key={label}
-                  href={href}
+                  href={`/#${section}`}
                   className="nav-link"
                   onMouseMove={handleNavLinkMouseMove}
-                  onClick={(e) => handleNavClick(e, section, href)}
+                  onClick={(e) => navigateToSection(e, section)}
                 >
                   {label}
                 </a>
@@ -113,7 +82,7 @@ export function Nav() {
             <a
               className="px-5 py-2 rounded-full text-xs font-semibold tracking-wide bg-primary text-primary-foreground shadow-md shadow-primary/30 hover:bg-primary/90 transition-colors flex-shrink-0 cursor-pointer"
               href="/#contact"
-              onClick={handleContactClick}
+              onClick={(e) => navigateToSection(e, 'contact')}
             >
               Book Meeting
             </a>
@@ -131,7 +100,7 @@ export function Nav() {
               <a
                 className="px-4 py-1.5 rounded-full text-[11px] font-semibold tracking-wide bg-primary text-primary-foreground shadow-md shadow-primary/30 hover:bg-primary/90 transition-colors cursor-pointer"
                 href="/#contact"
-                onClick={handleContactClick}
+                onClick={(e) => navigateToSection(e, 'contact')}
               >
                 Book Meeting
               </a>
@@ -178,11 +147,11 @@ export function Nav() {
           }`}
         >
           <nav className="flex flex-col gap-1">
-            {NAV_LINKS.map(({ label, href, section }) => (
+            {NAV_LINKS.map(({ label, section }) => (
               <a
                 key={label}
-                href={href}
-                onClick={(e) => handleNavClick(e, section, href)}
+                href={`/#${section}`}
+                onClick={(e) => navigateToSection(e, section)}
                 className="flex items-center gap-3 px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all text-base font-medium cursor-pointer"
               >
                 {label}
@@ -192,7 +161,7 @@ export function Nav() {
           <div className="mt-6 pt-6 border-t border-border/60">
             <a
               href="/#contact"
-              onClick={handleContactClick}
+              onClick={(e) => navigateToSection(e, 'contact')}
               className="flex items-center justify-center gap-2 w-full py-3 bg-primary text-primary-foreground font-semibold rounded-xl shadow-lg shadow-primary/20 hover:bg-primary/90 transition-colors cursor-pointer"
             >
               <span className="material-icons text-sm">calendar_today</span>

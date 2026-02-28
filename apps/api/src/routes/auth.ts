@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import bcrypt from 'bcrypt';
+import bcryptjs from 'bcryptjs';
 import { SignJWT } from 'jose';
 import { loginSchema } from '../lib/shared.js';
 
@@ -44,7 +44,7 @@ authRouter.post('/login', async (req, res) => {
       });
     }
 
-    const match = await bcrypt.compare(password, ADMIN_PASSWORD_HASH);
+    const match = await bcryptjs.compare(password, ADMIN_PASSWORD_HASH);
     if (!match) {
       return res.status(401).json({
         success: false,

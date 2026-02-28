@@ -1,12 +1,15 @@
-import Link from 'next/link';
+'use client';
+
+import { usePathname, useRouter } from 'next/navigation';
+import { type MouseEvent } from 'react';
 
 const NAV_LINKS = [
-  { label: 'About', href: '#about' },
-  { label: 'Expertise', href: '#expertise' },
-  { label: 'Process', href: '#process' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Testimonials', href: '#testimonials' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'About', section: 'about' },
+  { label: 'Expertise', section: 'expertise' },
+  { label: 'Process', section: 'process' },
+  { label: 'Projects', section: 'projects' },
+  { label: 'Testimonials', section: 'testimonials' },
+  { label: 'Contact', section: 'contact' },
 ];
 
 const SERVICES = [
@@ -17,6 +20,19 @@ const SERVICES = [
 ];
 
 export function Footer() {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  function handleSectionClick(e: MouseEvent, section: string) {
+    e.preventDefault();
+    if (pathname === '/') {
+      document.getElementById(section)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      sessionStorage.setItem('scrollTo', section);
+      router.push('/');
+    }
+  }
+
   return (
     <footer className="bg-background border-t border-border/60 pt-20 pb-12">
       <div className="container mx-auto px-6">
@@ -77,11 +93,15 @@ export function Footer() {
               Navigation
             </h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
-              {NAV_LINKS.map(({ label, href }) => (
+              {NAV_LINKS.map(({ label, section }) => (
                 <li key={label}>
-                  <Link className="hover:text-primary transition-colors" href={href}>
+                  <a
+                    href={`/#${section}`}
+                    onClick={(e) => handleSectionClick(e, section)}
+                    className="hover:text-primary transition-colors cursor-pointer"
+                  >
                     {label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -106,8 +126,9 @@ export function Footer() {
               Have a project in mind? I&apos;d love to hear about it.
             </p>
             <a
-              href="#contact"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground text-sm font-semibold rounded-full hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
+              href="/#contact"
+              onClick={(e) => handleSectionClick(e, 'contact')}
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground text-sm font-semibold rounded-full hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 cursor-pointer"
             >
               <span className="material-icons text-sm">mail</span>
               Book a Meeting
@@ -120,22 +141,8 @@ export function Footer() {
 
         <div className="pt-10 border-t border-border/60 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-muted-foreground text-xs font-medium">
-            © {new Date().getFullYear()} Sameer Qadri. All rights reserved.
+            &copy; 2025 Sameer Qadri. All rights reserved.
           </p>
-          <div className="flex gap-6">
-            <Link
-              className="text-muted-foreground hover:text-foreground text-xs transition-colors"
-              href="#"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              className="text-muted-foreground hover:text-foreground text-xs transition-colors"
-              href="#"
-            >
-              Terms of Service
-            </Link>
-          </div>
         </div>
       </div>
     </footer>

@@ -10,6 +10,7 @@ import {
   type CaseStudy,
   type CaseStudyUpdate,
 } from '@/lib/admin-api';
+import { ImageUpload } from '@/components/admin/ImageUpload';
 
 function EditForm() {
   const router = useRouter();
@@ -184,14 +185,17 @@ function EditForm() {
             className="input"
           />
         </Field>
-        <Field label="Cover image URL">
-          <input
-            type="url"
-            value={(form.coverImageUrl as string) ?? ''}
-            onChange={(e) => update('coverImageUrl', e.target.value)}
-            className="input"
-          />
-        </Field>
+        <div>
+          <label className="mb-1 block text-sm font-medium text-muted-foreground">
+            Cover Image
+          </label>
+          <div className="mt-1">
+            <ImageUpload
+              value={form.coverImageUrl as string}
+              onChange={(url) => update('coverImageUrl', url)}
+            />
+          </div>
+        </div>
         <Field label="Tags (comma-separated)">
           <input
             value={Array.isArray(form.tags) ? form.tags.join(', ') : ''}

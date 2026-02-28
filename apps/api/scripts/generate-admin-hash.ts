@@ -4,7 +4,7 @@
  *
  * Copy the printed hash into your .env as ADMIN_PASSWORD_HASH=<hash>
  */
-import bcrypt from 'bcrypt';
+import bcryptjs from 'bcryptjs';
 import * as readline from 'readline';
 
 const rl = readline.createInterface({
@@ -18,7 +18,7 @@ rl.question('Enter the password you want to use for admin login: ', async (passw
     console.error('❌  Password must be at least 8 characters.');
     process.exit(1);
   }
-  const hash = await bcrypt.hash(password, 10);
+  const hash = await bcryptjs.hash(password, 10);
   console.log('\n✅  Password hash generated. Add this to your apps/api/.env:\n');
   console.log(`ADMIN_PASSWORD_HASH="${hash}"\n`);
 });

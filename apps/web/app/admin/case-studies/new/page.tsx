@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { createCaseStudy, type CaseStudyCreate } from '@/lib/admin-api';
+import { ImageUpload } from '@/components/admin/ImageUpload';
 
 const defaultForm: CaseStudyCreate = {
   slug: '',
@@ -136,14 +137,17 @@ export default function NewCaseStudyPage() {
             className="input"
           />
         </Field>
-        <Field label="Cover image URL">
-          <input
-            type="url"
-            value={form.coverImageUrl ?? ''}
-            onChange={(e) => update('coverImageUrl', e.target.value)}
-            className="input"
-          />
-        </Field>
+        <div>
+          <label className="mb-1 block text-sm font-medium text-muted-foreground">
+            Cover Image
+          </label>
+          <div className="mt-1">
+            <ImageUpload
+              value={form.coverImageUrl}
+              onChange={(url) => update('coverImageUrl', url)}
+            />
+          </div>
+        </div>
         <Field label="Tags (comma-separated)">
           <input
             value={Array.isArray(form.tags) ? form.tags.join(', ') : ''}

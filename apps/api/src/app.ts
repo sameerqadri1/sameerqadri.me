@@ -5,6 +5,8 @@ import { caseStudiesRouter } from './routes/case-studies.js';
 import { contactRouter } from './routes/contact.js';
 import { healthRouter } from './routes/health.js';
 import { adminRouter } from './routes/admin/index.js';
+import { uploadRouter } from './routes/upload.js';
+import { authMiddleware } from './middleware/auth.js';
 
 export const app = express();
 
@@ -38,6 +40,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/case-studies', caseStudiesRouter);
 app.use('/api/contact', contactRouter);
 app.use('/api/admin', adminRouter);
+app.use('/api/upload', authMiddleware, uploadRouter);
 
 app.use(
   (

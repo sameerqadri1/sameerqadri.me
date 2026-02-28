@@ -34,9 +34,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build shared package
-        run: npm run build -w @portfolio/shared
-
       - name: Build web (static export)
         run: npm run build -w @portfolio/web
         env:

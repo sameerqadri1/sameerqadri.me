@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@portfolio/shared": "*",
     "@types/bcryptjs": "^2.4.6",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",

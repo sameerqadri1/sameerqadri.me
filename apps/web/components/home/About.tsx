@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 export function About() {
   return (
     <section className="py-24 bg-muted" id="about">
@@ -11,12 +9,12 @@ export function About() {
             <div className="relative">
               <div className="absolute -inset-4 bg-primary/20 rounded-3xl blur-2xl" />
               <div className="relative w-72 h-72 sm:w-96 sm:h-96 lg:w-[420px] lg:h-[480px] rounded-3xl overflow-hidden border-2 border-primary/30 shadow-2xl">
-                <Image
-                  src="/sameer.svg"
+                <img
+                  src="/sameer.jpg"
                   alt="Sameer Qadri — Full Stack Engineer"
-                  fill
-                  className="object-cover"
-                  priority
+                  width={420}
+                  height={480}
+                  className="w-full h-full object-cover"
                 />
               </div>
               {/* Floating badge */}
@@ -25,7 +23,7 @@ export function About() {
                   Based in
                 </p>
                 <p className="text-sm font-bold text-foreground">
-                  Islamabad, PK 🇵🇰
+                  Islamabad, PK
                 </p>
               </div>
             </div>
