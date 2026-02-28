@@ -1,8 +1,14 @@
 'use client';
 
 import { useState, useRef, type DragEvent } from 'react';
+import imageCompression from 'browser-image-compression';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? '';
+
+const MAX_INPUT_MB = 4.5;
+const MAX_INPUT_BYTES = MAX_INPUT_MB * 1024 * 1024;
+const TARGET_MAX_MB = 4;
+const TARGET_MAX_WIDTH = 1920;
 
 interface Props {
   value: string | null | undefined;
@@ -15,13 +21,31 @@ export function ImageUpload({ value, onChange }: Props) {
   const [dragOver, setDragOver] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  async function compressImage(file: File): Promise<File> {
+    const isImage = /^image\/(jpeg|png|webp|gif)$/i.test(file.type);
+    if (!isImage || file.size <= 0) return file;
+
+    const options = {
+      maxSizeMB: TARGET_MAX_MB,
+      maxWidthOrHeight: TARGET_MAX_WIDTH,
+      useWebWorker: true,
+    };
+
+    try {
+      const compressed = await imageCompression(file, options);
+      return compressed;
+    } catch {
+      return file;
+    }
+  }
+
   async function upload(file: File) {
     if (!API_URL) {
       setError('API URL not configured');
       return;
     }
-    if (file.size > 4.5 * 1024 * 1024) {
-      setError('File too large (max 4.5 MB)');
+    if (file.size > MAX_INPUT_BYTES) {
+      setError(`File too large (max ${MAX_INPUT_MB} MB).`);
       return;
     }
 
@@ -29,12 +53,14 @@ export function ImageUpload({ value, onChange }: Props) {
     setError(null);
 
     try {
+      const fileToSend = await compressImage(file);
+
       const token = typeof window !== 'undefined'
         ? window.localStorage.getItem('admin_token')
         : null;
 
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append('file', fileToSend);
 
       const res = await fetch(`${API_URL}/api/upload`, {
         method: 'POST',
@@ -92,12 +118,12 @@ export function ImageUpload({ value, onChange }: Props) {
         } ${uploading ? 'opacity-60 pointer-events-none' : ''}`}
       >
         {uploading ? (
-          <span>Uploading...</span>
+          <span>Compressing & uploading…</span>
         ) : (
           <>
             <span className="material-icons text-2xl">cloud_upload</span>
             <span>{value ? 'Replace image' : 'Drop image here or click to browse'}</span>
-            <span className="text-xs text-muted-foreground">JPEG, PNG, WebP, GIF — max 4.5 MB</span>
+            <span className="text-xs text-muted-foreground">JPEG, PNG, WebP, GIF — max {MAX_INPUT_MB} MB (auto-compressed)</span>
           </>
         )}
       </div>
