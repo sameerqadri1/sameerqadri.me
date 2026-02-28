@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { caseStudyQuerySchema } from '../lib/shared.js';
-import type { CaseStudy } from '../generated/prisma/client.js';
+import type { CaseStudy } from '@prisma/client';
 import { prisma } from '../lib/prisma.js';
 
 export const caseStudiesRouter = Router();

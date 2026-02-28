@@ -1,8 +1,7 @@
 // Neon (PostgreSQL) for production; use same or local Postgres for dev.
 // Prisma 7: url is in prisma.config.ts; client uses @prisma/adapter-pg at runtime.
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
