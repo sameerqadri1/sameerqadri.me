@@ -41,6 +41,7 @@ jobs:
         run: npm run build -w @portfolio/web
         env:
           NEXT_TELEMETRY_DISABLED: 1
+          NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
