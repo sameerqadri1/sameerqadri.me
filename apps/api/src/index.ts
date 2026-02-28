@@ -1,5 +1,6 @@
 // Local development entry point — runs the Express server with app.listen().
 // Vercel uses src/vercel.ts instead.
+import 'dotenv/config';
 import { app } from './app.js';
 
 const PORT = process.env.API_PORT ?? 3001;
