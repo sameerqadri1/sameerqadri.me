@@ -34,6 +34,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Fetch SEO configuration
+        run: node scripts/fetch-seo.mjs
+        env:
+          NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
+
       - name: Build web (static export)
         run: npm run build -w @portfolio/web
         env:

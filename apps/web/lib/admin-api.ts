@@ -92,3 +92,36 @@ export async function deleteCaseStudy(id: string): Promise<void> {
     throw new Error(json.error?.message ?? 'Failed to delete');
   }
 }
+
+export interface SeoConfig {
+  siteName: string;
+  siteUrl: string;
+  home: {
+    title: string;
+    description: string;
+    ogImage: string | null;
+  };
+  caseStudies: {
+    title: string;
+    description: string;
+    ogImage: string | null;
+  };
+}
+
+export async function getSeoConfig(): Promise<SeoConfig | null> {
+  const res = await adminFetch('/api/admin/seo');
+  const json = await res.json();
+  if (!json.success) throw new Error(json.error?.message ?? 'Failed to load SEO');
+  return json.data ?? null;
+}
+
+export async function updateSeoConfig(config: SeoConfig): Promise<SeoConfig> {
+  const res = await adminFetch('/api/admin/seo', {
+    method: 'PUT',
+    body: JSON.stringify(config),
+  });
+  const json = await res.json();
+  if (!json.success) throw new Error(json.error?.message ?? 'Failed to save SEO');
+  return json.data as SeoConfig;
+}
+

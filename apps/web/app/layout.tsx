@@ -3,22 +3,14 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { cn } from '../lib/utils';
 import { RevealObserver } from '../components/RevealObserver';
+import { buildBaseMetadata } from '../seo';
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-sans',
 });
 
-export const metadata: Metadata = {
-  title: 'Sameer Qadri — Full Stack Engineer',
-  description:
-    'Full Stack Engineer specializing in headless systems, AI agents, and SaaS products. 50+ projects delivered across 10+ countries.',
-  openGraph: {
-    title: 'Sameer Qadri — Full Stack Engineer',
-    description:
-      'Full Stack Engineer specializing in headless systems, AI agents, and SaaS products. 50+ projects delivered across 10+ countries.',
-  },
-};
+export const metadata: Metadata = buildBaseMetadata();
 
 export default function RootLayout({
   children,

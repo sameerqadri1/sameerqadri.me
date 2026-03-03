@@ -29,3 +29,16 @@ model CaseStudy {
   @@index([published, order])
   @@index([slug])
 }
+
+model SeoSettings {
+  id                       Int      @id @default(1)
+  siteName                 String   @default("Sameer Qadri — Full Stack Engineer")
+  siteUrl                  String   @default("https://sameerqadri.me")
+  homeTitle                String
+  homeDescription          String
+  homeOgImage              String?
+  caseStudiesTitle         String
+  caseStudiesDescription   String
+  caseStudiesOgImage       String?
+  updatedAt                DateTime @updatedAt
+}

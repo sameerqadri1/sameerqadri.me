@@ -21,6 +21,9 @@ export default function AdminDashboardPage() {
           <Link href="/panel-sq8701/case-studies/" className="text-primary hover:underline">
             Case studies
           </Link>
+          <Link href="/panel-sq8701/seo/" className="text-primary hover:underline">
+            SEO
+          </Link>
           <button
             type="button"
             onClick={handleLogout}

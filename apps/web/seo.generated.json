@@ -1,0 +1,15 @@
+{
+  "siteName": "Sameer Qadri — Full Stack Engineer",
+  "siteUrl": "https://sameerqadri.me",
+  "home": {
+    "title": "Sameer Qadri — Full Stack Engineer",
+    "description": "Full Stack Engineer specializing in headless systems, AI agents, and SaaS products. 50+ projects delivered across 10+ countries.",
+    "ogImage": null
+  },
+  "caseStudies": {
+    "title": "Client Case Studies — Sameer Qadri",
+    "description": "Selected client projects where I designed and built headless systems, AI agents, and SaaS products that shipped to production.",
+    "ogImage": null
+  }
+}
+

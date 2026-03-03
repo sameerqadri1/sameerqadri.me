@@ -2,6 +2,7 @@ import { Router } from 'express';
 import type { Request } from 'express';
 import { authMiddleware, type AuthPayload } from '../../middleware/auth.js';
 import { adminCaseStudiesRouter } from './case-studies.js';
+import { adminSeoRouter } from './seo.js';
 
 export const adminRouter = Router();
 
@@ -15,3 +16,4 @@ adminRouter.get('/me', (req: Request & { auth?: AuthPayload }, res) => {
 });
 
 adminRouter.use('/case-studies', adminCaseStudiesRouter);
+adminRouter.use('/seo', adminSeoRouter);
