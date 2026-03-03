@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { createCaseStudy, type CaseStudyCreate } from '@/lib/admin-api';
 import { ImageUpload } from '@/components/admin/ImageUpload';
+import { RichTextEditor } from '@/components/admin/RichTextEditor';
 
 const defaultForm: CaseStudyCreate = {
   slug: '',
@@ -129,12 +130,10 @@ export default function NewCaseStudyPage() {
           />
         </Field>
         <Field label="Body" required>
-          <textarea
+          <RichTextEditor
             value={form.body}
-            onChange={(e) => update('body', e.target.value)}
-            required
-            rows={8}
-            className="input"
+            onChange={(html) => update('body', html)}
+            placeholder="Use headings, lists, links, bold/italic. Paste content and it will keep basic formatting."
           />
         </Field>
         <div>

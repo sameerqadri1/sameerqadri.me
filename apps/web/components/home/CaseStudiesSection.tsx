@@ -69,7 +69,9 @@ export function CaseStudiesSection() {
                 <button
                   key={study.id}
                   type="button"
-                  onClick={() => setActiveSlug(study.slug)}
+                  onClick={() => {
+                    setActiveSlug(study.slug);
+                  }}
                   className="group cursor-pointer animate-enter text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-2xl"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >

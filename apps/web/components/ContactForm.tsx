@@ -1,9 +1,11 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import { useRef, useState, FormEvent } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? '';
 const CALENDLY_URL = 'https://calendly.com/sameerqadri/30min';
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? '';
 
 /** Success view with thank-you message and Calendly iframe (for use when parent controls layout). */
 export function ContactSuccessView({ name }: { name?: string }) {
@@ -72,10 +74,10 @@ export function ContactForm({
   const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const [website, setWebsite] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA | null>(null);
 
   const isCompact = variant === 'compact';
   const labelClass = isCompact ? compactLabelClass : defaultLabelClass;
@@ -88,15 +90,19 @@ export function ContactForm({
     else if (n === 'company') setCompany(value);
     else if (n === 'email') setEmail(value);
     else if (n === 'message') setMessage(value);
-    else if (n === 'website') setWebsite(value);
   }
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    if (website) return;
     setLoading(true);
     setError(null);
     try {
+      let recaptchaToken: string | null = null;
+      if (RECAPTCHA_SITE_KEY && recaptchaRef.current) {
+        recaptchaToken = await recaptchaRef.current.executeAsync();
+        recaptchaRef.current.reset();
+      }
+
       if (API_URL) {
         const res = await fetch(`${API_URL}/api/contact`, {
           method: 'POST',
@@ -106,6 +112,7 @@ export function ContactForm({
             company: showCompany ? company : '',
             email,
             message,
+            recaptchaToken,
           }),
         });
         if (!res.ok) {
@@ -135,9 +142,13 @@ export function ContactForm({
 
   return (
     <form onSubmit={handleSubmit} className={`${spaceY} ${className}`}>
-      <div aria-hidden className="absolute -left-[9999px] h-0 overflow-hidden" tabIndex={-1}>
-        <input name="website" value={website} onChange={handleChange} tabIndex={-1} autoComplete="off" />
-      </div>
+      {RECAPTCHA_SITE_KEY && (
+        <ReCAPTCHA
+          ref={recaptchaRef}
+          sitekey={RECAPTCHA_SITE_KEY}
+          size="invisible"
+        />
+      )}
 
       <div className={showCompany && !isCompact ? 'grid grid-cols-1 sm:grid-cols-2 gap-5' : ''}>
         <div className={isCompact ? '' : 'space-y-2'}>

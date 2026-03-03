@@ -24,6 +24,9 @@ export function CaseStudyModal({ slug, onClose }: Props) {
   const [study, setStudy] = useState<CaseStudy | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [shareState, setShareState] = useState<'idle' | 'copied' | 'error'>(
+    'idle'
+  );
   const closeRef = useRef<HTMLButtonElement>(null);
   const scrollBodyRef = useRef<HTMLDivElement>(null);
 
@@ -70,6 +73,35 @@ export function CaseStudyModal({ slug, onClose }: Props) {
 
   if (!slug) return null;
 
+  const shareUrl = typeof window !== 'undefined'
+    ? `${window.location.origin}/case-studies/?open=${encodeURIComponent(slug)}`
+    : `/case-studies/?open=${encodeURIComponent(slug)}`;
+
+  async function handleShare() {
+    setShareState('idle');
+    try {
+      const nav: any = typeof navigator !== 'undefined' ? navigator : null;
+      if (nav?.share) {
+        await nav.share({
+          title: study?.title ? `${study.title} — Case Study` : 'Case Study',
+          url: shareUrl,
+        });
+        return;
+      }
+      if (nav?.clipboard?.writeText) {
+        await nav.clipboard.writeText(shareUrl);
+        setShareState('copied');
+        window.setTimeout(() => setShareState('idle'), 1600);
+        return;
+      }
+      setShareState('error');
+      window.setTimeout(() => setShareState('idle'), 2000);
+    } catch {
+      setShareState('error');
+      window.setTimeout(() => setShareState('idle'), 2000);
+    }
+  }
+
   return (
     <div className="fixed inset-0 z-[60] flex items-start justify-center" role="dialog" aria-modal="true" aria-labelledby="case-study-title">
       {/* Backdrop */}
@@ -81,8 +113,34 @@ export function CaseStudyModal({ slug, onClose }: Props) {
 
       {/* Panel: flex column so close button stays visible; only body scrolls */}
       <div className="relative z-10 flex w-full max-w-3xl max-h-[85vh] mx-4 my-8 sm:my-16 flex-col rounded-2xl border border-border bg-card shadow-2xl animate-enter overflow-hidden">
-        {/* Close button - always visible above scroll area */}
-        <div className="flex flex-none items-start justify-end p-4 pb-0">
+        {/* Header actions */}
+        <div className="flex flex-none items-start justify-between gap-3 p-4 pb-0">
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={handleShare}
+              className="h-9 px-3 rounded-full bg-background/80 backdrop-blur border border-border flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              aria-label="Share case study"
+            >
+              <span className="material-icons text-lg" aria-hidden>share</span>
+              <span className="text-sm font-semibold">
+                {shareState === 'copied'
+                  ? 'Copied'
+                  : shareState === 'error'
+                    ? 'Copy failed'
+                    : 'Share'}
+              </span>
+            </button>
+            <a
+              href={shareUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="h-9 px-3 rounded-full bg-background/80 backdrop-blur border border-border flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              Open link
+              <span className="material-icons text-base" aria-hidden>open_in_new</span>
+            </a>
+          </div>
           <button
             ref={closeRef}
             onClick={onClose}

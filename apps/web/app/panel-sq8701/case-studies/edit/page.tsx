@@ -11,6 +11,7 @@ import {
   type CaseStudyUpdate,
 } from '@/lib/admin-api';
 import { ImageUpload } from '@/components/admin/ImageUpload';
+import { RichTextEditor } from '@/components/admin/RichTextEditor';
 
 function EditForm() {
   const router = useRouter();
@@ -177,12 +178,10 @@ function EditForm() {
           />
         </Field>
         <Field label="Body" required>
-          <textarea
+          <RichTextEditor
             value={(form.body as string) ?? ''}
-            onChange={(e) => update('body', e.target.value)}
-            required
-            rows={8}
-            className="input"
+            onChange={(html) => update('body', html)}
+            placeholder="Use headings, lists, links, bold/italic. Paste content and it will keep basic formatting."
           />
         </Field>
         <div>

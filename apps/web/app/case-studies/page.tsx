@@ -55,6 +55,7 @@ function CaseStudiesContent() {
     const tag = searchParams.get('tag');
     setSelectedTag(tag);
     setSort(parseSort(searchParams.get('sort')));
+    setActiveSlug(searchParams.get('open'));
   }, [searchParams]);
 
   const fetchCaseStudies = useCallback(async () => {
@@ -113,22 +114,33 @@ function CaseStudiesContent() {
     return sort === 'newest' ? dateB - dateA : dateA - dateB;
   });
 
-  function updateUrl(tag: string | null, sortVal: SortOption) {
+  function updateUrl(tag: string | null, sortVal: SortOption, openSlug: string | null) {
     const params = new URLSearchParams();
     if (tag) params.set('tag', tag);
     if (sortVal !== 'newest') params.set('sort', sortVal);
+    if (openSlug) params.set('open', openSlug);
     const qs = params.toString();
     router.replace(qs ? `/case-studies?${qs}` : '/case-studies', { scroll: false });
   }
 
   function handleTagSelect(tag: string | null) {
     setSelectedTag(tag);
-    updateUrl(tag, sort);
+    updateUrl(tag, sort, activeSlug);
   }
 
   function handleSortChange(sortVal: SortOption) {
     setSort(sortVal);
-    updateUrl(selectedTag, sortVal);
+    updateUrl(selectedTag, sortVal, activeSlug);
+  }
+
+  function handleOpen(slug: string) {
+    setActiveSlug(slug);
+    updateUrl(selectedTag, sort, slug);
+  }
+
+  function handleClose() {
+    setActiveSlug(null);
+    updateUrl(selectedTag, sort, null);
   }
 
   return (
@@ -291,7 +303,7 @@ function CaseStudiesContent() {
                     <button
                       key={study.id}
                       type="button"
-                      onClick={() => setActiveSlug(study.slug)}
+                      onClick={() => handleOpen(study.slug)}
                       className="group cursor-pointer animate-enter text-left rounded-2xl border border-border/70 bg-card overflow-hidden shadow-sm hover:shadow-lg hover:border-primary/30 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                       style={{ animationDelay: `${Math.min(index * 0.06, 0.3)}s` }}
                     >
@@ -369,7 +381,7 @@ function CaseStudiesContent() {
       <Footer />
 
       {activeSlug && (
-        <CaseStudyModal slug={activeSlug} onClose={() => setActiveSlug(null)} />
+        <CaseStudyModal slug={activeSlug} onClose={handleClose} />
       )}
     </>
   );

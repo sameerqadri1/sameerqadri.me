@@ -4,6 +4,8 @@ import { Resend } from 'resend';
 
 export const contactRouter = Router();
 
+const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY;
+
 const contactSchema = z.object({
   name: z.string().min(1).max(200),
   company: z.string().max(200).optional(),
@@ -13,7 +15,48 @@ const contactSchema = z.object({
 
 contactRouter.post('/', async (req, res) => {
   try {
-    const parsed = contactSchema.safeParse(req.body);
+    const { recaptchaToken, ...body } = (req.body ?? {}) as {
+      recaptchaToken?: string | null;
+      name?: unknown;
+      company?: unknown;
+      email?: unknown;
+      message?: unknown;
+    };
+
+    if (RECAPTCHA_SECRET_KEY) {
+      if (!recaptchaToken || typeof recaptchaToken !== 'string') {
+        return res.status(400).json({
+          success: false,
+          error: { message: 'reCAPTCHA token missing. Please try again.' },
+        });
+      }
+      try {
+        const params = new URLSearchParams();
+        params.set('secret', RECAPTCHA_SECRET_KEY);
+        params.set('response', recaptchaToken);
+        const verifyRes = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: params.toString(),
+        });
+        const verifyJson = (await verifyRes.json()) as { success: boolean; ['error-codes']?: string[] };
+        if (!verifyJson.success) {
+          console.error('reCAPTCHA failed', verifyJson['error-codes']);
+          return res.status(400).json({
+            success: false,
+            error: { message: 'reCAPTCHA validation failed. Please try again.' },
+          });
+        }
+      } catch (err) {
+        console.error('reCAPTCHA verification error:', err);
+        return res.status(400).json({
+          success: false,
+          error: { message: 'reCAPTCHA validation failed. Please try again.' },
+        });
+      }
+    }
+
+    const parsed = contactSchema.safeParse(body);
     if (!parsed.success) {
       return res.status(400).json({
         success: false,
