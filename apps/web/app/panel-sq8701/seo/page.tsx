@@ -116,9 +116,9 @@ export default function SeoSettingsPage() {
       ) : (
         <form onSubmit={handleSubmit} className="mt-6 space-y-8">
           {/* Site settings */}
-          <section className="space-y-4 rounded-2xl border border-border bg-card/40 p-4 sm:p-6">
+          <section className="space-y-3 rounded-2xl border border-border bg-card/30 p-4">
             <h2 className="text-lg font-semibold text-foreground">Site</h2>
-            <div className="mt-3 grid gap-4 md:grid-cols-2">
+            <div className="mt-2 grid gap-3 md:grid-cols-2">
               <div className="space-y-2 md:col-span-2">
                 <label className="block text-sm font-medium text-muted-foreground">
                   Site name
@@ -148,9 +148,9 @@ export default function SeoSettingsPage() {
           </section>
 
           {/* Home page settings */}
-          <section className="space-y-4 rounded-2xl border border-border bg-card/40 p-4 sm:p-6">
+          <section className="space-y-3 rounded-2xl border border-border bg-card/30 p-4">
             <h2 className="text-lg font-semibold text-foreground">Home page</h2>
-            <div className="mt-3 grid gap-4 md:grid-cols-2">
+            <div className="mt-2 grid gap-3 md:grid-cols-2">
               <div className="space-y-2 md:col-span-2">
                 <label className="block text-sm font-medium text-muted-foreground">
                   Title
@@ -173,7 +173,7 @@ export default function SeoSettingsPage() {
                     handleHomeChange('description', e.target.value)
                   }
                   className="input"
-                  rows={3}
+                  rows={2}
                   required
                 />
               </div>
@@ -198,11 +198,11 @@ export default function SeoSettingsPage() {
           </section>
 
           {/* Case studies settings */}
-          <section className="space-y-4 rounded-2xl border border-border bg-card/40 p-4 sm:p-6">
+          <section className="space-y-3 rounded-2xl border border-border bg-card/30 p-4">
             <h2 className="text-lg font-semibold text-foreground">
               Case studies page
             </h2>
-            <div className="mt-3 grid gap-4 md:grid-cols-2">
+            <div className="mt-2 grid gap-3 md:grid-cols-2">
               <div className="space-y-2 md:col-span-2">
                 <label className="block text-sm font-medium text-muted-foreground">
                   Title
@@ -227,7 +227,7 @@ export default function SeoSettingsPage() {
                     handleCaseStudiesChange('description', e.target.value)
                   }
                   className="input"
-                  rows={3}
+                  rows={2}
                   required
                 />
               </div>
