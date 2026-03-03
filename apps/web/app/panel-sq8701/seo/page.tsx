@@ -88,7 +88,7 @@ export default function SeoSettingsPage() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-12">
+    <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <Link
           href="/panel-sq8701/"
@@ -115,132 +115,143 @@ export default function SeoSettingsPage() {
         <p className="mt-6 text-muted-foreground">Loading…</p>
       ) : (
         <form onSubmit={handleSubmit} className="mt-6 space-y-8">
-          <section className="space-y-4">
+          {/* Site settings */}
+          <section className="space-y-4 rounded-2xl border border-border bg-card/40 p-4 sm:p-6">
             <h2 className="text-lg font-semibold text-foreground">Site</h2>
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-muted-foreground">
-                Site name
-              </label>
-              <input
-                type="text"
-                value={config.siteName}
-                onChange={(e) => handleChange('siteName', e.target.value)}
-                className="input"
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-muted-foreground">
-                Site URL
-              </label>
-              <input
-                type="url"
-                value={config.siteUrl}
-                onChange={(e) => handleChange('siteUrl', e.target.value)}
-                className="input"
-                required
-                placeholder="https://sameerqadri.me"
-              />
+            <div className="mt-3 grid gap-4 md:grid-cols-2">
+              <div className="space-y-2 md:col-span-2">
+                <label className="block text-sm font-medium text-muted-foreground">
+                  Site name
+                </label>
+                <input
+                  type="text"
+                  value={config.siteName}
+                  onChange={(e) => handleChange('siteName', e.target.value)}
+                  className="input"
+                  required
+                />
+              </div>
+              <div className="space-y-2 md:col-span-2">
+                <label className="block text-sm font-medium text-muted-foreground">
+                  Site URL
+                </label>
+                <input
+                  type="url"
+                  value={config.siteUrl}
+                  onChange={(e) => handleChange('siteUrl', e.target.value)}
+                  className="input"
+                  required
+                  placeholder="https://sameerqadri.me"
+                />
+              </div>
             </div>
           </section>
 
-          <section className="space-y-4">
+          {/* Home page settings */}
+          <section className="space-y-4 rounded-2xl border border-border bg-card/40 p-4 sm:p-6">
             <h2 className="text-lg font-semibold text-foreground">Home page</h2>
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-muted-foreground">
-                Title
-              </label>
-              <input
-                type="text"
-                value={config.home.title}
-                onChange={(e) => handleHomeChange('title', e.target.value)}
-                className="input"
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-muted-foreground">
-                Description
-              </label>
-              <textarea
-                value={config.home.description}
-                onChange={(e) => handleHomeChange('description', e.target.value)}
-                className="input"
-                rows={3}
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-muted-foreground">
-                Open Graph image URL
-              </label>
-              <input
-                type="url"
-                value={config.home.ogImage ?? ''}
-                onChange={(e) =>
-                  handleHomeChange(
-                    'ogImage',
-                    e.target.value.trim() === '' ? null : e.target.value.trim()
-                  )
-                }
-                className="input"
-                placeholder="https://…/og-image.png (optional)"
-              />
+            <div className="mt-3 grid gap-4 md:grid-cols-2">
+              <div className="space-y-2 md:col-span-2">
+                <label className="block text-sm font-medium text-muted-foreground">
+                  Title
+                </label>
+                <input
+                  type="text"
+                  value={config.home.title}
+                  onChange={(e) => handleHomeChange('title', e.target.value)}
+                  className="input"
+                  required
+                />
+              </div>
+              <div className="space-y-2 md:col-span-2">
+                <label className="block text-sm font-medium text-muted-foreground">
+                  Description
+                </label>
+                <textarea
+                  value={config.home.description}
+                  onChange={(e) =>
+                    handleHomeChange('description', e.target.value)
+                  }
+                  className="input"
+                  rows={3}
+                  required
+                />
+              </div>
+              <div className="space-y-2 md:col-span-2 lg:col-span-1">
+                <label className="block text-sm font-medium text-muted-foreground">
+                  Open Graph image URL
+                </label>
+                <input
+                  type="url"
+                  value={config.home.ogImage ?? ''}
+                  onChange={(e) =>
+                    handleHomeChange(
+                      'ogImage',
+                      e.target.value.trim() === '' ? null : e.target.value.trim()
+                    )
+                  }
+                  className="input"
+                  placeholder="https://…/og-image.png (optional)"
+                />
+              </div>
             </div>
           </section>
 
-          <section className="space-y-4">
+          {/* Case studies settings */}
+          <section className="space-y-4 rounded-2xl border border-border bg-card/40 p-4 sm:p-6">
             <h2 className="text-lg font-semibold text-foreground">
               Case studies page
             </h2>
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-muted-foreground">
-                Title
-              </label>
-              <input
-                type="text"
-                value={config.caseStudies.title}
-                onChange={(e) =>
-                  handleCaseStudiesChange('title', e.target.value)
-                }
-                className="input"
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-muted-foreground">
-                Description
-              </label>
-              <textarea
-                value={config.caseStudies.description}
-                onChange={(e) =>
-                  handleCaseStudiesChange('description', e.target.value)
-                }
-                className="input"
-                rows={3}
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-muted-foreground">
-                Open Graph image URL
-              </label>
-              <input
-                type="url"
-                value={config.caseStudies.ogImage ?? ''}
-                onChange={(e) =>
-                  handleCaseStudiesChange(
-                    'ogImage',
-                    e.target.value.trim() === '' ? null : e.target.value.trim()
-                  )
-                }
-                className="input"
-                placeholder="https://…/og-case-studies.png (optional)"
-              />
+            <div className="mt-3 grid gap-4 md:grid-cols-2">
+              <div className="space-y-2 md:col-span-2">
+                <label className="block text-sm font-medium text-muted-foreground">
+                  Title
+                </label>
+                <input
+                  type="text"
+                  value={config.caseStudies.title}
+                  onChange={(e) =>
+                    handleCaseStudiesChange('title', e.target.value)
+                  }
+                  className="input"
+                  required
+                />
+              </div>
+              <div className="space-y-2 md:col-span-2">
+                <label className="block text-sm font-medium text-muted-foreground">
+                  Description
+                </label>
+                <textarea
+                  value={config.caseStudies.description}
+                  onChange={(e) =>
+                    handleCaseStudiesChange('description', e.target.value)
+                  }
+                  className="input"
+                  rows={3}
+                  required
+                />
+              </div>
+              <div className="space-y-2 md:col-span-2 lg:col-span-1">
+                <label className="block text-sm font-medium text-muted-foreground">
+                  Open Graph image URL
+                </label>
+                <input
+                  type="url"
+                  value={config.caseStudies.ogImage ?? ''}
+                  onChange={(e) =>
+                    handleCaseStudiesChange(
+                      'ogImage',
+                      e.target.value.trim() === '' ? null : e.target.value.trim()
+                    )
+                  }
+                  className="input"
+                  placeholder="https://…/og-case-studies.png (optional)"
+                />
+              </div>
             </div>
           </section>
 
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <button
               type="submit"
               disabled={saving}
