@@ -114,7 +114,10 @@ export default function SeoSettingsPage() {
       {loading ? (
         <p className="mt-6 text-muted-foreground">Loading…</p>
       ) : (
-        <form onSubmit={handleSubmit} className="mt-6 space-y-8">
+        <form
+          onSubmit={handleSubmit}
+          className="mt-6 space-y-8 [&_.input]:w-full [&_.input]:rounded-lg [&_.input]:border [&_.input]:border-border [&_.input]:bg-card [&_.input]:px-4 [&_.input]:py-2 [&_.input]:text-foreground [&_.input]:focus:border-primary [&_.input]:focus:outline-none [&_.input]:focus:ring-1 [&_.input]:focus:ring-primary"
+        >
           {/* Site settings */}
           <section className="space-y-3 rounded-2xl border border-border bg-card/30 p-4">
             <h2 className="text-lg font-semibold text-foreground">Site</h2>

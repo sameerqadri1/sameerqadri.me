@@ -1,9 +1,19 @@
 import { Router } from 'express';
 import { z } from 'zod';
 import { prisma } from '../../lib/prisma.js';
+import { Prisma } from '@prisma/client';
 import type { SeoConfig } from '../seo.js';
 
 export const adminSeoRouter = Router();
+
+function isMissingSeoTableError(e: unknown): boolean {
+  if (e instanceof Prisma.PrismaClientKnownRequestError) {
+    // P2021: table does not exist
+    if (e.code === 'P2021') return true;
+  }
+  const msg = e instanceof Error ? e.message : String(e);
+  return /SeoSettings/i.test(msg) && /(does not exist|relation .* does not exist)/i.test(msg);
+}
 
 const seoConfigSchema = z.object({
   siteName: z.string().min(1),
@@ -48,6 +58,10 @@ adminSeoRouter.get('/', async (_req, res) => {
     res.json({ success: true, data });
   } catch (e) {
     console.error('Admin SEO load error:', e);
+    if (isMissingSeoTableError(e)) {
+      // Don't hard-fail the UI; show default values and allow the user to push DB schema.
+      return res.json({ success: true, data: null });
+    }
     res.status(500).json({
       success: false,
       error: { message: 'Failed to load SEO configuration' },
@@ -110,6 +124,15 @@ adminSeoRouter.put('/', async (req, res) => {
     });
   } catch (e) {
     console.error('Admin SEO save error:', e);
+    if (isMissingSeoTableError(e)) {
+      return res.status(503).json({
+        success: false,
+        error: {
+          message:
+            'SEO settings table is not initialized in the database yet. Run `prisma db push` against your production DB and redeploy the API.',
+        },
+      });
+    }
     res.status(500).json({
       success: false,
       error: { message: 'Failed to save SEO configuration' },

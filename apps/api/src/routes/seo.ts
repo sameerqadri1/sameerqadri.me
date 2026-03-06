@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { prisma } from '../lib/prisma.js';
+import { Prisma } from '@prisma/client';
 
 export const seoRouter = Router();
 
@@ -23,6 +24,14 @@ function buildDefaultConfig() {
 }
 
 export type SeoConfig = ReturnType<typeof buildDefaultConfig>;
+
+function isMissingSeoTableError(e: unknown): boolean {
+  if (e instanceof Prisma.PrismaClientKnownRequestError) {
+    if (e.code === 'P2021') return true;
+  }
+  const msg = e instanceof Error ? e.message : String(e);
+  return /SeoSettings/i.test(msg) && /(does not exist|relation .* does not exist)/i.test(msg);
+}
 
 seoRouter.get('/', async (_req, res) => {
   try {
@@ -52,6 +61,9 @@ seoRouter.get('/', async (_req, res) => {
     res.json({ success: true, data });
   } catch (e) {
     console.error('SEO config error:', e);
+    if (isMissingSeoTableError(e)) {
+      return res.json({ success: true, data: buildDefaultConfig() });
+    }
     res.status(500).json({
       success: false,
       error: { message: 'Failed to load SEO configuration' },
