@@ -29,7 +29,7 @@ export function Contact() {
               </p>
               <div className="space-y-5">
                 <a
-                  href="mailto:sameerkhan8701@gmail.com"
+                  href="mailto:info@sameerqadri.me"
                   className="flex items-center gap-4 group"
                 >
                   <div className="w-12 h-12 bg-muted rounded-xl flex items-center justify-center border border-border group-hover:border-primary/50 transition-colors flex-shrink-0">
@@ -38,7 +38,7 @@ export function Contact() {
                   <div>
                     <h4 className="text-foreground font-bold text-sm">Email</h4>
                     <p className="text-muted-foreground text-sm">
-                      sameerkhan8701@gmail.com
+                      info@sameerqadri.me
                     </p>
                   </div>
                 </a>

@@ -134,7 +134,7 @@ export function Footer() {
               Book a Meeting
             </a>
             <p className="text-muted-foreground text-xs mt-3">
-              sameerkhan8701@gmail.com
+              info@sameerqadri.me
             </p>
           </div>
         </div>
