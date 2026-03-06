@@ -11,6 +11,10 @@ const contactSchema = z.object({
   company: z.string().max(200).optional(),
   email: z.string().email(),
   message: z.string().min(1).max(5000),
+  projectType: z.string().max(200).optional(),
+  timeline: z.string().max(200).optional(),
+  budgetRange: z.string().max(200).optional(),
+  projectStage: z.string().max(200).optional(),
 });
 
 contactRouter.post('/', async (req, res) => {
@@ -21,6 +25,10 @@ contactRouter.post('/', async (req, res) => {
       company?: unknown;
       email?: unknown;
       message?: unknown;
+      projectType?: unknown;
+      timeline?: unknown;
+      budgetRange?: unknown;
+      projectStage?: unknown;
     };
 
     if (RECAPTCHA_SECRET_KEY) {
@@ -64,13 +72,22 @@ contactRouter.post('/', async (req, res) => {
       });
     }
 
-    const { name, company, email, message } = parsed.data;
+    const { name, company, email, message, projectType, timeline, budgetRange, projectStage } =
+      parsed.data;
 
     console.log('\n📩  New contact submission:');
     console.log(`   Name:    ${name}`);
     console.log(`   Company: ${company ?? '—'}`);
     console.log(`   Email:   ${email}`);
-    console.log(`   Message: ${message.slice(0, 120)}${message.length > 120 ? '…' : ''}\n`);
+    console.log(`   Message: ${message.slice(0, 120)}${message.length > 120 ? '…' : ''}`);
+    if (projectType || timeline || budgetRange || projectStage) {
+      console.log('   Project details:');
+      console.log(`     Type:   ${projectType ?? '—'}`);
+      console.log(`     When:   ${timeline ?? '—'}`);
+      console.log(`     Budget: ${budgetRange ?? '—'}`);
+      console.log(`     Stage:  ${projectStage ?? '—'}`);
+    }
+    console.log('');
 
     // Send email via Resend if API key is configured
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
@@ -93,6 +110,34 @@ contactRouter.post('/', async (req, res) => {
                 <tr><td style="padding:8px 0;color:#6b7280"><strong>Email</strong></td><td style="padding:8px 0"><a href="mailto:${email}">${email}</a></td></tr>
               </table>
               <hr style="border:none;border-top:1px solid #e5e7eb;margin:16px 0"/>
+              ${
+                projectType || timeline || budgetRange || projectStage
+                  ? `<p style="color:#6b7280;font-size:13px;margin-bottom:8px"><strong>Project details:</strong></p>
+              <ul style="color:#111827;font-size:13px;padding-left:18px;margin:0 0 12px 0">
+                ${
+                  projectType
+                    ? `<li><strong>Type:</strong> ${projectType}</li>`
+                    : ''
+                }
+                ${
+                  timeline
+                    ? `<li><strong>Timeline:</strong> ${timeline}</li>`
+                    : ''
+                }
+                ${
+                  budgetRange
+                    ? `<li><strong>Budget:</strong> ${budgetRange}</li>`
+                    : ''
+                }
+                ${
+                  projectStage
+                    ? `<li><strong>Stage:</strong> ${projectStage}</li>`
+                    : ''
+                }
+              </ul>
+              <hr style="border:none;border-top:1px solid #e5e7eb;margin:16px 0"/>`
+                  : ''
+              }
               <p style="color:#6b7280;font-size:13px;margin-bottom:8px"><strong>Message:</strong></p>
               <p style="white-space:pre-wrap;color:#111827">${message}</p>
               <hr style="border:none;border-top:1px solid #e5e7eb;margin:16px 0"/>

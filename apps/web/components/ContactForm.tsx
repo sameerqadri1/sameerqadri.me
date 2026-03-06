@@ -43,6 +43,8 @@ interface ContactFormProps {
   idPrefix?: string;
   /** Show company field (home contact: true, CTA: false) */
   showCompany?: boolean;
+  /** Show extra project detail fields (type, timeline, budget, stage) */
+  showProjectDetails?: boolean;
   /** Show success message + Calendly iframe after submit (ignored if onSubmitted is set) */
   showCalendlyOnSuccess?: boolean;
   /** When set, parent controls success view; form calls this on success and does not show success UI */
@@ -64,6 +66,7 @@ const compactInputClass =
 export function ContactForm({
   idPrefix = 'contact',
   showCompany = true,
+  showProjectDetails = false,
   showCalendlyOnSuccess = true,
   onSubmitted,
   submitLabel = 'Send Message & Book a Call',
@@ -74,6 +77,10 @@ export function ContactForm({
   const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [projectType, setProjectType] = useState('');
+  const [timeline, setTimeline] = useState('');
+  const [budgetRange, setBudgetRange] = useState('');
+  const [projectStage, setProjectStage] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -112,6 +119,10 @@ export function ContactForm({
             company: showCompany ? company : '',
             email,
             message,
+                projectType: showProjectDetails ? projectType : undefined,
+                timeline: showProjectDetails ? timeline : undefined,
+                budgetRange: showProjectDetails ? budgetRange : undefined,
+                projectStage: showProjectDetails ? projectStage : undefined,
             recaptchaToken,
           }),
         });
@@ -202,6 +213,100 @@ export function ContactForm({
           autoComplete="email"
         />
       </div>
+
+      {showProjectDetails && (
+        <div
+          className={
+            isCompact
+              ? 'space-y-3'
+              : 'mt-2 rounded-2xl border border-border/60 bg-card/40 px-4 py-4 space-y-4'
+          }
+        >
+          {!isCompact && (
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-1">
+                Project details
+              </p>
+              <p className="text-xs text-muted-foreground/80">
+                Optional, but helps make the first call more concrete.
+              </p>
+            </div>
+          )}
+          <div className={isCompact ? 'space-y-3' : 'grid grid-cols-1 sm:grid-cols-2 gap-4'}>
+            <div className={isCompact ? '' : 'space-y-2'}>
+              <label className={labelClass} htmlFor={`${idPrefix}-project-type`}>
+                Project type
+              </label>
+              <select
+                id={`${idPrefix}-project-type`}
+                value={projectType}
+                onChange={(e) => setProjectType(e.target.value)}
+                className={inputClass}
+              >
+                <option value="">Select (optional)</option>
+                <option value="new_build">New build</option>
+                <option value="rebuild_migration">Rebuild / migration</option>
+                <option value="ai_automation">AI agent / automation</option>
+                <option value="saas_platform">SaaS product / platform</option>
+                <option value="performance_audit">Performance audit</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div className={isCompact ? '' : 'space-y-2'}>
+              <label className={labelClass} htmlFor={`${idPrefix}-timeline`}>
+                Timeline
+              </label>
+              <select
+                id={`${idPrefix}-timeline`}
+                value={timeline}
+                onChange={(e) => setTimeline(e.target.value)}
+                className={inputClass}
+              >
+                <option value="">Select (optional)</option>
+                <option value="asap">ASAP (0–4 weeks)</option>
+                <option value="1_3_months">1–3 months</option>
+                <option value="3_6_months">3–6 months</option>
+                <option value="not_sure">Not sure yet</option>
+              </select>
+            </div>
+            <div className={isCompact ? '' : 'space-y-2'}>
+              <label className={labelClass} htmlFor={`${idPrefix}-budget`}>
+                Budget range
+              </label>
+              <select
+                id={`${idPrefix}-budget`}
+                value={budgetRange}
+                onChange={(e) => setBudgetRange(e.target.value)}
+                className={inputClass}
+              >
+                <option value="">Select (optional)</option>
+                <option value="<2k">&lt; $2k</option>
+                <option value="2k_5k">$2k–$5k</option>
+                <option value="5k_10k">$5k–$10k</option>
+                <option value="10k_plus">$10k+</option>
+                <option value="not_sure">Not sure</option>
+              </select>
+            </div>
+            <div className={isCompact ? '' : 'space-y-2'}>
+              <label className={labelClass} htmlFor={`${idPrefix}-stage`}>
+                Current stage
+              </label>
+              <select
+                id={`${idPrefix}-stage`}
+                value={projectStage}
+                onChange={(e) => setProjectStage(e.target.value)}
+                className={inputClass}
+              >
+                <option value="">Select (optional)</option>
+                <option value="idea_only">Idea only</option>
+                <option value="designs_ready">Wireframes / designs ready</option>
+                <option value="existing_product">Existing product live</option>
+                <option value="scaling_refactor">Scaling / refactor</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className={isCompact ? '' : 'space-y-2'}>
         <label className={labelClass} htmlFor={`${idPrefix}-message`}>

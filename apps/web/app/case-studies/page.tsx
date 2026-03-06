@@ -67,7 +67,7 @@ function CaseStudiesContent() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`${API_URL}/api/case-studies?published=true&limit=100`, {
+      const res = await fetch(`${API_URL}/api/case-studies?published=true&limit=30`, {
         method: 'GET',
         headers: { Accept: 'application/json' },
       });
@@ -313,6 +313,8 @@ function CaseStudiesContent() {
                             alt=""
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             src={study.coverImageUrl}
+                            loading="lazy"
+                            decoding="async"
                           />
                         ) : (
                           <div className="w-full h-full bg-muted flex items-center justify-center">
@@ -358,20 +360,61 @@ function CaseStudiesContent() {
               </section>
 
               <section className="mt-24 pt-20 border-t border-border/60 animate-enter" aria-labelledby="cta-heading">
-                <div className="max-w-2xl mx-auto text-center">
-                  <h2 id="cta-heading" className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-                    Have a similar project?
-                  </h2>
-                  <p className="text-muted-foreground mb-8">
-                    Tell me about your idea and I&apos;ll get back within 12 hours.
-                  </p>
-                  <ContactForm
-                    idPrefix="cta"
-                    showCompany={false}
-                    variant="compact"
-                    showCalendlyOnSuccess
-                    className="text-left"
-                  />
+                <div className="max-w-5xl mx-auto">
+                  <div className="bg-card/80 border border-border/70 rounded-3xl shadow-xl shadow-primary/10 px-6 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] gap-10 items-start">
+                      <div className="space-y-6">
+                        <div>
+                          <p className="text-primary font-bold tracking-[0.2em] uppercase text-xs mb-3">
+                            Next project
+                          </p>
+                          <h2
+                            id="cta-heading"
+                            className="text-2xl md:text-3xl font-bold text-foreground mb-3 tracking-tight"
+                          >
+                            Have a similar project in mind?
+                          </h2>
+                          <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
+                            Share a bit of context about what you&apos;re building so our first
+                            30‑minute call can focus on decisions instead of discovery.
+                          </p>
+                        </div>
+                        <ul className="space-y-2 text-sm text-muted-foreground">
+                          <li className="flex items-start gap-2">
+                            <span className="material-icons text-primary text-base mt-0.5" aria-hidden>
+                              check_circle
+                            </span>
+                            <span>What kind of system you&apos;re planning — headless, AI agent, SaaS, or something else.</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="material-icons text-primary text-base mt-0.5" aria-hidden>
+                              check_circle
+                            </span>
+                            <span>Rough timeline and budget so I can suggest a realistic approach.</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="material-icons text-primary text-base mt-0.5" aria-hidden>
+                              check_circle
+                            </span>
+                            <span>Where you are today — from idea only to a live product that needs scaling.</span>
+                          </li>
+                        </ul>
+                        <p className="text-xs text-muted-foreground/80">
+                          You&apos;ll see a Calendly link right after submitting to book a 30‑minute discovery call.
+                        </p>
+                      </div>
+                      <div className="bg-background/80 rounded-2xl border border-border/70 p-4 sm:p-5">
+                        <ContactForm
+                          idPrefix="cta"
+                          showCompany
+                          showProjectDetails
+                          variant="default"
+                          showCalendlyOnSuccess
+                          className="text-left"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </section>
             </>
