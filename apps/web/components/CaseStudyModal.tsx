@@ -176,28 +176,39 @@ export function CaseStudyModal({ slug, onClose }: Props) {
 
         {!loading && !error && study && (
           <div>
+            {/* Cover image */}
             {study.coverImageUrl && (
-              <img
-                src={study.coverImageUrl}
-                alt={study.title}
-                className="w-full aspect-video object-cover rounded-t-2xl"
-              />
+              <div className="relative">
+                <img
+                  src={study.coverImageUrl}
+                  alt={study.title}
+                  className="w-full aspect-video object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-card/60 to-transparent" />
+              </div>
             )}
 
-            <div className="p-6 sm:p-8 space-y-6">
+            <div className="p-6 sm:p-8 space-y-5">
               {/* Header */}
               <div>
-                {study.client && (
-                  <p className="text-primary text-xs font-bold uppercase tracking-widest mb-2">
-                    {study.client}
-                    {study.year ? ` · ${study.year}` : ''}
-                  </p>
-                )}
+                <div className="flex flex-wrap items-center gap-2 mb-3">
+                  {study.client && (
+                    <span className="text-primary text-[11px] font-bold uppercase tracking-[0.15em]">
+                      {study.client}
+                    </span>
+                  )}
+                  {study.year && (
+                    <>
+                      <span className="text-border">·</span>
+                      <span className="text-muted-foreground text-xs">{study.year}</span>
+                    </>
+                  )}
+                </div>
                 <h2 id="case-study-title" className="text-2xl sm:text-3xl font-bold text-foreground leading-tight">
                   {study.title}
                 </h2>
                 {study.subtitle && (
-                  <p className="mt-2 text-muted-foreground text-lg">
+                  <p className="mt-2 text-muted-foreground text-base leading-relaxed">
                     {study.subtitle}
                   </p>
                 )}
@@ -209,7 +220,7 @@ export function CaseStudyModal({ slug, onClose }: Props) {
                   {study.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-xs font-semibold rounded-full"
+                      className="px-2.5 py-1 bg-primary/10 border border-primary/20 text-primary text-xs font-semibold rounded-lg"
                     >
                       {tag}
                     </span>
@@ -218,17 +229,15 @@ export function CaseStudyModal({ slug, onClose }: Props) {
               )}
 
               {/* Summary */}
-              <p className="text-muted-foreground text-base leading-relaxed">
+              <p className="text-muted-foreground text-base leading-relaxed border-l-2 border-primary/40 pl-4">
                 {study.summary}
               </p>
 
               {/* Body */}
               {study.body && (
-                <div className="prose prose-invert prose-sm max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-a:text-primary border-t border-border pt-6">
-                  <div
-                    dangerouslySetInnerHTML={{ __html: formatBody(study.body) }}
-                  />
-                </div>
+                <div className="border-t border-border pt-6 rich-body"
+                  dangerouslySetInnerHTML={{ __html: formatBody(study.body) }}
+                />
               )}
 
               {/* CTA */}

@@ -59,7 +59,7 @@ caseStudiesRouter.get('/:slug', async (req, res) => {
   try {
     const { slug } = req.params;
     const study = await prisma.caseStudy.findUnique({ where: { slug } });
-    if (!study) {
+    if (!study || !study.published) {
       return res.status(404).json({
         success: false,
         error: { message: 'Case study not found', code: 'NOT_FOUND' },

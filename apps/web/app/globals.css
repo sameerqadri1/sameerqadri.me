@@ -75,6 +75,50 @@
     animation: scroll 35s linear infinite;
   }
 
+  /* Rich text / TipTap body rendered in dark UI */
+  .rich-body {
+    @apply text-muted-foreground text-base leading-relaxed;
+  }
+  .rich-body h2 {
+    @apply text-foreground text-xl font-bold mt-8 mb-3;
+  }
+  .rich-body h3 {
+    @apply text-foreground text-lg font-semibold mt-6 mb-2;
+  }
+  .rich-body p {
+    @apply mb-4 leading-relaxed;
+  }
+  .rich-body ul {
+    @apply list-disc list-inside space-y-1.5 mb-4 pl-2;
+  }
+  .rich-body ol {
+    @apply list-decimal list-inside space-y-1.5 mb-4 pl-2;
+  }
+  .rich-body li {
+    @apply text-muted-foreground;
+  }
+  .rich-body strong {
+    @apply text-foreground font-semibold;
+  }
+  .rich-body em {
+    @apply italic;
+  }
+  .rich-body a {
+    @apply text-primary underline underline-offset-2 hover:text-primary/80 transition-colors;
+  }
+  .rich-body blockquote {
+    @apply border-l-2 border-primary/40 pl-4 italic text-muted-foreground/80 my-4;
+  }
+  .rich-body code {
+    @apply bg-muted rounded px-1.5 py-0.5 text-sm font-mono text-foreground;
+  }
+  .rich-body pre {
+    @apply bg-muted rounded-xl p-4 overflow-x-auto text-sm font-mono mb-4;
+  }
+  .rich-body hr {
+    @apply border-border my-6;
+  }
+
   /* Auto-running fade-up for dynamically rendered content (no JS observer needed) */
   .animate-enter {
     animation: fade-up-in 0.6s ease-out both;
