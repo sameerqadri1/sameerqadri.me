@@ -12,12 +12,25 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
 function formatBody(raw: string): string {
   const trimmed = raw.trim();
-  if (/<[a-z][\s\S]*>/i.test(trimmed)) return trimmed;
 
+  // Plain text — wrap in paragraphs
+  if (!/<[a-z][\s\S]*>/i.test(trimmed)) {
+    return trimmed
+      .split(/\n{2,}/)
+      .map((block) => `<p>${block.replace(/\n/g, '<br />')}</p>`)
+      .join('');
+  }
+
+  // TipTap HTML — remove artifacts that cause blank bullets / extra gaps
   return trimmed
-    .split(/\n{2,}/)
-    .map((block) => `<p>${block.replace(/\n/g, '<br />')}</p>`)
-    .join('');
+    // Empty list items: <li><p></p></li>  or  <li></li>
+    .replace(/<li>\s*<p>\s*<\/p>\s*<\/li>/gi, '')
+    .replace(/<li>\s*<\/li>/gi, '')
+    // Leftover empty paragraphs
+    .replace(/<p>\s*<\/p>/gi, '')
+    // Empty lists after item removal
+    .replace(/<ul>\s*<\/ul>/gi, '')
+    .replace(/<ol>\s*<\/ol>/gi, '');
 }
 
 export function CaseStudyModal({ slug, onClose }: Props) {

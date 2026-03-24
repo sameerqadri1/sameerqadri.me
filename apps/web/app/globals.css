@@ -75,27 +75,38 @@
     animation: scroll 35s linear infinite;
   }
 
-  /* Rich text / TipTap body rendered in dark UI */
+  /* ─── Rich text / TipTap body rendered in dark UI ─── */
   .rich-body {
     @apply text-muted-foreground text-base leading-relaxed;
   }
+  .rich-body > * + * {
+    margin-top: 0.75rem;
+  }
   .rich-body h2 {
-    @apply text-foreground text-xl font-bold mt-8 mb-3;
+    @apply text-foreground text-xl font-bold mt-8 mb-2 leading-tight;
   }
   .rich-body h3 {
-    @apply text-foreground text-lg font-semibold mt-6 mb-2;
+    @apply text-foreground text-lg font-semibold mt-6 mb-1.5 leading-snug;
   }
+  /* Paragraphs — no bottom margin; gap handled by > * + * above */
   .rich-body p {
-    @apply mb-4 leading-relaxed;
+    @apply leading-relaxed mb-0;
   }
+  /* Lists: outside placement so bullet/number is visually separate from text */
   .rich-body ul {
-    @apply list-disc list-inside space-y-1.5 mb-4 pl-2;
+    @apply list-disc list-outside pl-5 mb-0;
   }
   .rich-body ol {
-    @apply list-decimal list-inside space-y-1.5 mb-4 pl-2;
+    @apply list-decimal list-outside pl-5 mb-0;
   }
   .rich-body li {
-    @apply text-muted-foreground;
+    @apply text-muted-foreground mb-1.5;
+  }
+  /* TipTap wraps every <li> content in a <p> — treat it as inline to avoid
+     double spacing and extra blank-line bullets */
+  .rich-body li > p {
+    display: inline;
+    margin: 0;
   }
   .rich-body strong {
     @apply text-foreground font-semibold;
@@ -113,7 +124,7 @@
     @apply bg-muted rounded px-1.5 py-0.5 text-sm font-mono text-foreground;
   }
   .rich-body pre {
-    @apply bg-muted rounded-xl p-4 overflow-x-auto text-sm font-mono mb-4;
+    @apply bg-muted rounded-xl p-4 overflow-x-auto text-sm font-mono mb-0;
   }
   .rich-body hr {
     @apply border-border my-6;
