@@ -4,11 +4,11 @@ export function About() {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-          {/* Photo */}
-          <div className="flex justify-center lg:justify-start animate-fade-up order-first lg:order-none">
+          {/* Photo — slides in from the left */}
+          <div className="flex justify-center lg:justify-start animate-slide-left order-first lg:order-none">
             <div className="relative">
               <div className="absolute -inset-4 bg-primary/20 rounded-3xl blur-2xl" />
-              <div className="relative w-72 h-72 sm:w-96 sm:h-96 lg:w-[420px] lg:h-[480px] rounded-3xl overflow-hidden border-2 border-primary/30 shadow-2xl">
+              <div className="relative w-72 h-72 sm:w-96 sm:h-96 lg:w-[420px] lg:h-[480px] rounded-3xl overflow-hidden border-2 border-primary/30 shadow-2xl hover:scale-[1.02] hover:shadow-primary/20 transition-all duration-500">
                 <img
                   src="/sameer.jpg"
                   alt="Sameer Qadri — Full Stack Engineer"
@@ -18,7 +18,7 @@ export function About() {
                 />
               </div>
               {/* Floating badge */}
-              <div className="absolute -bottom-4 -right-4 bg-card border border-border rounded-2xl px-4 py-3 shadow-xl">
+              <div className="absolute -bottom-4 -right-4 bg-card border border-border rounded-2xl px-4 py-3 shadow-xl animate-zoom-in" style={{ animationDelay: '0.4s' }}>
                 <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
                   Based in
                 </p>
@@ -29,8 +29,8 @@ export function About() {
             </div>
           </div>
 
-          {/* Bio */}
-          <div className="space-y-6 animate-fade-up">
+          {/* Bio — slides in from the right */}
+          <div className="space-y-6 animate-slide-right">
             <div>
               <p className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4">
                 About Me
@@ -74,7 +74,7 @@ export function About() {
               ].map((skill) => (
                 <span
                   key={skill}
-                  className="px-3 py-1.5 bg-card border border-border rounded-full text-xs font-semibold text-muted-foreground hover:border-primary/50 hover:text-foreground transition-colors"
+                  className="px-3 py-1.5 bg-card border border-border rounded-full text-xs font-semibold text-muted-foreground hover:border-primary/50 hover:text-foreground hover:-translate-y-0.5 hover:shadow-sm transition-all cursor-default"
                 >
                   {skill}
                 </span>

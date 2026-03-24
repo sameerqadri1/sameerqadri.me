@@ -51,7 +51,7 @@ export function FAQ() {
             return (
               <div
                 key={question}
-                className="bg-card border border-border rounded-2xl overflow-hidden transition-all duration-200 animate-fade-up"
+                className="bg-card border border-border rounded-2xl overflow-hidden animate-fade-up hover:border-primary/30 transition-colors duration-200"
                 style={{ animationDelay: `${index * 0.06}s` }}
               >
                 <button
@@ -70,14 +70,17 @@ export function FAQ() {
                     expand_more
                   </span>
                 </button>
+
+                {/* Smooth grid-rows accordion — no max-height flicker */}
                 <div
-                  className={`overflow-hidden transition-all duration-300 ${
-                    isOpen ? 'max-h-96' : 'max-h-0'
-                  }`}
+                  className="faq-accordion"
+                  data-open={String(isOpen)}
                 >
-                  <p className="px-6 pb-5 text-muted-foreground text-sm leading-relaxed">
-                    {answer}
-                  </p>
+                  <div className="overflow-hidden">
+                    <p className="px-6 pb-5 text-muted-foreground text-sm leading-relaxed">
+                      {answer}
+                    </p>
+                  </div>
                 </div>
               </div>
             );

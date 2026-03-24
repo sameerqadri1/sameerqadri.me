@@ -38,7 +38,7 @@ export function Footer() {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 
-          <div className="space-y-6 lg:col-span-1">
+          <div className="space-y-6 lg:col-span-1 animate-fade-up" style={{ animationDelay: '0s' }}>
             <div>
               <span className="text-xl font-bold text-foreground tracking-tight">
                 Sameer Qadri
@@ -53,7 +53,7 @@ export function Footer() {
             </p>
             <div className="flex gap-3">
               <a
-                className="w-10 h-10 bg-muted border border-border rounded-lg flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
+                className="w-10 h-10 bg-muted border border-border rounded-lg flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 hover:scale-110 transition-all"
                 href="https://linkedin.com/in/sameerqadri"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -64,7 +64,7 @@ export function Footer() {
                 </svg>
               </a>
               <a
-                className="w-10 h-10 bg-muted border border-border rounded-lg flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
+                className="w-10 h-10 bg-muted border border-border rounded-lg flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 hover:scale-110 transition-all"
                 href="https://github.com/sameerqadri1"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -75,7 +75,7 @@ export function Footer() {
                 </svg>
               </a>
               <a
-                className="w-10 h-10 bg-muted border border-border rounded-lg flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
+                className="w-10 h-10 bg-muted border border-border rounded-lg flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 hover:scale-110 transition-all"
                 href="https://x.com/coder_qadri"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -88,7 +88,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div>
+          <div className="animate-fade-up" style={{ animationDelay: '0.1s' }}>
             <h4 className="text-foreground font-bold mb-6 text-xs uppercase tracking-[0.2em]">
               Navigation
             </h4>
@@ -107,7 +107,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div className="animate-fade-up" style={{ animationDelay: '0.2s' }}>
             <h4 className="text-foreground font-bold mb-6 text-xs uppercase tracking-[0.2em]">
               Services
             </h4>
@@ -118,7 +118,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-4 animate-fade-up" style={{ animationDelay: '0.3s' }}>
             <h4 className="text-foreground font-bold mb-2 text-xs uppercase tracking-[0.2em]">
               Get In Touch
             </h4>

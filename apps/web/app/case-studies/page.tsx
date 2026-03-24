@@ -24,9 +24,9 @@ function CaseStudiesPageFallback() {
       <main className="min-h-screen bg-background pt-28 pb-24">
         <div className="container mx-auto px-6 max-w-6xl">
           <header className="max-w-2xl mb-16">
-            <p className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4">Work</p>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">All Case Studies</h1>
-            <p className="text-muted-foreground text-lg">Loading…</p>
+            <p className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4 animate-enter">Work</p>
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 tracking-tight animate-enter" style={{ animationDelay: '0.1s' }}>All Case Studies</h1>
+            <p className="text-muted-foreground text-lg animate-enter" style={{ animationDelay: '0.2s' }}>Loading…</p>
           </header>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" aria-busy="true">
             {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -148,18 +148,18 @@ function CaseStudiesContent() {
       <Nav />
       <main className="min-h-screen bg-background pt-28 pb-24">
         <div className="container mx-auto px-6 max-w-6xl">
-          <header className="max-w-2xl mb-16 animate-enter">
-            <p className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4">
+          <header className="max-w-2xl mb-16">
+            <p className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4 animate-enter" style={{ animationDelay: '0s' }}>
               Work
             </p>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 tracking-tight animate-enter" style={{ animationDelay: '0.1s' }}>
               All Case Studies
             </h1>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-3">
+            <p className="text-muted-foreground text-lg leading-relaxed mb-3 animate-enter" style={{ animationDelay: '0.2s' }}>
               A full collection of projects I&apos;ve shipped — from SaaS
               platforms to AI-powered systems.
             </p>
-            <p className="text-muted-foreground/90 text-base">
+            <p className="text-muted-foreground/90 text-base animate-enter" style={{ animationDelay: '0.3s' }}>
               Real projects, real impact. Select a project to read the full story.
             </p>
           </header>
@@ -304,7 +304,7 @@ function CaseStudiesContent() {
                       key={study.id}
                       type="button"
                       onClick={() => handleOpen(study.slug)}
-                      className="group cursor-pointer animate-enter text-left rounded-2xl border border-border/70 bg-card overflow-hidden shadow-sm hover:shadow-lg hover:border-primary/30 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                      className="group cursor-pointer animate-enter text-left rounded-2xl border border-border/70 bg-card overflow-hidden shadow-sm hover:shadow-xl hover:shadow-primary/10 hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                       style={{ animationDelay: `${Math.min(index * 0.06, 0.3)}s` }}
                     >
                       <div className="rounded-t-2xl overflow-hidden relative aspect-video bg-muted">

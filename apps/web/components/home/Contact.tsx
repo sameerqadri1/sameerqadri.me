@@ -12,7 +12,7 @@ export function Contact() {
       <div className="container mx-auto px-6">
         {!submitted ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-            <div className="space-y-8 animate-fade-up">
+            <div className="space-y-8 animate-slide-left">
               <div>
                 <p className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4">
                   Contact
@@ -60,7 +60,7 @@ export function Contact() {
               </div>
             </div>
 
-            <div className="bg-card border border-border p-6 sm:p-8 rounded-3xl relative shadow-sm animate-fade-up">
+            <div className="bg-card border border-border p-6 sm:p-8 rounded-3xl relative shadow-sm animate-slide-right">
               <div className="absolute -top-3 -right-3 bg-primary text-primary-foreground text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">
                 Responds within 12h
               </div>

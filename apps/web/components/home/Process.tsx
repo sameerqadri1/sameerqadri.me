@@ -63,7 +63,7 @@ export function Process() {
             {STEPS.map(({ icon, title, description, optional }, index) => (
               <div
                 key={title}
-                className="relative glow-card p-6 rounded-2xl animate-fade-up group"
+                className="relative glow-card p-6 rounded-2xl animate-fade-up group hover:-translate-y-1.5 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300"
                 style={{ animationDelay: `${index * 0.08}s` }}
               >
                 {optional && (
@@ -72,7 +72,7 @@ export function Process() {
                   </span>
                 )}
                 <div className="mb-4">
-                  <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+                  <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary animate-zoom-in group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300" style={{ animationDelay: `${index * 0.08 + 0.15}s` }}>
                     <span className="material-symbols-outlined text-xl">
                       {icon}
                     </span>

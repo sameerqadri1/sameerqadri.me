@@ -50,10 +50,10 @@ export function Testimonials() {
           {QUOTES.map(({ quote, name, role, initials }, index) => (
             <div
               key={name}
-              className="bg-card border border-border p-8 rounded-2xl shadow-sm animate-fade-up"
-              style={{ animationDelay: `${index * 0.05}s` }}
+              className="bg-card border border-border p-8 rounded-2xl shadow-sm animate-fade-up hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/10 hover:border-primary/30 transition-all duration-300 group"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <span className="material-icons text-primary text-4xl mb-6 opacity-40">
+              <span className="material-icons text-primary text-4xl mb-6 opacity-40 group-hover:opacity-60 transition-opacity">
                 format_quote
               </span>
               <p className="text-muted-foreground mb-8 italic leading-relaxed text-lg">
@@ -61,7 +61,7 @@ export function Testimonials() {
               </p>
               <div className="flex items-center gap-4">
                 <div
-                  className={`w-12 h-12 rounded-full bg-gradient-to-br ${AVATAR_COLORS[index % AVATAR_COLORS.length]} flex items-center justify-center text-white font-bold text-sm shadow-lg`}
+                  className={`w-12 h-12 rounded-full bg-gradient-to-br ${AVATAR_COLORS[index % AVATAR_COLORS.length]} flex items-center justify-center text-white font-bold text-sm shadow-lg group-hover:scale-110 transition-transform duration-300`}
                 >
                   {initials}
                 </div>
