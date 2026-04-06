@@ -41,9 +41,10 @@ export function CaseStudiesSection() {
                 Case Studies
               </h2>
             </div>
+            {/* Desktop: button sits in the header row */}
             <Link
               href="/case-studies"
-              className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-border bg-card text-sm font-semibold text-foreground hover:bg-muted/60 hover:border-primary/30 transition-all"
+              className="hidden md:inline-flex shrink-0 items-center gap-2 px-5 py-2.5 rounded-xl border border-border bg-card text-sm font-semibold text-foreground hover:bg-muted/60 hover:border-primary/30 transition-all"
             >
               View all case studies
               <span className="material-icons text-base text-primary">arrow_forward</span>
@@ -81,6 +82,7 @@ export function CaseStudiesSection() {
           )}
 
           {!loading && !error && items.length > 0 && (
+            <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {items.map((study, index) => (
                 <button
@@ -143,6 +145,18 @@ export function CaseStudiesSection() {
                 </button>
               ))}
             </div>
+
+            {/* Mobile/tablet: button below the grid */}
+            <div className="mt-10 flex justify-center md:hidden animate-fade-up">
+              <Link
+                href="/case-studies"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border bg-card text-sm font-semibold text-foreground hover:bg-muted/60 hover:border-primary/30 active:scale-[0.97] transition-all"
+              >
+                View all case studies
+                <span className="material-icons text-base text-primary">arrow_forward</span>
+              </Link>
+            </div>
+            </>
           )}
         </div>
       </section>

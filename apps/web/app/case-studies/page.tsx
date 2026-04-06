@@ -97,9 +97,14 @@ function CaseStudiesContent() {
     fetchCaseStudies();
   }, [fetchCaseStudies]);
 
+  // Build tag list sorted by frequency (most-used first)
+  const tagFrequency = items.reduce<Record<string, number>>((acc, s) => {
+    (s.tags || []).forEach((t) => { acc[t] = (acc[t] || 0) + 1; });
+    return acc;
+  }, {});
   const allTags = Array.from(
     new Set(items.flatMap((s) => s.tags || []).filter(Boolean))
-  ).sort();
+  ).sort((a, b) => (tagFrequency[b] || 0) - (tagFrequency[a] || 0));
 
   const filteredItems = selectedTag
     ? items.filter((s) => (s.tags || []).includes(selectedTag))
@@ -222,30 +227,31 @@ function CaseStudiesContent() {
           {!loading && !error && items.length > 0 && (
             <>
               <section className="animate-enter" aria-label="Filters and sort">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-8">
-                  <p className="text-muted-foreground text-sm">
+                {/* Top bar: count + sort */}
+                <div className="flex items-center justify-between gap-4 mb-5">
+                  <p className="text-muted-foreground text-sm shrink-0">
                     {filteredItems.length} {filteredItems.length === 1 ? 'project' : 'projects'}
                     {selectedTag && (
-                      <span className="ml-2">
-                        · <button
-                          type="button"
-                          onClick={() => handleTagSelect(null)}
-                          className="text-primary hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded"
-                        >
-                          Clear filter
-                        </button>
-                      </span>
+                      <button
+                        type="button"
+                        onClick={() => handleTagSelect(null)}
+                        className="ml-2 inline-flex items-center gap-1 text-primary hover:text-primary/80 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
+                        aria-label="Clear tag filter"
+                      >
+                        <span className="material-icons text-sm leading-none">close</span>
+                        {selectedTag}
+                      </button>
                     )}
                   </p>
-                  <div className="flex items-center gap-3 flex-wrap">
-                    <label htmlFor="sort-case-studies" className="text-muted-foreground text-sm font-medium">
+                  <div className="flex items-center gap-2 shrink-0">
+                    <label htmlFor="sort-case-studies" className="text-muted-foreground text-xs font-medium hidden sm:block">
                       Sort:
                     </label>
                     <select
                       id="sort-case-studies"
                       value={sort}
                       onChange={(e) => handleSortChange(e.target.value as SortOption)}
-                      className="rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground focus:border-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                      className="rounded-lg border border-border bg-card px-3 py-1.5 text-sm text-foreground focus:border-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                     >
                       <option value="newest">Newest first</option>
                       <option value="oldest">Oldest first</option>
@@ -254,33 +260,50 @@ function CaseStudiesContent() {
                   </div>
                 </div>
 
+                {/* Tag filter — horizontal scrollable strip, sorted by frequency */}
                 {allTags.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mb-10" role="tablist" aria-label="Filter by category">
-                    <button
-                      type="button"
-                      onClick={() => handleTagSelect(null)}
-                      className={`px-4 py-2 rounded-full text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
-                        !selectedTag
-                          ? 'bg-primary text-primary-foreground'
-                          : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground'
-                      }`}
+                  <div className="relative mb-10">
+                    {/* Fade hint on right edge to indicate scrollability */}
+                    <div className="absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-background to-transparent pointer-events-none z-10" aria-hidden />
+                    <div
+                      className="overflow-x-auto scrollbar-hide -mx-6 px-6"
+                      role="tablist"
+                      aria-label="Filter by category"
                     >
-                      All
-                    </button>
-                    {allTags.map((tag) => (
-                      <button
-                        key={tag}
-                        type="button"
-                        onClick={() => handleTagSelect(tag)}
-                        className={`px-4 py-2 rounded-full text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
-                          selectedTag === tag
-                            ? 'bg-primary text-primary-foreground'
-                            : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground'
-                        }`}
-                      >
-                        {tag}
-                      </button>
-                    ))}
+                      <div className="flex gap-2 w-max pb-1.5">
+                        <button
+                          type="button"
+                          role="tab"
+                          aria-selected={!selectedTag}
+                          onClick={() => handleTagSelect(null)}
+                          className={`shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                            !selectedTag
+                              ? 'bg-primary text-primary-foreground shadow-sm shadow-primary/30'
+                              : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground border border-border/60'
+                          }`}
+                        >
+                          All
+                          <span className="ml-1.5 text-xs opacity-70">({items.length})</span>
+                        </button>
+                        {allTags.map((tag) => (
+                          <button
+                            key={tag}
+                            type="button"
+                            role="tab"
+                            aria-selected={selectedTag === tag}
+                            onClick={() => handleTagSelect(tag)}
+                            className={`shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                              selectedTag === tag
+                                ? 'bg-primary text-primary-foreground shadow-sm shadow-primary/30'
+                                : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground border border-border/60'
+                            }`}
+                          >
+                            {tag}
+                            <span className="ml-1.5 text-xs opacity-60">({tagFrequency[tag] || 0})</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 )}
 
