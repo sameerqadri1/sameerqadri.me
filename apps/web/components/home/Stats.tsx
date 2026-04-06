@@ -68,7 +68,7 @@ export function Stats() {
             <div
               key={label}
               className="p-6 md:p-8 rounded-2xl border bg-card border-border/70 text-center shadow-sm animate-zoom-in hover:-translate-y-1 hover:shadow-md hover:border-primary/30 transition-all duration-300"
-              style={{ transitionDelay: `${index * 0.05}s`, animationDelay: `${index * 0.07}s` }}
+              style={{ transitionDelay: `${index * 0.07}s` }}
             >
               <CountUp raw={value} />
               <p className="text-muted-foreground text-sm uppercase tracking-widest font-bold">

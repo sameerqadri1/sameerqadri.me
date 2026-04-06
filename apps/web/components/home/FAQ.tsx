@@ -52,7 +52,7 @@ export function FAQ() {
               <div
                 key={question}
                 className="bg-card border border-border rounded-2xl overflow-hidden animate-fade-up hover:border-primary/30 transition-colors duration-200"
-                style={{ animationDelay: `${index * 0.06}s` }}
+                style={{ transitionDelay: `${index * 0.06}s` }}
               >
                 <button
                   className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-white/5 transition-colors"

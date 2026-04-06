@@ -54,7 +54,7 @@ export function Expertise() {
             <div
               key={title}
               className="group relative rounded-2xl border border-border/70 bg-card overflow-hidden transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-0.5 animate-fade-up"
-              style={{ animationDelay: `${index * 0.07}s` }}
+              style={{ transitionDelay: `${index * 0.07}s` }}
             >
               {/* Gradient bg tint */}
               <div className={`absolute inset-0 bg-gradient-to-br ${accent} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />

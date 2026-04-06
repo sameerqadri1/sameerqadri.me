@@ -18,7 +18,7 @@ export function About() {
                 />
               </div>
               {/* Floating badge */}
-              <div className="absolute -bottom-4 -right-4 bg-card border border-border rounded-2xl px-4 py-3 shadow-xl animate-zoom-in" style={{ animationDelay: '0.4s' }}>
+              <div className="absolute -bottom-4 -right-4 bg-card border border-border rounded-2xl px-4 py-3 shadow-xl animate-zoom-in" style={{ transitionDelay: '0.4s' }}>
                 <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
                   Based in
                 </p>

@@ -42,7 +42,7 @@ export function RevealObserver() {
             }
           });
         },
-        { threshold: 0.07, rootMargin: '0px 0px -40px 0px' }
+        { threshold: 0.12, rootMargin: '0px 0px -10px 0px' }
       );
 
       const elements = document.querySelectorAll(SELECTOR);

@@ -51,7 +51,7 @@ export function Testimonials() {
             <div
               key={name}
               className="bg-card border border-border p-8 rounded-2xl shadow-sm animate-fade-up hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/10 hover:border-primary/30 transition-all duration-300 group"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              style={{ transitionDelay: `${index * 0.1}s` }}
             >
               <span className="material-icons text-primary text-4xl mb-6 opacity-40 group-hover:opacity-60 transition-opacity">
                 format_quote

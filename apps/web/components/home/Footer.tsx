@@ -38,7 +38,7 @@ export function Footer() {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 
-          <div className="space-y-6 lg:col-span-1 animate-fade-up" style={{ animationDelay: '0s' }}>
+          <div className="space-y-6 lg:col-span-1 animate-fade-up" style={{ transitionDelay: '0s' }}>
             <div>
               <span className="text-xl font-bold text-foreground tracking-tight">
                 Sameer Qadri
@@ -88,7 +88,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="animate-fade-up" style={{ animationDelay: '0.1s' }}>
+          <div className="animate-fade-up" style={{ transitionDelay: '0.1s' }}>
             <h4 className="text-foreground font-bold mb-6 text-xs uppercase tracking-[0.2em]">
               Navigation
             </h4>
@@ -107,7 +107,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="animate-fade-up" style={{ animationDelay: '0.2s' }}>
+          <div className="animate-fade-up" style={{ transitionDelay: '0.2s' }}>
             <h4 className="text-foreground font-bold mb-6 text-xs uppercase tracking-[0.2em]">
               Services
             </h4>
@@ -118,7 +118,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="space-y-4 animate-fade-up" style={{ animationDelay: '0.3s' }}>
+          <div className="space-y-4 animate-fade-up" style={{ transitionDelay: '0.3s' }}>
             <h4 className="text-foreground font-bold mb-2 text-xs uppercase tracking-[0.2em]">
               Get In Touch
             </h4>
