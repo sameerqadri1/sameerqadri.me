@@ -49,6 +49,7 @@ function CaseStudiesContent() {
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [sort, setSort] = useState<SortOption>('newest');
+  const [showAllTags, setShowAllTags] = useState(false);
 
   // Sync URL -> state (e.g. browser back, shared link)
   useEffect(() => {
@@ -260,52 +261,70 @@ function CaseStudiesContent() {
                   </div>
                 </div>
 
-                {/* Tag filter — horizontal scrollable strip, sorted by frequency */}
-                {allTags.length > 0 && (
-                  <div className="relative mb-10">
-                    {/* Fade hint on right edge to indicate scrollability */}
-                    <div className="absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-background to-transparent pointer-events-none z-10" aria-hidden />
-                    <div
-                      className="overflow-x-auto scrollbar-hide -mx-6 px-6"
-                      role="tablist"
-                      aria-label="Filter by category"
-                    >
-                      <div className="flex gap-2 w-max pb-1.5">
+                {/* Tag filter — top 8 visible, expand/collapse for the rest */}
+                {allTags.length > 0 && (() => {
+                  const TOP_TAGS = 8;
+                  const visibleTags = showAllTags ? allTags : allTags.slice(0, TOP_TAGS);
+                  const hiddenCount = allTags.length - TOP_TAGS;
+                  return (
+                    <div className="flex flex-wrap gap-2 mb-10" role="tablist" aria-label="Filter by category">
+                      {/* All */}
+                      <button
+                        type="button"
+                        role="tab"
+                        aria-selected={!selectedTag}
+                        onClick={() => handleTagSelect(null)}
+                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                          !selectedTag
+                            ? 'bg-primary text-primary-foreground shadow-sm shadow-primary/30'
+                            : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground border border-border/60'
+                        }`}
+                      >
+                        All
+                        <span className="ml-1.5 text-xs opacity-70">({items.length})</span>
+                      </button>
+
+                      {/* Top 8 (or all when expanded) */}
+                      {visibleTags.map((tag) => (
                         <button
+                          key={tag}
                           type="button"
                           role="tab"
-                          aria-selected={!selectedTag}
-                          onClick={() => handleTagSelect(null)}
-                          className={`shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
-                            !selectedTag
+                          aria-selected={selectedTag === tag}
+                          onClick={() => handleTagSelect(tag)}
+                          className={`px-4 py-2 rounded-full text-sm font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                            selectedTag === tag
                               ? 'bg-primary text-primary-foreground shadow-sm shadow-primary/30'
                               : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground border border-border/60'
                           }`}
                         >
-                          All
-                          <span className="ml-1.5 text-xs opacity-70">({items.length})</span>
+                          {tag}
+                          <span className="ml-1.5 text-xs opacity-60">({tagFrequency[tag] || 0})</span>
                         </button>
-                        {allTags.map((tag) => (
-                          <button
-                            key={tag}
-                            type="button"
-                            role="tab"
-                            aria-selected={selectedTag === tag}
-                            onClick={() => handleTagSelect(tag)}
-                            className={`shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
-                              selectedTag === tag
-                                ? 'bg-primary text-primary-foreground shadow-sm shadow-primary/30'
-                                : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground border border-border/60'
-                            }`}
-                          >
-                            {tag}
-                            <span className="ml-1.5 text-xs opacity-60">({tagFrequency[tag] || 0})</span>
-                          </button>
-                        ))}
-                      </div>
+                      ))}
+
+                      {/* Expand / collapse toggle */}
+                      {!showAllTags && hiddenCount > 0 && (
+                        <button
+                          type="button"
+                          onClick={() => setShowAllTags(true)}
+                          className="px-4 py-2 rounded-full text-sm font-medium bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground border border-dashed border-border/70 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                        >
+                          + {hiddenCount} more
+                        </button>
+                      )}
+                      {showAllTags && (
+                        <button
+                          type="button"
+                          onClick={() => setShowAllTags(false)}
+                          className="px-4 py-2 rounded-full text-sm font-medium bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground border border-dashed border-border/70 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                        >
+                          Show less
+                        </button>
+                      )}
                     </div>
-                  </div>
-                )}
+                  );
+                })()}
 
                 {selectedTag && filteredItems.length === 0 ? (
                   <div className="py-12 text-center rounded-2xl border border-border bg-card/50 animate-enter" role="status">

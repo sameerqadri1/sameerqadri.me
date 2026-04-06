@@ -147,7 +147,7 @@ export function CaseStudiesSection() {
             </div>
 
             {/* Mobile/tablet: button below the grid */}
-            <div className="mt-10 flex justify-center md:hidden animate-fade-up">
+            <div className="mt-10 flex justify-center md:hidden animate-enter">
               <Link
                 href="/case-studies"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border bg-card text-sm font-semibold text-foreground hover:bg-muted/60 hover:border-primary/30 active:scale-[0.97] transition-all"
