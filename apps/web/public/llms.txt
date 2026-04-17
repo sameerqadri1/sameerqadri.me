@@ -1,0 +1,20 @@
+# Sameer Qadri - Full Stack Engineer
+
+> Portfolio website for Sameer Qadri, focused on headless systems, AI agents, and SaaS delivery.
+
+## Primary URLs
+- https://sameerqadri.me/
+- https://sameerqadri.me/case-studies/
+
+## Structured Content
+- LLM index: https://sameerqadri.me/llms.txt
+- LLM extended: https://sameerqadri.me/llms-full.md
+- Sitemap: https://sameerqadri.me/sitemap.xml
+- Robots: https://sameerqadri.me/robots.txt
+
+## Topics
+- Full-stack engineering
+- SaaS product development
+- Headless architecture
+- AI agent development
+- Client case studies

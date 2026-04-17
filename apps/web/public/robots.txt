@@ -1,0 +1,36 @@
+User-agent: *
+Allow: /
+Disallow: /panel-sq8701/
+Disallow: /panel-sq8701
+
+User-agent: GPTBot
+Allow: /
+Disallow: /panel-sq8701/
+Disallow: /panel-sq8701
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /panel-sq8701/
+Disallow: /panel-sq8701
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /panel-sq8701/
+Disallow: /panel-sq8701
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /panel-sq8701/
+Disallow: /panel-sq8701
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /panel-sq8701/
+Disallow: /panel-sq8701
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /panel-sq8701/
+Disallow: /panel-sq8701
+
+Sitemap: https://sameerqadri.me/sitemap.xml
