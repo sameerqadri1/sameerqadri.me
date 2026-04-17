@@ -41,13 +41,17 @@ function applyConsent(choice: ConsentChoice) {
 
 export function CookieConsentBanner() {
   const pathname = usePathname();
-  const [visible, setVisible] = useState(false);
+  const [initialized, setInitialized] = useState(false);
   const [isAdminRoute, setIsAdminRoute] = useState(false);
+  const [storedChoice, setStoredChoice] = useState<ConsentChoice | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (pathname?.startsWith('/panel-sq8701')) {
       setIsAdminRoute(true);
-      setVisible(false);
+      setStoredChoice(null);
+      setIsOpen(false);
+      setInitialized(true);
       return;
     }
     setIsAdminRoute(false);
@@ -55,21 +59,25 @@ export function CookieConsentBanner() {
     const stored = localStorage.getItem(CONSENT_STORAGE_KEY) as ConsentChoice | null;
     if (stored === 'accepted' || stored === 'rejected') {
       applyConsent(stored);
-      setVisible(false);
-      return;
+      setStoredChoice(stored);
+      setIsOpen(false);
+    } else {
+      setStoredChoice(null);
+      setIsOpen(true);
     }
-
-    setVisible(true);
+    setInitialized(true);
   }, [pathname]);
 
   function handleChoice(choice: ConsentChoice) {
     localStorage.setItem(CONSENT_STORAGE_KEY, choice);
     applyConsent(choice);
-    setVisible(false);
+    setStoredChoice(choice);
+    setIsOpen(false);
   }
 
   useEffect(() => {
-    if (!visible) {
+    const shouldLock = !isAdminRoute && initialized && (storedChoice === null || isOpen);
+    if (!shouldLock) {
       document.body.style.overflow = '';
       return;
     }
@@ -77,16 +85,17 @@ export function CookieConsentBanner() {
     return () => {
       document.body.style.overflow = '';
     };
-  }, [visible]);
+  }, [initialized, isAdminRoute, isOpen, storedChoice]);
 
   if (isAdminRoute) return null;
+  if (!initialized) return null;
 
   return (
     <>
-      {!visible ? (
+      {storedChoice !== null && !isOpen ? (
         <button
           type="button"
-          onClick={() => setVisible(true)}
+          onClick={() => setIsOpen(true)}
           className="fixed bottom-4 right-4 z-[110] rounded-full border border-border bg-card/95 px-4 py-2 text-xs font-semibold text-foreground shadow-lg backdrop-blur-sm hover:bg-muted"
         >
           Cookie settings
@@ -116,6 +125,15 @@ export function CookieConsentBanner() {
                 >
                   Reject
                 </button>
+                {storedChoice !== null ? (
+                  <button
+                    type="button"
+                    onClick={() => setIsOpen(false)}
+                    className="rounded-lg border border-border bg-transparent px-4 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-muted"
+                  >
+                    Close
+                  </button>
+                ) : null}
               </div>
             </div>
           </div>
