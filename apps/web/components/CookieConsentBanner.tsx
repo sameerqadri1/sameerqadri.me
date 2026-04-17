@@ -65,32 +65,45 @@ export function CookieConsentBanner() {
     setVisible(false);
   }
 
+  useEffect(() => {
+    if (!visible) {
+      document.body.style.overflow = '';
+      return;
+    }
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [visible]);
+
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-[120] p-4 sm:p-6">
-      <div className="mx-auto max-w-3xl rounded-2xl border border-border bg-card/95 p-4 shadow-2xl backdrop-blur-md sm:p-5">
-        <p className="text-sm font-semibold text-foreground sm:text-base">
+    <div className="fixed inset-0 z-[120] bg-background/70 backdrop-blur-sm">
+      <div className="absolute inset-x-3 top-3 sm:inset-x-auto sm:right-6 sm:top-6 sm:w-[30rem]">
+        <div className="rounded-2xl border border-border bg-card/95 p-4 shadow-2xl backdrop-blur-md sm:p-5">
+          <p className="text-sm font-semibold text-foreground sm:text-base">
           Cookie consent
-        </p>
-        <p className="mt-1 text-xs text-muted-foreground sm:text-sm">
-          We use analytics and advertising cookies to improve performance and marketing. You can accept or reject optional tracking cookies.
-        </p>
-        <div className="mt-4 flex flex-wrap gap-2">
-          <button
-            type="button"
-            onClick={() => handleChoice('accepted')}
-            className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Accept
-          </button>
-          <button
-            type="button"
-            onClick={() => handleChoice('rejected')}
-            className="rounded-lg border border-border bg-background px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
-          >
-            Reject
-          </button>
+          </p>
+          <p className="mt-1 text-xs text-muted-foreground sm:text-sm">
+            We use analytics and advertising cookies to improve performance and marketing. Choose Accept or Reject to continue.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => handleChoice('accepted')}
+              className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              Accept
+            </button>
+            <button
+              type="button"
+              onClick={() => handleChoice('rejected')}
+              className="rounded-lg border border-border bg-background px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+            >
+              Reject
+            </button>
+          </div>
         </div>
       </div>
     </div>
