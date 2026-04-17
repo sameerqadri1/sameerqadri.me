@@ -3,6 +3,7 @@
 # See DEPLOY.md for full steps and custom domain (sameerqadri.me).
 
 name: Deploy to GitHub Pages
+# Trigger note: keep workflow active for manual redeploys.
 
 on:
   push:
