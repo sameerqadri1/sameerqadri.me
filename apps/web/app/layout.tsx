@@ -21,8 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const gaMeasurementId = 'G-RYSBD4Y6VJ';
-  const gtmContainerId =
-    process.env.NEXT_PUBLIC_GTM_ID || 'GTM-TSZSFLF8';
+  const gtmContainerId = process.env.NEXT_PUBLIC_GTM_ID;
   const googleSiteVerification =
     process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
   const baseUrl = seoConfig.siteUrl.replace(/\/$/, '');
@@ -74,15 +73,17 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(globalServiceSchema) }}
         />
-        <script
+        <Script
           id="gtm-consent-default"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('consent','default',{'ad_storage':'denied','analytics_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','functionality_storage':'granted','security_storage':'granted','wait_for_update':500});`,
           }}
         />
         {gtmContainerId ? (
-          <script
+          <Script
             id="gtm-script"
+            strategy="beforeInteractive"
             dangerouslySetInnerHTML={{
               __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtmContainerId}');`,
             }}
@@ -92,11 +93,11 @@ export default function RootLayout({
           <>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
-              strategy="afterInteractive"
+              strategy="beforeInteractive"
             />
             <Script
               id="google-analytics"
-              strategy="afterInteractive"
+              strategy="beforeInteractive"
               dangerouslySetInnerHTML={{
                 __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', '${gaMeasurementId}');`,
               }}

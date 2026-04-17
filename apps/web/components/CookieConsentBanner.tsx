@@ -88,7 +88,9 @@ export function CookieConsentBanner() {
   }, [initialized, isAdminRoute, isOpen, storedChoice]);
 
   if (isAdminRoute) return null;
-  if (!initialized) return null;
+  if (!initialized) {
+    return <div className="fixed inset-0 z-[120] bg-background/70 backdrop-blur-sm" />;
+  }
 
   return (
     <>
