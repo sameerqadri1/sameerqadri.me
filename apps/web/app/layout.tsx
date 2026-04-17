@@ -20,8 +20,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-  const gtmContainerId = process.env.NEXT_PUBLIC_GTM_ID;
+  const gaMeasurementId = 'G-RYSBD4Y6VJ';
+  const gtmContainerId =
+    process.env.NEXT_PUBLIC_GTM_ID || 'GTM-TSZSFLF8';
   const googleSiteVerification =
     process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
   const baseUrl = seoConfig.siteUrl.replace(/\/$/, '');
