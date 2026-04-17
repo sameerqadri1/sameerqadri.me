@@ -87,8 +87,8 @@ export function CaseStudyModal({ slug, onClose }: Props) {
   if (!slug) return null;
 
   const shareUrl = typeof window !== 'undefined'
-    ? `${window.location.origin}/case-studies/?open=${encodeURIComponent(slug)}`
-    : `/case-studies/?open=${encodeURIComponent(slug)}`;
+    ? `${window.location.origin}/case-studies/${encodeURIComponent(slug)}/`
+    : `/case-studies/${encodeURIComponent(slug)}/`;
 
   async function handleShare() {
     setShareState('idle');
