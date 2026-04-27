@@ -68,15 +68,27 @@ export function Nav() {
 
             <div className="flex items-center gap-1">
               {NAV_LINKS.map(({ label, section }) => (
-                <a
-                  key={label}
-                  href={`/#${section}`}
-                  className="nav-link"
-                  onMouseMove={handleNavLinkMouseMove}
-                  onClick={(e) => navigateToSection(e, section)}
-                >
-                  {label}
-                </a>
+                label === 'Projects' ? (
+                  <Link
+                    key={label}
+                    href="/case-studies"
+                    className="nav-link"
+                    onMouseMove={handleNavLinkMouseMove}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {label}
+                  </Link>
+                ) : (
+                  <a
+                    key={label}
+                    href={`/#${section}`}
+                    className="nav-link"
+                    onMouseMove={handleNavLinkMouseMove}
+                    onClick={(e) => navigateToSection(e, section)}
+                  >
+                    {label}
+                  </a>
+                )
               ))}
             </div>
             <a
@@ -148,14 +160,25 @@ export function Nav() {
         >
           <nav className="flex flex-col gap-1">
             {NAV_LINKS.map(({ label, section }) => (
-              <a
-                key={label}
-                href={`/#${section}`}
-                onClick={(e) => navigateToSection(e, section)}
-                className="flex items-center gap-3 px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all text-base font-medium cursor-pointer"
-              >
-                {label}
-              </a>
+              label === 'Projects' ? (
+                <Link
+                  key={label}
+                  href="/case-studies"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all text-base font-medium cursor-pointer"
+                >
+                  {label}
+                </Link>
+              ) : (
+                <a
+                  key={label}
+                  href={`/#${section}`}
+                  onClick={(e) => navigateToSection(e, section)}
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all text-base font-medium cursor-pointer"
+                >
+                  {label}
+                </a>
+              )
             ))}
           </nav>
           <div className="mt-6 pt-6 border-t border-border/60">

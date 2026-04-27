@@ -35,10 +35,11 @@ export function buildBaseMetadata(): Metadata {
   const title = home.title || siteName;
   const description = home.description;
   const baseUrl = seoConfig.siteUrl.replace(/\/$/, '');
+  const homeUrl = `${baseUrl}/`;
 
   const ogImage =
     home.ogImage ??
-    `${seoConfig.siteUrl.replace(/\/$/, '')}/og-image.png`;
+    `${baseUrl}/opengraph-image`;
 
   return {
     title,
@@ -59,7 +60,7 @@ export function buildBaseMetadata(): Metadata {
       title,
       description,
       siteName,
-      url: baseUrl,
+      url: homeUrl,
       images: [ogImage],
       type: 'website',
     },
@@ -68,6 +69,8 @@ export function buildBaseMetadata(): Metadata {
       title,
       description,
       images: [ogImage],
+      site: '@coder_qadri',
+      creator: '@coder_qadri',
     },
   };
 }

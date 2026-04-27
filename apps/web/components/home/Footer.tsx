@@ -95,13 +95,22 @@ export function Footer() {
             <ul className="space-y-3 text-sm text-muted-foreground">
               {NAV_LINKS.map(({ label, section }) => (
                 <li key={label}>
-                  <a
-                    href={`/#${section}`}
-                    onClick={(e) => handleSectionClick(e, section)}
-                    className="hover:text-primary transition-colors cursor-pointer"
-                  >
-                    {label}
-                  </a>
+                  {label === 'Projects' ? (
+                    <a
+                      href="/case-studies"
+                      className="hover:text-primary transition-colors cursor-pointer"
+                    >
+                      {label}
+                    </a>
+                  ) : (
+                    <a
+                      href={`/#${section}`}
+                      onClick={(e) => handleSectionClick(e, section)}
+                      className="hover:text-primary transition-colors cursor-pointer"
+                    >
+                      {label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>

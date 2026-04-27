@@ -20,8 +20,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const gtmContainerId = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-TSZSFLF8';
-  const googleSiteVerification =
-    process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
   const baseUrl = seoConfig.siteUrl.replace(/\/$/, '');
   const globalServiceSchema = {
     '@context': 'https://schema.org',
@@ -31,7 +29,7 @@ export default function RootLayout({
         '@id': `${baseUrl}#person`,
         name: 'Sameer Qadri',
         url: baseUrl,
-        jobTitle: 'Full Stack Engineer',
+        jobTitle: 'AI Software Engineer',
       },
       {
         '@type': 'ProfessionalService',
@@ -54,10 +52,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <meta
-          name="google-site-verification"
-          content={googleSiteVerification}
-        />
         <link
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet"
