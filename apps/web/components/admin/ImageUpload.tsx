@@ -2,8 +2,7 @@
 
 import { useState, useRef, type DragEvent } from 'react';
 import imageCompression from 'browser-image-compression';
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? '';
+import { API_URL } from '@/lib/api';
 
 const MAX_INPUT_MB = 4.5;
 const MAX_INPUT_BYTES = MAX_INPUT_MB * 1024 * 1024;
