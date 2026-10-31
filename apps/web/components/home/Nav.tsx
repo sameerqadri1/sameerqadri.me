@@ -32,7 +32,12 @@ export function Nav() {
   function navigateToSection(e: MouseEvent, section: string) {
     e.preventDefault();
     if (pathname === '/') {
-      document.getElementById(section)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const el = document.getElementById(section);
+      if (el) {
+        const headerHeight = 64;
+        const targetPosition = el.getBoundingClientRect().top + window.scrollY - headerHeight;
+        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+      }
     } else {
       sessionStorage.setItem('scrollTo', section);
       router.push('/');

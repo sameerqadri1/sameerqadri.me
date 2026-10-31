@@ -31,6 +31,8 @@ pnpm-debug.log*
 # Testing
 coverage/
 .nyc_output/
+test-results/
+playwright-report/
 
 # Prisma generated client (run prisma generate)
 apps/api/src/generated/

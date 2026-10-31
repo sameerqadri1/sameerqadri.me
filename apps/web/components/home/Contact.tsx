@@ -8,7 +8,7 @@ export function Contact() {
   const [submitterName, setSubmitterName] = useState('');
 
   return (
-    <section className="py-20 md:py-24 border-b border-border bg-background" id="contact">
+    <section className="py-20 md:py-24 border-b border-border bg-background scroll-mt-16" id="contact">
       <div className="container mx-auto px-6">
         {!submitted ? (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">

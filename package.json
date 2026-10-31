@@ -16,10 +16,12 @@
     "security:vercel-inventory": "node scripts/vercel-secret-inventory.mjs",
     "security:generate-rotation-values": "node scripts/generate-rotation-values.mjs",
     "security:smoke": "node scripts/api-smoke-check.mjs",
+    "test:e2e": "playwright test",
     "db:seed": "npm run db:seed -w @portfolio/api",
     "db:generate": "npm run db:generate -w @portfolio/api"
   },
   "devDependencies": {
+    "@playwright/test": "^1.64.1",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
     "eslint": "^8.57.0",

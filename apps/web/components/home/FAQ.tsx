@@ -34,7 +34,7 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-20 md:py-24 border-b border-border bg-background" id="faq">
+    <section className="py-20 md:py-24 border-b border-border bg-background scroll-mt-16" id="faq">
       <div className="container mx-auto px-6">
         
         {/* Section Head Block */}

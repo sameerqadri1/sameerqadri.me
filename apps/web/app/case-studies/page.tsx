@@ -7,8 +7,7 @@ import { Footer } from '@/components/home/Footer';
 import { CaseStudyModal } from '@/components/CaseStudyModal';
 import { ContactForm } from '@/components/ContactForm';
 import type { CaseStudy, CaseStudyListResponse } from '@/lib/types';
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
+import { API_URL } from '@/lib/api';
 
 type SortOption = 'newest' | 'oldest' | 'title';
 

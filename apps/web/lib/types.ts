@@ -16,7 +16,10 @@ export interface CaseStudy {
   coverImageUrl?: string | null;
   tags?: string[];
   createdAt?: string;
+  updatedAt?: string;
   order?: number;
+  featured?: boolean;
+  published?: boolean;
   /** Only on detail */
   subtitle?: string | null;
   body?: string;
@@ -28,5 +31,11 @@ export interface CaseStudyListResponse {
   success: boolean;
   data?: CaseStudy[];
   pagination?: { total: number; page?: number; limit?: number; totalPages?: number };
+  error?: { message?: string };
+}
+
+export interface CaseStudyResponse {
+  success: boolean;
+  data?: CaseStudy;
   error?: { message?: string };
 }

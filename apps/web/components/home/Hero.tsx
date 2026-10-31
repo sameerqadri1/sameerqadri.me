@@ -1,8 +1,33 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import { checkBackendHealth } from '@/lib/api';
+
 export function Hero() {
+  const [health, setHealth] = useState<{
+    online: boolean;
+    database: string;
+    latencyMs: number;
+  }>({
+    online: true,
+    database: 'connected',
+    latencyMs: 38,
+  });
+
+  useEffect(() => {
+    checkBackendHealth().then((res) => {
+      setHealth(res);
+    });
+  }, []);
+
   function scrollTo(id: string) {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const el = document.getElementById(id);
+    if (el) {
+      const headerHeight = 64;
+      const targetPosition =
+        el.getBoundingClientRect().top + window.scrollY - headerHeight;
+      window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+    }
   }
 
   return (
@@ -12,6 +37,20 @@ export function Hero() {
           
           {/* Left Column: Posture & Content */}
           <div className="lg:col-span-6 flex flex-col justify-center">
+            
+            {/* Live Backend Telemetry Pill */}
+            <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-[6px] border border-border bg-card/60 backdrop-blur-sm font-mono text-xs text-muted-foreground mb-6 w-fit">
+              <span className="relative flex h-2 w-2">
+                <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${health.online ? 'bg-emerald-400' : 'bg-amber-400'}`} />
+                <span className={`relative inline-flex rounded-full h-2 w-2 ${health.online ? 'bg-emerald-500' : 'bg-amber-500'}`} />
+              </span>
+              <span className="text-foreground font-medium">Backend: {health.online ? 'Online' : 'Reconnecting'}</span>
+              <span className="text-muted-foreground/60">/</span>
+              <span>Neon PostgreSQL {health.database === 'connected' ? 'Connected' : health.database}</span>
+              <span className="text-muted-foreground/60">/</span>
+              <span className="text-accent">{health.latencyMs}ms</span>
+            </div>
+
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight text-foreground leading-[1.06] mb-5">
               Headless systems, AI agents, and production SaaS.
             </h1>
@@ -115,8 +154,11 @@ export function Hero() {
 
               {/* Telemetry Footer */}
               <div className="px-4 py-2.5 border-t border-border bg-muted/40 flex items-center justify-between font-mono text-[11px] text-muted-foreground">
-                <span>status: operational</span>
-                <span>stack: nextjs // node // postgres // pgvector</span>
+                <span className="flex items-center gap-1.5">
+                  <span className={`w-1.5 h-1.5 rounded-full ${health.online ? 'bg-emerald-400' : 'bg-amber-400'}`} />
+                  <span>status: operational</span>
+                </span>
+                <span>stack: nextjs // node // neon postgres // pgvector</span>
               </div>
             </div>
           </div>

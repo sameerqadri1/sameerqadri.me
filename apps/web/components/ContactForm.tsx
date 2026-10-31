@@ -2,8 +2,8 @@
 
 import { useRef, useState, FormEvent } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { API_URL } from '@/lib/api';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? '';
 const CALENDLY_URL = 'https://calendly.com/sameerqadri/30min';
 const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? '';
 

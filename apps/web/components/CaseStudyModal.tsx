@@ -2,13 +2,12 @@
 
 import { useEffect, useState, useCallback, useRef } from 'react';
 import type { CaseStudy } from '@/lib/types';
+import { API_URL } from '@/lib/api';
 
 interface Props {
   slug: string | null;
   onClose: () => void;
 }
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
 function formatBody(raw: string): string {
   const trimmed = raw.trim();
@@ -119,13 +118,13 @@ export function CaseStudyModal({ slug, onClose }: Props) {
     <div className="fixed inset-0 z-[60] flex items-start justify-center" role="dialog" aria-modal="true" aria-labelledby="case-study-title">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-background/90 animate-enter"
+        className="absolute inset-0 bg-background/95 modal-backdrop-animate"
         onClick={onClose}
         aria-hidden
       />
 
       {/* Panel: flex column so close button stays visible; only body scrolls */}
-      <div className="relative z-10 flex w-full max-w-3xl max-h-[85vh] mx-4 my-8 sm:my-16 flex-col rounded-[10px] border border-border bg-card animate-enter overflow-hidden">
+      <div className="relative z-10 flex w-full max-w-3xl max-h-[85vh] mx-4 my-8 sm:my-16 flex-col rounded-[10px] border border-border bg-card modal-dialog-animate overflow-hidden">
         {/* Header actions */}
         <div className="flex flex-none items-start justify-between gap-3 p-4 pb-0">
           <div className="flex items-center gap-2">

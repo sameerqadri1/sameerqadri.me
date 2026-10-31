@@ -16,7 +16,9 @@ export function ScrollHandler() {
       const el = document.getElementById(section);
       if (el) {
         clearInterval(poll);
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const headerHeight = 64;
+        const targetPosition = el.getBoundingClientRect().top + window.scrollY - headerHeight;
+        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
       } else if (attempts >= maxAttempts) {
         clearInterval(poll);
       }
