@@ -399,33 +399,54 @@ function CaseStudiesContent() {
               </section>
 
               <section className="mt-20 pt-16 border-t border-border animate-enter" aria-labelledby="cta-heading">
-                <div className="max-w-4xl mx-auto rounded-[10px] border border-border bg-card p-6 sm:p-8">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    <div className="lg:col-span-7 space-y-4">
+                <div className="rounded-[12px] border border-border bg-card p-8 sm:p-10">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    
+                    {/* Left: Content */}
+                    <div className="lg:col-span-8 space-y-4">
+                      <div className="inline-flex items-center gap-2 font-mono text-xs text-accent">
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                        <span>engineering consultation</span>
+                      </div>
+
                       <h2
                         id="cta-heading"
-                        className="text-2xl font-medium text-foreground tracking-tight"
+                        className="text-2xl sm:text-3xl font-medium text-foreground tracking-tight"
                       >
                         Have a similar system to build?
                       </h2>
-                      <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
+
+                      <p className="text-muted-foreground text-sm leading-relaxed max-w-xl">
                         Share your technical specifications or architecture needs so our initial 30-minute discussion focuses directly on implementation decisions.
                       </p>
-                      <ul className="space-y-2 text-xs text-muted-foreground font-mono">
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                          <span>Headless storefronts, autonomous AI agents, or SaaS platforms</span>
-                        </li>
-                      </ul>
+
+                      {/* Clean technical spec chips without awkward floating bullets */}
+                      <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-xs">
+                        <span className="px-2.5 py-1 rounded-[4px] border border-border bg-background text-muted-foreground">
+                          Headless storefronts
+                        </span>
+                        <span className="px-2.5 py-1 rounded-[4px] border border-border bg-background text-muted-foreground">
+                          Autonomous AI agents
+                        </span>
+                        <span className="px-2.5 py-1 rounded-[4px] border border-border bg-background text-muted-foreground">
+                          Multi-tenant SaaS
+                        </span>
+                      </div>
                     </div>
-                    <div className="lg:col-span-5 flex flex-col justify-center">
+
+                    {/* Right: Action */}
+                    <div className="lg:col-span-4 flex lg:justify-end">
                       <a
                         href="/#contact"
-                        className="px-5 py-3 rounded-[6px] bg-primary text-primary-foreground text-xs font-medium text-center hover:opacity-90 transition-opacity whitespace-nowrap"
+                        className="w-full sm:w-auto px-6 py-3.5 rounded-[6px] bg-primary text-primary-foreground text-xs sm:text-sm font-medium text-center hover:opacity-90 transition-opacity whitespace-nowrap flex items-center justify-center gap-2 cursor-pointer shadow-sm group"
                       >
-                        Start a Project Inquiry
+                        <span>Start a Project Inquiry</span>
+                        <span className="material-icons text-sm transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">
+                          arrow_forward
+                        </span>
                       </a>
                     </div>
+
                   </div>
                 </div>
               </section>
