@@ -2,10 +2,11 @@ import { Router } from 'express';
 import bcryptjs from 'bcryptjs';
 import { SignJWT } from 'jose';
 import { loginSchema } from '../lib/shared.js';
+import { getJwtSecret } from '../lib/env.js';
 
 export const authRouter = Router();
 
-const JWT_SECRET = process.env.JWT_SECRET ?? 'change-me-in-production';
+const JWT_SECRET = getJwtSecret();
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME ?? 'admin';
 const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH ?? '';
 

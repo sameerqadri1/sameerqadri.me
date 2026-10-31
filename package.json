@@ -13,6 +13,9 @@
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "security:vercel-inventory": "node scripts/vercel-secret-inventory.mjs",
+    "security:generate-rotation-values": "node scripts/generate-rotation-values.mjs",
+    "security:smoke": "node scripts/api-smoke-check.mjs",
     "db:seed": "npm run db:seed -w @portfolio/api",
     "db:generate": "npm run db:generate -w @portfolio/api"
   },

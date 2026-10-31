@@ -8,8 +8,10 @@ import { seoRouter } from './routes/seo.js';
 import { adminRouter } from './routes/admin/index.js';
 import { uploadRouter } from './routes/upload.js';
 import { authMiddleware } from './middleware/auth.js';
+import { validateProductionEnv } from './lib/env.js';
 
 export const app = express();
+validateProductionEnv();
 
 const allowedOrigins = [
   'http://localhost:3000',

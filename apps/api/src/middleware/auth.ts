@@ -1,7 +1,8 @@
 import type { Request, Response, NextFunction } from 'express';
 import { jwtVerify } from 'jose';
+import { getJwtSecret } from '../lib/env.js';
 
-const JWT_SECRET = process.env.JWT_SECRET ?? 'change-me-in-production';
+const JWT_SECRET = getJwtSecret();
 
 export interface AuthPayload {
   sub: string;

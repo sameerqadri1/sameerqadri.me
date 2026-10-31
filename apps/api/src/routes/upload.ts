@@ -18,6 +18,13 @@ const upload = multer({
 
 uploadRouter.post('/', upload.single('file'), async (req, res) => {
   try {
+    if (!process.env.BLOB_READ_WRITE_TOKEN) {
+      return res.status(503).json({
+        success: false,
+        error: { message: 'Upload service is not configured' },
+      });
+    }
+
     const file = req.file;
     if (!file) {
       return res.status(400).json({
