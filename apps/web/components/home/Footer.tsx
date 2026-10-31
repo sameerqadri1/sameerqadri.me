@@ -119,10 +119,10 @@ export function Footer() {
                   href="https://github.com/sameerqadri1"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-foreground transition-colors inline-flex items-center gap-1.5 group"
+                  className="hover:text-foreground transition-colors inline-flex items-center gap-1.5 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-sm"
                 >
                   <span>GitHub</span>
-                  <span className="material-icons text-xs text-muted-foreground group-hover:text-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true">
+                  <span className="material-icons text-xs text-muted-foreground group-hover:text-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-safe:transition-transform motion-reduce:transform-none" aria-hidden="true">
                     arrow_outward
                   </span>
                 </a>
@@ -132,10 +132,10 @@ export function Footer() {
                   href="https://linkedin.com/in/sameerqadri"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-foreground transition-colors inline-flex items-center gap-1.5 group"
+                  className="hover:text-foreground transition-colors inline-flex items-center gap-1.5 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-sm"
                 >
                   <span>LinkedIn</span>
-                  <span className="material-icons text-xs text-muted-foreground group-hover:text-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true">
+                  <span className="material-icons text-xs text-muted-foreground group-hover:text-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-safe:transition-transform motion-reduce:transform-none" aria-hidden="true">
                     arrow_outward
                   </span>
                 </a>
@@ -145,21 +145,21 @@ export function Footer() {
                   href="https://x.com/coder_qadri"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-foreground transition-colors inline-flex items-center gap-1.5 group"
+                  className="hover:text-foreground transition-colors inline-flex items-center gap-1.5 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-sm"
                 >
                   <span>X / Twitter</span>
-                  <span className="material-icons text-xs text-muted-foreground group-hover:text-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true">
+                  <span className="material-icons text-xs text-muted-foreground group-hover:text-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-safe:transition-transform motion-reduce:transform-none" aria-hidden="true">
                     arrow_outward
                   </span>
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:info@sameerqadri.me"
-                  className="hover:text-foreground transition-colors inline-flex items-center gap-1.5 group"
+                  href="mailto:hello@sameerqadri.me"
+                  className="hover:text-foreground transition-colors inline-flex items-center gap-1.5 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-sm"
                 >
                   <span>Direct Email</span>
-                  <span className="material-icons text-xs text-muted-foreground group-hover:text-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true">
+                  <span className="material-icons text-xs text-muted-foreground group-hover:text-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-safe:transition-transform motion-reduce:transform-none" aria-hidden="true">
                     arrow_outward
                   </span>
                 </a>

@@ -26,8 +26,8 @@ export function Contact() {
 
               <div className="space-y-3 pt-2">
                 <a
-                  href="mailto:info@sameerqadri.me"
-                  className="flex items-center gap-3 p-3.5 rounded-[10px] border border-border bg-card hover:bg-muted/40 transition-colors"
+                  href="mailto:hello@sameerqadri.me"
+                  className="flex items-center gap-3 p-3.5 rounded-[10px] border border-border bg-card hover:bg-muted/40 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent active:scale-[0.99]"
                 >
                   <div className="w-9 h-9 rounded-[6px] border border-border bg-muted flex items-center justify-center text-foreground flex-shrink-0">
                     <span className="material-icons text-base" aria-hidden="true">mail</span>
@@ -35,7 +35,7 @@ export function Contact() {
                   <div>
                     <h3 className="text-xs font-mono text-muted-foreground">Email</h3>
                     <p className="text-xs sm:text-sm font-medium text-foreground">
-                      info@sameerqadri.me
+                      hello@sameerqadri.me
                     </p>
                   </div>
                 </a>
