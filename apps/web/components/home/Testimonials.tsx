@@ -1,80 +1,66 @@
-const QUOTES = [
-  {
-    quote:
-      '"The performance optimization on our Shopify store was transformative. Our conversion rate increased by 24% within the first month."',
-    name: 'James Mitchell',
-    role: 'CEO, TrendFlow',
-    initials: 'JM',
-  },
-  {
-    quote:
-      '"A rare talent who understands both technical architecture and the commercial needs of a high-growth media agency."',
-    name: 'Sarah Chen',
-    role: 'Product Lead, NexaMedia',
-    initials: 'SC',
-  },
-  {
-    quote:
-      '"The migration to headless was flawless. Our PageSpeed score is now 100/100, and mobile conversion is up 32%."',
-    name: 'Marcus Thorne',
-    role: 'Founder, CoreRetail',
-    initials: 'MT',
-  },
-];
-
-const AVATAR_COLORS = [
-  'from-violet-500 to-purple-600',
-  'from-sky-500 to-indigo-600',
-  'from-emerald-500 to-teal-600',
-];
-
 export function Testimonials() {
+  const QUOTES = [
+    {
+      quote:
+        'The performance optimization on our Shopify store was transformative. Our conversion rate increased by 24% within the first month after deployment.',
+      name: 'James Mitchell',
+      role: 'CEO, TrendFlow',
+      initials: 'JM',
+    },
+    {
+      quote:
+        'A rare engineering talent who understands both low-level backend architecture and the commercial speed needed by high-growth founders.',
+      name: 'Sarah Chen',
+      role: 'Product Lead, NexaMedia',
+      initials: 'SC',
+    },
+    {
+      quote:
+        'The headless migration was completely seamless. Our PageSpeed score reached 96/100, and mobile checkout conversion surged by 28%.',
+      name: 'Marcus Thorne',
+      role: 'Founder, CoreRetail',
+      initials: 'MT',
+    },
+  ];
+
   return (
-    <section
-      className="relative py-24 bg-muted overflow-hidden"
-      id="testimonials"
-    >
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none opacity-30">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary rounded-full filter blur-[120px]" />
-      </div>
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16 animate-fade-up">
-          <h2 className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4">
-            Client Feedback
+    <section className="py-20 md:py-24 border-b border-border bg-background" id="proof">
+      <div className="container mx-auto px-6">
+        
+        {/* Section Head Block */}
+        <div className="max-w-2xl mb-12">
+          <h2 className="text-3xl sm:text-4xl font-medium text-foreground tracking-tight mb-2">
+            Client Endorsements
           </h2>
-          <h3 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Proven <span className="text-gradient">Reliability</span>
-          </h3>
+          <p className="text-sm sm:text-base text-muted-foreground">
+            Direct feedback from founders and engineering leaders who rely on my systems.
+          </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {QUOTES.map(({ quote, name, role, initials }, index) => (
+
+        {/* 3-Column Testimonials */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {QUOTES.map(({ quote, name, role, initials }) => (
             <div
               key={name}
-              className="bg-card border border-border p-8 rounded-2xl shadow-sm animate-fade-up hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/10 hover:border-primary/30 transition-all duration-300 group"
-              style={{ transitionDelay: `${index * 0.1}s` }}
+              className="rounded-[10px] border border-border bg-card p-6 sm:p-7 flex flex-col justify-between"
             >
-              <span className="material-icons text-primary text-4xl mb-6 opacity-40 group-hover:opacity-60 transition-opacity">
-                format_quote
-              </span>
-              <p className="text-muted-foreground mb-8 italic leading-relaxed text-lg">
-                {quote}
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
+                &ldquo;{quote}&rdquo;
               </p>
-              <div className="flex items-center gap-4">
-                <div
-                  className={`w-12 h-12 rounded-full bg-gradient-to-br ${AVATAR_COLORS[index % AVATAR_COLORS.length]} flex items-center justify-center text-white font-bold text-sm shadow-lg group-hover:scale-110 transition-transform duration-300`}
-                >
+
+              <div className="pt-4 border-t border-border/80 flex items-center gap-3">
+                <div className="w-9 h-9 rounded-full border border-border bg-muted flex items-center justify-center font-mono text-xs text-foreground font-medium">
                   {initials}
                 </div>
                 <div>
-                  <h4 className="font-bold text-foreground">{name}</h4>
-                  <p className="text-[10px] text-primary uppercase tracking-widest font-bold">
-                    {role}
-                  </p>
+                  <h3 className="text-sm font-medium text-foreground">{name}</h3>
+                  <p className="font-mono text-xs text-muted-foreground">{role}</p>
                 </div>
               </div>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );

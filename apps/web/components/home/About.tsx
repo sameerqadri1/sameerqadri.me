@@ -1,86 +1,71 @@
 export function About() {
-  return (
-    <section className="py-24 bg-muted" id="about">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+  const STACK = [
+    'Next.js 15',
+    'TypeScript',
+    'Headless Shopify',
+    'Node.js',
+    'PostgreSQL',
+    'Prisma',
+    'AI Agents / RAG',
+    'Stripe',
+  ];
 
-          {/* Photo — slides in from the left */}
-          <div className="flex justify-center lg:justify-start animate-slide-left order-first lg:order-none">
-            <div className="relative">
-              <div className="absolute -inset-4 bg-primary/20 rounded-3xl blur-2xl" />
-              <div className="relative w-72 h-72 sm:w-96 sm:h-96 lg:w-[420px] lg:h-[480px] rounded-3xl overflow-hidden border-2 border-primary/30 shadow-2xl hover:scale-[1.02] hover:shadow-primary/20 transition-all duration-500">
+  return (
+    <section className="py-20 md:py-24 border-b border-border bg-background" id="about">
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+          {/* Portrait: crisp hairline framing, no glow orbs */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-start">
+            <div className="relative w-full max-w-sm rounded-[10px] overflow-hidden border border-border bg-card">
+              <div className="aspect-[4/5] overflow-hidden">
                 <img
                   src="/sameer.jpg"
-                  alt="Sameer Qadri — Full Stack Engineer"
+                  alt="Sameer Qadri, Full Stack Engineer"
                   width={420}
-                  height={480}
-                  className="w-full h-full object-cover"
+                  height={525}
+                  className="w-full h-full object-cover grayscale contrast-110"
                 />
               </div>
-              {/* Floating badge */}
-              <div className="absolute -bottom-4 -right-4 bg-card border border-border rounded-2xl px-4 py-3 shadow-xl animate-zoom-in" style={{ transitionDelay: '0.4s' }}>
-                <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
-                  Based in
-                </p>
-                <p className="text-sm font-bold text-foreground">
-                  Islamabad, PK
-                </p>
+              <div className="p-4 border-t border-border bg-muted/60 flex items-center justify-between font-mono text-xs text-muted-foreground">
+                <span>Sameer Qadri</span>
+                <span className="text-foreground">Islamabad, PK // Remote</span>
               </div>
             </div>
           </div>
 
-          {/* Bio — slides in from the right */}
-          <div className="space-y-6 animate-slide-right">
-            <div>
-              <p className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4">
-                About Me
-              </p>
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight mb-6">
-                Engineer with a{' '}
-                <span className="text-gradient">builder&apos;s mindset</span>
-              </h2>
-            </div>
+          {/* Bio & Philosophy */}
+          <div className="lg:col-span-7">
+            <h2 className="text-3xl sm:text-4xl font-medium text-foreground tracking-tight mb-6">
+              Engineering systems built to endure production load.
+            </h2>
 
-            <div className="space-y-4 text-muted-foreground text-base leading-relaxed">
+            <div className="space-y-4 text-sm sm:text-base text-muted-foreground leading-relaxed mb-8 max-w-2xl">
               <p>
-                I&apos;m Sameer Qadri — a Full Stack Engineer with 3 years of
-                hands-on experience building things that real businesses depend
-                on. My core work is custom headless website development for
-                WordPress and Shopify — designing and building fast, scalable
-                storefronts and business sites that convert.
+                I am a Full Stack and AI Software Engineer with 3 years of production experience shipping platforms that commercial businesses run on. My primary domain is high-speed headless storefronts for Shopify, custom Next.js web applications, and autonomous LLM agents that resolve customer operations.
               </p>
               <p>
-                Beyond the web, I build SaaS products end-to-end and
-                AI-powered chatbots for ecommerce — intelligent systems that
-                handle customer queries, drive sales, and cut support costs.
-                50+ projects shipped across 10+ countries.
-              </p>
-              <p>
-                I take ownership from architecture to deployment. Clean code,
-                documented, and built to last — not just to demo.
+                Having shipped 50+ projects across 10+ countries, I manage software from database schema design and edge caching to end-to-end security verification. Every system is built with typed contracts, rigorous documentation, and measurable performance standards.
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-3 pt-2">
-              {[
-                'React / Next.js',
-                'Headless Shopify',
-                'WordPress',
-                'Node.js',
-                'Django',
-                'AI Chatbots',
-                'SaaS Architecture',
-                'PostgreSQL',
-              ].map((skill) => (
-                <span
-                  key={skill}
-                  className="px-3 py-1.5 bg-card border border-border rounded-full text-xs font-semibold text-muted-foreground hover:border-primary/50 hover:text-foreground hover:-translate-y-0.5 hover:shadow-sm transition-all cursor-default"
-                >
-                  {skill}
-                </span>
-              ))}
+            {/* Stack Tags */}
+            <div className="pt-6 border-t border-border">
+              <p className="font-mono text-xs text-muted-foreground mb-3">Primary Tech Stack</p>
+              <div className="flex flex-wrap gap-2">
+                {STACK.map((item) => (
+                  <span
+                    key={item}
+                    className="font-mono text-xs px-2.5 py-1 rounded-[4px] border border-border bg-card text-foreground"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
             </div>
+
           </div>
+
         </div>
       </div>
     </section>

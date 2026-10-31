@@ -35,7 +35,7 @@ export default function AdminSetupPage() {
       </Link>
 
       <h1 className="mt-6 text-2xl font-semibold text-foreground">
-        Admin Setup — Generate Password Hash
+        Admin Setup: Generate Password Hash
       </h1>
       <p className="mt-3 text-muted-foreground text-sm leading-relaxed">
         The admin panel uses a <strong className="text-foreground">bcrypt hash</strong> stored
@@ -69,7 +69,7 @@ export default function AdminSetupPage() {
         {hash && (
           <div className="space-y-3">
             <label className="block text-sm font-medium text-muted-foreground">
-              Your bcrypt hash — copy this into Vercel
+              Your bcrypt hash (copy this into Vercel):
             </label>
             <div className="flex items-start gap-2">
               <code className="flex-1 block rounded-lg border border-border bg-card px-4 py-3 text-xs text-primary break-all">

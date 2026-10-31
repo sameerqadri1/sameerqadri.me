@@ -99,15 +99,11 @@ export default function AdminDashboardPage() {
     <div className="mx-auto max-w-5xl px-6 py-10 lg:py-14">
       <header className="flex flex-wrap items-center justify-between gap-4 mb-8">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-1">
-            Admin
-          </p>
-          <h1 className="text-2xl md:text-3xl font-semibold text-foreground">
+          <h1 className="text-2xl md:text-3xl font-medium text-foreground">
             Portfolio control center
           </h1>
-          <p className="mt-2 text-sm text-muted-foreground max-w-xl">
-            Manage the work that appears on your site, keep SEO in sync, and stay on top of new
-            inquiries.
+          <p className="mt-2 text-xs sm:text-sm text-muted-foreground max-w-xl">
+            Manage published work, synchronize SEO metadata, and monitor client inquiries.
           </p>
         </div>
         <div className="flex items-center gap-3">

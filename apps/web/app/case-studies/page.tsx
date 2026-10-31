@@ -24,13 +24,12 @@ function CaseStudiesPageFallback() {
       <main className="min-h-screen bg-background pt-28 pb-24">
         <div className="container mx-auto px-6 max-w-6xl">
           <header className="max-w-2xl mb-16">
-            <p className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4 animate-enter">Work</p>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 tracking-tight animate-enter" style={{ animationDelay: '0.1s' }}>All Case Studies</h1>
-            <p className="text-muted-foreground text-lg animate-enter" style={{ animationDelay: '0.2s' }}>Loading…</p>
+            <h1 className="text-4xl md:text-5xl font-medium text-foreground mb-4 tracking-tight animate-enter">All Case Studies</h1>
+            <p className="text-muted-foreground text-lg animate-enter">Loading…</p>
           </header>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" aria-busy="true">
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="h-80 rounded-2xl bg-card/40 border border-border/60 animate-pulse" />
+              <div key={i} className="h-80 rounded-[10px] bg-card border border-border animate-pulse" />
             ))}
           </div>
         </div>
@@ -155,18 +154,15 @@ function CaseStudiesContent() {
       <main className="min-h-screen bg-background pt-28 pb-24">
         <div className="container mx-auto px-6 max-w-6xl">
           <header className="max-w-2xl mb-16">
-            <p className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4 animate-enter" style={{ animationDelay: '0s' }}>
-              Work
-            </p>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 tracking-tight animate-enter" style={{ animationDelay: '0.1s' }}>
+            <h1 className="text-4xl md:text-5xl font-medium text-foreground mb-4 tracking-tight animate-enter">
               All Case Studies
             </h1>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-3 animate-enter" style={{ animationDelay: '0.2s' }}>
-              A full collection of projects I&apos;ve shipped — from SaaS
+            <p className="text-muted-foreground text-lg leading-relaxed mb-3 animate-enter">
+              A full collection of projects I&apos;ve shipped, from SaaS
               platforms to AI-powered systems.
             </p>
-            <p className="text-muted-foreground/90 text-base animate-enter" style={{ animationDelay: '0.3s' }}>
-              Real projects, real impact. Select a project to read the full story.
+            <p className="text-muted-foreground/90 text-sm animate-enter">
+              Select a project to read the full architectural breakdown.
             </p>
           </header>
 
@@ -252,16 +248,16 @@ function CaseStudiesContent() {
                       id="sort-case-studies"
                       value={sort}
                       onChange={(e) => handleSortChange(e.target.value as SortOption)}
-                      className="rounded-lg border border-border bg-card px-3 py-1.5 text-sm text-foreground focus:border-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                      className="rounded-[6px] border border-border bg-card px-3 py-1.5 text-xs font-mono text-foreground focus:border-accent focus-visible:outline-2 focus-visible:outline-accent"
                     >
                       <option value="newest">Newest first</option>
                       <option value="oldest">Oldest first</option>
-                      <option value="title">A–Z</option>
+                      <option value="title">A to Z</option>
                     </select>
                   </div>
                 </div>
 
-                {/* Tag filter — top 8 visible, expand/collapse for the rest */}
+                {/* Tag filter */}
                 {allTags.length > 0 && (() => {
                   const TOP_TAGS = 8;
                   const visibleTags = showAllTags ? allTags : allTags.slice(0, TOP_TAGS);
@@ -274,14 +270,14 @@ function CaseStudiesContent() {
                         role="tab"
                         aria-selected={!selectedTag}
                         onClick={() => handleTagSelect(null)}
-                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                        className={`px-3 py-1.5 rounded-[6px] text-xs font-mono transition-colors focus-visible:outline-2 focus-visible:outline-accent ${
                           !selectedTag
-                            ? 'bg-primary text-primary-foreground shadow-sm shadow-primary/30'
-                            : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground border border-border/60'
+                            ? 'bg-primary text-primary-foreground font-medium'
+                            : 'bg-muted text-muted-foreground hover:text-foreground border border-border'
                         }`}
                       >
                         All
-                        <span className="ml-1.5 text-xs opacity-70">({items.length})</span>
+                        <span className="ml-1 opacity-70">({items.length})</span>
                       </button>
 
                       {/* Top 8 (or all when expanded) */}
@@ -292,14 +288,14 @@ function CaseStudiesContent() {
                           role="tab"
                           aria-selected={selectedTag === tag}
                           onClick={() => handleTagSelect(tag)}
-                          className={`px-4 py-2 rounded-full text-sm font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                          className={`px-3 py-1.5 rounded-[6px] text-xs font-mono transition-colors focus-visible:outline-2 focus-visible:outline-accent ${
                             selectedTag === tag
-                              ? 'bg-primary text-primary-foreground shadow-sm shadow-primary/30'
-                              : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground border border-border/60'
+                              ? 'bg-primary text-primary-foreground font-medium'
+                              : 'bg-muted text-muted-foreground hover:text-foreground border border-border'
                           }`}
                         >
                           {tag}
-                          <span className="ml-1.5 text-xs opacity-60">({tagFrequency[tag] || 0})</span>
+                          <span className="ml-1 opacity-60">({tagFrequency[tag] || 0})</span>
                         </button>
                       ))}
 
@@ -308,7 +304,7 @@ function CaseStudiesContent() {
                         <button
                           type="button"
                           onClick={() => setShowAllTags(true)}
-                          className="px-4 py-2 rounded-full text-sm font-medium bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground border border-dashed border-border/70 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                          className="px-3 py-1.5 rounded-[6px] text-xs font-mono bg-muted text-muted-foreground hover:text-foreground border border-border transition-colors focus-visible:outline-2 focus-visible:outline-accent"
                         >
                           + {hiddenCount} more
                         </button>
@@ -317,7 +313,7 @@ function CaseStudiesContent() {
                         <button
                           type="button"
                           onClick={() => setShowAllTags(false)}
-                          className="px-4 py-2 rounded-full text-sm font-medium bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground border border-dashed border-border/70 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                          className="px-3 py-1.5 rounded-[6px] text-xs font-mono bg-muted text-muted-foreground hover:text-foreground border border-border transition-colors focus-visible:outline-2 focus-visible:outline-accent"
                         >
                           Show less
                         </button>
@@ -327,73 +323,75 @@ function CaseStudiesContent() {
                 })()}
 
                 {selectedTag && filteredItems.length === 0 ? (
-                  <div className="py-12 text-center rounded-2xl border border-border bg-card/50 animate-enter" role="status">
-                    <p className="text-muted-foreground mb-2">
+                  <div className="py-12 text-center rounded-[10px] border border-border bg-card animate-enter" role="status">
+                    <p className="text-muted-foreground mb-2 text-sm">
                       No projects with the &quot;{selectedTag}&quot; tag.
                     </p>
-                        <button
-                          type="button"
-                          onClick={() => handleTagSelect(null)}
-                          className="text-primary font-semibold hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded"
-                        >
-                          Clear filter and show all
-                        </button>
+                    <button
+                      type="button"
+                      onClick={() => handleTagSelect(null)}
+                      className="text-accent text-xs font-mono hover:underline whitespace-nowrap focus-visible:outline-2 focus-visible:outline-accent"
+                    >
+                      Clear filter and show all
+                    </button>
                   </div>
                 ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {sortedItems.map((study, index) => (
+                  {sortedItems.map((study) => (
                     <button
                       key={study.id}
                       type="button"
                       onClick={() => handleOpen(study.slug)}
-                      className="group cursor-pointer animate-enter text-left rounded-2xl border border-border/70 bg-card overflow-hidden shadow-sm hover:shadow-xl hover:shadow-primary/10 hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                      style={{ animationDelay: `${Math.min(index * 0.06, 0.3)}s` }}
+                      className="group cursor-pointer text-left rounded-[10px] border border-border bg-card overflow-hidden hover:bg-muted/40 transition-colors focus-visible:outline-2 focus-visible:outline-accent flex flex-col justify-between"
                     >
-                      <div className="rounded-t-2xl overflow-hidden relative aspect-video bg-muted">
-                        {study.coverImageUrl ? (
-                          <img
-                            alt=""
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            src={study.coverImageUrl}
-                            loading="lazy"
-                            decoding="async"
-                          />
-                        ) : (
-                          <div className="w-full h-full bg-muted flex items-center justify-center">
-                            <span className="material-icons text-muted-foreground/40 text-5xl" aria-hidden>
-                              image
-                            </span>
-                          </div>
-                        )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-5">
-                          <span className="text-white font-bold flex items-center gap-2 text-sm drop-shadow-lg">
-                            View case study
-                            <span className="material-icons text-sm" aria-hidden>arrow_forward</span>
-                          </span>
+                      <div>
+                        <div className="overflow-hidden relative aspect-video bg-muted border-b border-border">
+                          {study.coverImageUrl ? (
+                            <img
+                              alt=""
+                              className="w-full h-full object-cover grayscale contrast-110"
+                              src={study.coverImageUrl}
+                              loading="lazy"
+                              decoding="async"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-muted flex items-center justify-center">
+                              <span className="material-icons text-muted-foreground/40 text-4xl" aria-hidden>
+                                image
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                        <div className="p-5">
+                          <p className="font-mono text-xs text-muted-foreground mb-1">
+                            {study.client || 'Client System'}
+                          </p>
+                          <h2 className="text-base font-medium text-foreground mb-2 group-hover:text-accent transition-colors">
+                            {study.title}
+                          </h2>
+                          {(study.tags?.length ?? 0) > 0 && (
+                            <div className="flex flex-wrap gap-1.5 mb-2 font-mono text-[10px]">
+                              {(study.tags || []).slice(0, 3).map((tag) => (
+                                <span
+                                  key={tag}
+                                  className="px-2 py-0.5 rounded-[4px] border border-border bg-background text-muted-foreground"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                          <p className="text-muted-foreground text-xs sm:text-sm line-clamp-2 leading-relaxed">
+                            {study.summary}
+                          </p>
                         </div>
                       </div>
-                      <div className="p-5">
-                        <p className="text-primary text-xs font-bold uppercase tracking-widest mb-1">
-                          {study.client || 'Case Study'}
-                        </p>
-                        <h2 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-                          {study.title}
-                        </h2>
-                        {(study.tags?.length ?? 0) > 0 && (
-                          <div className="flex flex-wrap gap-1.5 mb-2">
-                            {(study.tags || []).slice(0, 3).map((tag) => (
-                              <span
-                                key={tag}
-                                className="px-2 py-0.5 rounded-md bg-primary/10 text-primary text-xs font-medium"
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                        <p className="text-muted-foreground text-sm line-clamp-2">
-                          {study.summary}
-                        </p>
+                      <div className="px-5 pb-5 pt-2 border-t border-border/80 flex items-center justify-between font-mono text-xs">
+                        <span className="text-muted-foreground">{study.year || '2024'}</span>
+                        <span className="text-foreground group-hover:text-accent transition-colors flex items-center gap-1 whitespace-nowrap">
+                          <span>Inspect</span>
+                          <span className="material-icons text-sm" aria-hidden>arrow_forward</span>
+                        </span>
                       </div>
                     </button>
                   ))}
@@ -401,60 +399,33 @@ function CaseStudiesContent() {
                 )}
               </section>
 
-              <section className="mt-24 pt-20 border-t border-border/60 animate-enter" aria-labelledby="cta-heading">
-                <div className="max-w-5xl mx-auto">
-                  <div className="bg-card/80 border border-border/70 rounded-3xl shadow-xl shadow-primary/10 px-6 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
-                    <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] gap-10 items-start">
-                      <div className="space-y-6">
-                        <div>
-                          <p className="text-primary font-bold tracking-[0.2em] uppercase text-xs mb-3">
-                            Next project
-                          </p>
-                          <h2
-                            id="cta-heading"
-                            className="text-2xl md:text-3xl font-bold text-foreground mb-3 tracking-tight"
-                          >
-                            Have a similar project in mind?
-                          </h2>
-                          <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
-                            Share a bit of context about what you&apos;re building so our first
-                            30‑minute call can focus on decisions instead of discovery.
-                          </p>
-                        </div>
-                        <ul className="space-y-2 text-sm text-muted-foreground">
-                          <li className="flex items-start gap-2">
-                            <span className="material-icons text-primary text-base mt-0.5" aria-hidden>
-                              check_circle
-                            </span>
-                            <span>What kind of system you&apos;re planning — headless, AI agent, SaaS, or something else.</span>
-                          </li>
-                          <li className="flex items-start gap-2">
-                            <span className="material-icons text-primary text-base mt-0.5" aria-hidden>
-                              check_circle
-                            </span>
-                            <span>Rough timeline and budget so I can suggest a realistic approach.</span>
-                          </li>
-                          <li className="flex items-start gap-2">
-                            <span className="material-icons text-primary text-base mt-0.5" aria-hidden>
-                              check_circle
-                            </span>
-                            <span>Where you are today — from idea only to a live product that needs scaling.</span>
-                          </li>
-                        </ul>
-                        <p className="text-xs text-muted-foreground/80">
-                          You&apos;ll see a Calendly link right after submitting to book a 30‑minute discovery call.
-                        </p>
-                      </div>
-                      <div className="bg-background/80 rounded-2xl border border-border/70 p-4 sm:p-5">
-                        <ContactForm
-                          idPrefix="cta"
-                          showCompany
-                          showProjectDetails
-                          variant="default"
-                          showCalendlyOnSuccess
-                          className="text-left"
-                        />
-                      </div>
+              <section className="mt-20 pt-16 border-t border-border animate-enter" aria-labelledby="cta-heading">
+                <div className="max-w-4xl mx-auto rounded-[10px] border border-border bg-card p-6 sm:p-8">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <div className="lg:col-span-7 space-y-4">
+                      <h2
+                        id="cta-heading"
+                        className="text-2xl font-medium text-foreground tracking-tight"
+                      >
+                        Have a similar system to build?
+                      </h2>
+                      <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
+                        Share your technical specifications or architecture needs so our initial 30-minute discussion focuses directly on implementation decisions.
+                      </p>
+                      <ul className="space-y-2 text-xs text-muted-foreground font-mono">
+                        <li className="flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                          <span>Headless storefronts, autonomous AI agents, or SaaS platforms</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="lg:col-span-5 flex flex-col justify-center">
+                      <a
+                        href="/#contact"
+                        className="px-5 py-3 rounded-[6px] bg-primary text-primary-foreground text-xs font-medium text-center hover:opacity-90 transition-opacity whitespace-nowrap"
+                      >
+                        Start a Project Inquiry
+                      </a>
                     </div>
                   </div>
                 </div>

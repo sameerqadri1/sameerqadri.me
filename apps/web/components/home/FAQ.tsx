@@ -6,27 +6,27 @@ const FAQS = [
   {
     question: 'What types of projects do you take on?',
     answer:
-      "I work on full-stack web applications, SaaS products, AI-powered tools, headless frontends, REST/GraphQL APIs, and performance-critical systems. If there's a complex engineering problem at the core, I'm interested.",
+      "I engineer production web applications, SaaS platforms, headless e-commerce storefronts, and autonomous AI agents. If your product requires custom architecture, sub-second latency, or reliable LLM integrations, I can lead the build.",
   },
   {
     question: 'How long does a typical project take?',
     answer:
-      'A focused MVP or feature build typically takes 4–6 weeks. A full SaaS product from discovery to launch is usually 2–4 months. Every engagement starts with a scoping session so you get a clear, honest timeline before we begin.',
+      'A focused MVP or headless migration typically ships in 4 to 6 weeks. Full-scale SaaS platforms from architecture to launch generally require 2 to 4 months. All work is scoped upfront with documented acceptance criteria.',
   },
   {
     question: 'Do you work with startups or established companies?',
     answer:
-      "Both. I've worked with early-stage founders who needed fast, lean execution, and with growing companies that needed reliability, scale, and clean architecture. The approach adapts — the quality doesn't.",
+      'Both. I collaborate with early-stage founders needing rapid, high-leverage execution, as well as established organizations requiring scale, strict type contracts, and security hardening.',
   },
   {
     question: 'What does day-to-day collaboration look like?',
     answer:
-      "You'll get regular progress updates, async-first communication, and a weekly sync call if needed. I write code that's clean and documented so your team can own it after handoff. No black boxes.",
+      'Async-first communication, weekly milestone syncs, and direct access via Slack or Linear. Every feature is delivered with pull requests, automated checks, and clean documentation so your in-house team can easily maintain it.',
   },
   {
-    question: 'Do you offer support and maintenance after launch?',
+    question: 'Do you offer ongoing support after launch?',
     answer:
-      'Yes. For products that need ongoing attention, I offer retainer-based engagements covering bug fixes, feature iterations, performance monitoring, and scaling support. Long-term relationships produce the best results.',
+      'Yes. For production applications, I offer dedicated engineering retainers covering performance monitoring, security updates, and iterative feature development.',
   },
 ];
 
@@ -34,50 +34,51 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-24 bg-muted" id="faq">
+    <section className="py-20 md:py-24 border-b border-border bg-background" id="faq">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16 animate-fade-up">
-          <p className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4">
-            FAQ
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground">
-            Common <span className="text-gradient">Questions</span>
+        
+        {/* Section Head Block */}
+        <div className="max-w-2xl mb-12">
+          <h2 className="text-3xl sm:text-4xl font-medium text-foreground tracking-tight mb-2">
+            Frequently Asked Questions
           </h2>
+          <p className="text-sm sm:text-base text-muted-foreground">
+            Clear details on timelines, engineering scope, and working terms.
+          </p>
         </div>
 
-        <div className="max-w-3xl mx-auto space-y-3">
+        <div className="max-w-3xl space-y-2.5">
           {FAQS.map(({ question, answer }, index) => {
             const isOpen = openIndex === index;
             return (
               <div
                 key={question}
-                className="bg-card border border-border rounded-2xl overflow-hidden animate-fade-up hover:border-primary/30 transition-colors duration-200"
-                style={{ transitionDelay: `${index * 0.06}s` }}
+                className="rounded-[10px] border border-border bg-card overflow-hidden"
               >
                 <button
-                  className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-white/5 transition-colors"
+                  className="w-full flex items-center justify-between gap-4 px-6 py-4 text-left hover:bg-muted/40 transition-colors cursor-pointer"
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                   aria-expanded={isOpen}
                 >
-                  <span className="font-semibold text-foreground text-sm sm:text-base">
+                  <span className="font-medium text-foreground text-sm sm:text-base">
                     {question}
                   </span>
                   <span
-                    className={`material-icons text-primary flex-shrink-0 transition-transform duration-300 ${
-                      isOpen ? 'rotate-180' : ''
+                    className={`material-icons text-muted-foreground flex-shrink-0 transition-transform duration-200 ${
+                      isOpen ? 'rotate-180 text-foreground' : ''
                     }`}
+                    aria-hidden="true"
                   >
                     expand_more
                   </span>
                 </button>
 
-                {/* Smooth grid-rows accordion — no max-height flicker */}
                 <div
                   className="faq-accordion"
                   data-open={String(isOpen)}
                 >
                   <div className="overflow-hidden">
-                    <p className="px-6 pb-5 text-muted-foreground text-sm leading-relaxed">
+                    <p className="px-6 pb-4 pt-1 text-muted-foreground text-xs sm:text-sm leading-relaxed border-t border-border/40">
                       {answer}
                     </p>
                   </div>
@@ -86,6 +87,7 @@ export function FAQ() {
             );
           })}
         </div>
+
       </div>
     </section>
   );

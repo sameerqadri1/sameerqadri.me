@@ -22,10 +22,10 @@ export function ContactSuccessView({ name }: { name?: string }) {
         </h2>
         <p className="text-muted-foreground text-lg max-w-md mx-auto">
           Thanks{name ? `, ${name}` : ''}. I&apos;ll be in touch within 12 hours. In the meantime, book a 30-minute
-          discovery call below — let&apos;s talk through your project.
+          discovery call below, and let&apos;s talk through your project.
         </p>
       </div>
-      <div className="max-w-2xl mx-auto rounded-2xl overflow-hidden border border-border shadow-xl">
+      <div className="max-w-2xl mx-auto rounded-[10px] overflow-hidden border border-border">
         <iframe
           src={CALENDLY_URL}
           width="100%"
@@ -56,12 +56,12 @@ interface ContactFormProps {
   className?: string;
 }
 
-const defaultLabelClass = 'text-xs font-bold uppercase tracking-widest text-muted-foreground';
-const compactLabelClass = 'block text-sm font-medium text-muted-foreground mb-1';
+const defaultLabelClass = 'text-xs font-medium text-muted-foreground mb-1 block';
+const compactLabelClass = 'block text-xs font-medium text-muted-foreground mb-1';
 const defaultInputClass =
-  'w-full bg-background border border-input rounded-xl px-4 py-3 text-foreground focus:ring-1 focus:ring-ring focus:border-ring outline-none transition-all text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background';
+  'w-full bg-muted border border-border rounded-[6px] px-3.5 py-2.5 text-foreground outline-none transition-colors text-sm focus:border-accent focus-visible:outline-2 focus-visible:outline-accent';
 const compactInputClass =
-  'w-full rounded-lg border border-border bg-card px-4 py-3 text-foreground focus:border-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background text-sm';
+  'w-full rounded-[6px] border border-border bg-card px-3.5 py-2.5 text-foreground outline-none transition-colors text-sm focus:border-accent focus-visible:outline-2 focus-visible:outline-accent';
 
 export function ContactForm({
   idPrefix = 'contact',
@@ -224,10 +224,10 @@ export function ContactForm({
         >
           {!isCompact && (
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-1">
+              <p className="text-xs font-medium text-foreground mb-1">
                 Project details
               </p>
-              <p className="text-xs text-muted-foreground/80">
+              <p className="text-xs text-muted-foreground">
                 Optional, but helps make the first call more concrete.
               </p>
             </div>
@@ -263,9 +263,9 @@ export function ContactForm({
                 className={inputClass}
               >
                 <option value="">Select (optional)</option>
-                <option value="asap">ASAP (0–4 weeks)</option>
-                <option value="1_3_months">1–3 months</option>
-                <option value="3_6_months">3–6 months</option>
+                <option value="asap">ASAP (0 to 4 weeks)</option>
+                <option value="1_3_months">1 to 3 months</option>
+                <option value="3_6_months">3 to 6 months</option>
                 <option value="not_sure">Not sure yet</option>
               </select>
             </div>
@@ -281,8 +281,8 @@ export function ContactForm({
               >
                 <option value="">Select (optional)</option>
                 <option value="<2k">&lt; $2k</option>
-                <option value="2k_5k">$2k–$5k</option>
-                <option value="5k_10k">$5k–$10k</option>
+                <option value="2k_5k">$2k to $5k</option>
+                <option value="5k_10k">$5k to $10k</option>
                 <option value="10k_plus">$10k+</option>
                 <option value="not_sure">Not sure</option>
               </select>
@@ -325,7 +325,7 @@ export function ContactForm({
       </div>
 
       {error && (
-        <p className="text-sm text-red-400 bg-red-400/10 border border-red-400/20 rounded-xl px-4 py-3" role="alert">
+        <p className="text-sm text-red-400 bg-red-400/10 border border-red-400/20 rounded-[6px] px-4 py-3" role="alert">
           {error}
         </p>
       )}
@@ -333,7 +333,7 @@ export function ContactForm({
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-4 bg-primary text-primary-foreground font-bold rounded-xl shadow-xl shadow-primary/20 hover:bg-primary/90 transition-all flex items-center justify-center gap-2 text-sm disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        className="w-full py-3.5 bg-primary text-primary-foreground font-medium rounded-[6px] hover:opacity-90 transition-opacity flex items-center justify-center gap-2 text-sm disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-accent"
       >
         {loading ? (
           <>

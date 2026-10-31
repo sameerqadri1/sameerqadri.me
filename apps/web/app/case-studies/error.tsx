@@ -22,7 +22,7 @@ export default function CaseStudiesError({
       <Nav />
       <main className="min-h-screen bg-background pt-28 pb-24">
         <div className="container mx-auto px-6 max-w-6xl">
-          <div className="max-w-lg mx-auto text-center py-16 animate-enter">
+          <div className="max-w-lg mx-auto text-center py-16 animate-enter motion-reduce:animate-none">
             <span className="material-icons text-muted-foreground/40 text-6xl mb-4 block" aria-hidden>
               error_outline
             </span>

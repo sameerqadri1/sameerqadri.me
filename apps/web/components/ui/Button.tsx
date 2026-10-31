@@ -3,21 +3,21 @@
 import { type ButtonHTMLAttributes, forwardRef, cloneElement, isValidElement, type ReactElement } from 'react';
 
 const base =
-  'inline-flex items-center justify-center gap-2 font-semibold rounded-xl transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-60 disabled:cursor-not-allowed';
+  'inline-flex items-center justify-center gap-2 font-medium rounded-[6px] transition-colors focus-visible:outline-2 focus-visible:outline-accent disabled:opacity-60 disabled:cursor-not-allowed';
 
 const variants = {
   primary:
-    'bg-primary text-primary-foreground shadow-xl shadow-primary/20 hover:bg-primary/90',
+    'bg-primary text-primary-foreground hover:opacity-90',
   secondary:
-    'bg-secondary text-secondary-foreground border border-border hover:bg-secondary/80',
+    'bg-card text-foreground border border-border hover:bg-muted',
   ghost:
-    'text-muted-foreground hover:text-foreground hover:bg-white/5',
+    'text-muted-foreground hover:text-foreground hover:bg-muted',
 } as const;
 
 const sizes = {
-  sm: 'px-4 py-2 text-sm',
-  md: 'px-6 py-3 text-sm',
-  lg: 'px-8 py-4 text-sm',
+  sm: 'px-3 py-1.5 text-xs',
+  md: 'px-4 py-2 text-xs sm:text-sm',
+  lg: 'px-5 py-2.5 text-sm',
 } as const;
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

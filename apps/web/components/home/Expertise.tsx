@@ -3,77 +3,60 @@ const ITEMS = [
     icon: 'layers',
     title: 'Headless Systems',
     description:
-      'Decoupled frontends using Next.js connected to robust backend APIs — fast, scalable, and fully custom.',
-    accent: 'from-violet-500/20 to-violet-500/5',
+      'Decoupled frontends using Next.js connected to backend APIs. Fast, scalable, and fully custom.',
     tag: 'Architecture',
   },
   {
     icon: 'smart_toy',
     title: 'AI Agents',
     description:
-      'Intelligent automation pipelines, LLM-powered tools, and AI-driven workflows that save time and scale operations.',
-    accent: 'from-blue-500/20 to-blue-500/5',
+      'Intelligent automation pipelines, LLM-powered tools, and AI workflows that scale operations.',
     tag: 'Automation',
   },
   {
     icon: 'rocket_launch',
     title: 'SaaS Products',
     description:
-      'End-to-end SaaS development from architecture to launch — multi-tenant apps, billing, auth, and beyond.',
-    accent: 'from-emerald-500/20 to-emerald-500/5',
+      'End-to-end SaaS development from architecture to launch. Multi-tenant apps, billing, and auth.',
     tag: 'Full-cycle',
   },
   {
     icon: 'speed',
     title: 'Performance Audit',
     description:
-      'Systematic optimisation of Core Web Vitals, reducing TTI and improving conversion rates with measurable results.',
-    accent: 'from-amber-500/20 to-amber-500/5',
-    tag: 'Optimisation',
+      'Systematic optimization of Core Web Vitals, reducing TTI and improving conversion rates.',
+    tag: 'Optimization',
   },
 ];
 
 export function Expertise() {
   return (
-    <section className="py-24 bg-muted/40" id="expertise">
+    <section className="py-20 bg-background border-b border-border" id="expertise">
       <div className="container mx-auto px-6 max-w-6xl">
-
-        {/* Header */}
-        <div className="max-w-xl mb-14 animate-fade-up">
-          <p className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-3">
-            Services
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">
-            Full-Stack Expertise
+        <div className="max-w-xl mb-12">
+          <h2 className="text-3xl sm:text-4xl font-medium text-foreground tracking-tight">
+            Full-Stack Domain Expertise
           </h2>
         </div>
 
-        {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {ITEMS.map(({ icon, title, description, accent, tag }, index) => (
+          {ITEMS.map(({ icon, title, description, tag }) => (
             <div
               key={title}
-              className="group relative rounded-2xl border border-border/70 bg-card overflow-hidden transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-0.5 animate-fade-up"
-              style={{ transitionDelay: `${index * 0.07}s` }}
+              className="rounded-[10px] border border-border bg-card p-6 flex flex-col justify-between hover:bg-muted/40 transition-colors"
             >
-              {/* Gradient bg tint */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${accent} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-
-              <div className="relative p-6 flex flex-col h-full">
-                {/* Top row: icon + tag */}
-                <div className="flex items-start justify-between mb-5">
-                  <div className="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
-                    <span className="material-symbols-outlined text-2xl">{icon}</span>
-                  </div>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground border border-border rounded-full px-2.5 py-0.5">
+              <div>
+                <div className="flex items-start justify-between mb-4">
+                  <span className="material-symbols-outlined text-xl text-accent">{icon}</span>
+                  <span className="font-mono text-[10px] text-muted-foreground border border-border rounded-[4px] px-2 py-0.5">
                     {tag}
                   </span>
                 </div>
 
-                <h3 className="text-base font-bold text-foreground mb-2 leading-snug">
+                <h3 className="text-base font-medium text-foreground mb-2">
                   {title}
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed flex-1">
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                   {description}
                 </p>
               </div>

@@ -5,12 +5,11 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
 const NAV_LINKS = [
-  { label: 'About', section: 'about' },
-  { label: 'Expertise', section: 'expertise' },
-  { label: 'Process', section: 'process' },
-  { label: 'Projects', section: 'projects' },
-  { label: 'Testimonials', section: 'testimonials' },
+  { label: 'Work', section: 'projects' },
+  { label: 'Architecture', section: 'architecture' },
+  { label: 'Proof', section: 'proof' },
   { label: 'FAQ', section: 'faq' },
+  { label: 'Contact', section: 'contact' },
 ];
 
 export function Nav() {
@@ -20,7 +19,7 @@ export function Nav() {
   const router = useRouter();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 48);
+    const handleScroll = () => setScrolled(window.scrollY > 32);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -41,131 +40,114 @@ export function Nav() {
     setMenuOpen(false);
   }
 
-  function handleNavLinkMouseMove(e: MouseEvent<HTMLAnchorElement>) {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
-    e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
-  }
-
   return (
     <>
-      <nav className="fixed top-4 left-1/2 z-50 -translate-x-1/2 w-[min(94vw,1040px)]">
-        <div
-          className={`nav-pill transition-all duration-300 ${
-            scrolled ? 'nav-pill-scrolled' : ''
-          }`}
-        >
-          {/* Desktop */}
-          <div className="hidden md:flex w-full items-center justify-between gap-2">
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 border-b ${
+          scrolled
+            ? 'bg-background/95 border-border'
+            : 'bg-background/80 border-border/60'
+        }`}
+      >
+        <div className="container mx-auto px-6 h-16 flex items-center justify-between">
+          {/* Brand & telemetry status */}
+          <div className="flex items-center gap-4">
             <Link
               href="/"
-              className="text-sm font-bold text-foreground tracking-tight flex-shrink-0 hover:text-primary transition-colors pr-2"
+              className="text-sm font-semibold text-foreground tracking-tight hover:text-primary transition-colors flex items-center gap-2"
             >
-              SQ
+              <span>Sameer Qadri</span>
+              <span className="text-muted-foreground/60 text-xs">/</span>
+              <span className="text-xs text-muted-foreground font-normal">Systems &amp; AI</span>
             </Link>
 
-            <div className="flex items-center gap-1">
-              {NAV_LINKS.map(({ label, section }) => (
-                label === 'Projects' ? (
-                  <Link
-                    key={label}
-                    href="/case-studies"
-                    className="nav-link"
-                    onMouseMove={handleNavLinkMouseMove}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {label}
-                  </Link>
-                ) : (
-                  <a
-                    key={label}
-                    href={`/#${section}`}
-                    className="nav-link"
-                    onMouseMove={handleNavLinkMouseMove}
-                    onClick={(e) => navigateToSection(e, section)}
-                  >
-                    {label}
-                  </a>
-                )
-              ))}
+            <div className="hidden lg:flex items-center gap-2 px-2.5 py-1 rounded-[6px] border border-border bg-muted text-xs text-muted-foreground font-mono">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+              <span>Available for hire</span>
             </div>
+          </div>
+
+          {/* Desktop Links */}
+          <nav className="hidden md:flex items-center gap-1">
+            {NAV_LINKS.map(({ label, section }) => (
+              section === 'projects' ? (
+                <Link
+                  key={label}
+                  href="/case-studies"
+                  className="px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors rounded-[6px]"
+                >
+                  {label}
+                </Link>
+              ) : (
+                <a
+                  key={label}
+                  href={`/#${section}`}
+                  className="px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors rounded-[6px]"
+                  onClick={(e) => navigateToSection(e, section)}
+                >
+                  {label}
+                </a>
+              )
+            ))}
+          </nav>
+
+          {/* Action */}
+          <div className="hidden md:flex items-center gap-3">
             <a
-              className="px-5 py-2 rounded-full text-xs font-semibold tracking-wide bg-primary text-primary-foreground shadow-md shadow-primary/30 hover:bg-primary/90 transition-colors flex-shrink-0 cursor-pointer"
               href="/#contact"
               onClick={(e) => navigateToSection(e, 'contact')}
+              className="px-4 py-2 rounded-[6px] text-xs font-medium bg-primary text-primary-foreground hover:opacity-90 transition-opacity cursor-pointer"
             >
-              Book Meeting
+              Start a Project
             </a>
           </div>
 
-          {/* Mobile */}
-          <div className="flex md:hidden w-full items-center justify-between">
-            <Link
-              href="/"
-              className="text-sm font-bold text-foreground tracking-tight hover:text-primary transition-colors"
+          {/* Mobile hamburger */}
+          <div className="flex md:hidden items-center gap-2">
+            <a
+              href="/#contact"
+              onClick={(e) => navigateToSection(e, 'contact')}
+              className="px-3 py-1.5 rounded-[6px] text-xs font-medium bg-primary text-primary-foreground cursor-pointer"
             >
-              Sameer Qadri
-            </Link>
-            <div className="flex items-center gap-3">
-              <a
-                className="px-4 py-1.5 rounded-full text-[11px] font-semibold tracking-wide bg-primary text-primary-foreground shadow-md shadow-primary/30 hover:bg-primary/90 transition-colors cursor-pointer"
-                href="/#contact"
-                onClick={(e) => navigateToSection(e, 'contact')}
-              >
-                Book Meeting
-              </a>
-              <button
-                onClick={() => setMenuOpen((v) => !v)}
-                aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-                aria-expanded={menuOpen}
-                className="w-8 h-8 flex flex-col items-center justify-center gap-1.5 rounded-lg hover:bg-white/5 transition-colors"
-              >
-                <span
-                  className={`block h-0.5 w-5 bg-foreground rounded-full transition-all duration-300 origin-center ${
-                    menuOpen ? 'rotate-45 translate-y-2' : ''
-                  }`}
-                />
-                <span
-                  className={`block h-0.5 w-5 bg-foreground rounded-full transition-all duration-300 ${
-                    menuOpen ? 'opacity-0 scale-x-0' : ''
-                  }`}
-                />
-                <span
-                  className={`block h-0.5 w-5 bg-foreground rounded-full transition-all duration-300 origin-center ${
-                    menuOpen ? '-rotate-45 -translate-y-2' : ''
-                  }`}
-                />
-              </button>
-            </div>
+              Start
+            </a>
+            <button
+              onClick={() => setMenuOpen((v) => !v)}
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+              className="w-8 h-8 flex flex-col items-center justify-center gap-1 rounded-[6px] border border-border bg-card text-foreground"
+            >
+              <span
+                className={`block h-0.5 w-4 bg-foreground transition-transform duration-200 ${
+                  menuOpen ? 'rotate-45 translate-y-1.5' : ''
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-4 bg-foreground transition-opacity duration-200 ${
+                  menuOpen ? 'opacity-0' : ''
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-4 bg-foreground transition-transform duration-200 ${
+                  menuOpen ? '-rotate-45 -translate-y-1.5' : ''
+                }`}
+              />
+            </button>
           </div>
         </div>
-      </nav>
+      </header>
 
-      {/* Mobile slide-down panel */}
-      <div
-        className={`fixed inset-0 z-40 md:hidden transition-all duration-300 ${
-          menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        <div
-          className="absolute inset-0 bg-background/80 backdrop-blur-sm"
-          onClick={() => setMenuOpen(false)}
-        />
-        <div
-          className={`absolute top-0 left-0 right-0 bg-card/95 backdrop-blur-2xl border-b border-border/60 shadow-2xl pt-24 pb-8 px-6 transition-transform duration-300 ${
-            menuOpen ? 'translate-y-0' : '-translate-y-full'
-          }`}
-        >
-          <nav className="flex flex-col gap-1">
+      {/* Mobile drawer */}
+      {menuOpen && (
+        <div className="fixed inset-0 z-40 md:hidden bg-background/95 pt-20 px-6 pb-8 border-b border-border">
+          <nav className="flex flex-col gap-2">
             {NAV_LINKS.map(({ label, section }) => (
-              label === 'Projects' ? (
+              section === 'projects' ? (
                 <Link
                   key={label}
                   href="/case-studies"
                   onClick={() => setMenuOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all text-base font-medium cursor-pointer"
+                  className="px-3 py-2 rounded-[6px] text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
                 >
                   {label}
                 </Link>
@@ -174,51 +156,24 @@ export function Nav() {
                   key={label}
                   href={`/#${section}`}
                   onClick={(e) => navigateToSection(e, section)}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all text-base font-medium cursor-pointer"
+                  className="px-3 py-2 rounded-[6px] text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
                 >
                   {label}
                 </a>
               )
             ))}
           </nav>
-          <div className="mt-6 pt-6 border-t border-border/60">
+          <div className="mt-6 pt-6 border-t border-border flex flex-col gap-4">
             <a
               href="/#contact"
               onClick={(e) => navigateToSection(e, 'contact')}
-              className="flex items-center justify-center gap-2 w-full py-3 bg-primary text-primary-foreground font-semibold rounded-xl shadow-lg shadow-primary/20 hover:bg-primary/90 transition-colors cursor-pointer"
+              className="py-2.5 text-center text-xs font-medium bg-primary text-primary-foreground rounded-[6px]"
             >
-              <span className="material-icons text-sm">calendar_today</span>
-              Book a Meeting
+              Start a Project
             </a>
-            <div className="flex justify-center gap-6 mt-5">
-              <a
-                href="https://linkedin.com/in/sameerqadri"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="https://github.com/sameerqadri1"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
-              >
-                GitHub
-              </a>
-              <a
-                href="https://x.com/coder_qadri"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
-              >
-                X / Twitter
-              </a>
-            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

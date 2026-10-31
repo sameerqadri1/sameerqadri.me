@@ -99,7 +99,7 @@ export function ImageUpload({ value, onChange }: Props) {
           <button
             type="button"
             onClick={() => onChange('')}
-            className="absolute top-2 right-2 w-7 h-7 bg-background/80 backdrop-blur rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground text-xs"
+            className="absolute top-2 right-2 w-7 h-7 bg-background border border-border rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground text-xs"
           >
             ✕
           </button>

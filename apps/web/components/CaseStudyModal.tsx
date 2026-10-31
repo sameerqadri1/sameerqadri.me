@@ -119,24 +119,24 @@ export function CaseStudyModal({ slug, onClose }: Props) {
     <div className="fixed inset-0 z-[60] flex items-start justify-center" role="dialog" aria-modal="true" aria-labelledby="case-study-title">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-background/80 backdrop-blur-sm animate-enter"
+        className="absolute inset-0 bg-background/90 animate-enter"
         onClick={onClose}
         aria-hidden
       />
 
       {/* Panel: flex column so close button stays visible; only body scrolls */}
-      <div className="relative z-10 flex w-full max-w-3xl max-h-[85vh] mx-4 my-8 sm:my-16 flex-col rounded-2xl border border-border bg-card shadow-2xl animate-enter overflow-hidden">
+      <div className="relative z-10 flex w-full max-w-3xl max-h-[85vh] mx-4 my-8 sm:my-16 flex-col rounded-[10px] border border-border bg-card animate-enter overflow-hidden">
         {/* Header actions */}
         <div className="flex flex-none items-start justify-between gap-3 p-4 pb-0">
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={handleShare}
-              className="h-9 px-3 rounded-full bg-background/80 backdrop-blur border border-border flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="h-8 px-3 rounded-[6px] bg-muted border border-border flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-2 focus-visible:outline-accent"
               aria-label="Share case study"
             >
-              <span className="material-icons text-lg" aria-hidden>share</span>
-              <span className="text-sm font-semibold">
+              <span className="material-icons text-base" aria-hidden>share</span>
+              <span className="text-xs font-medium">
                 {shareState === 'copied'
                   ? 'Copied'
                   : shareState === 'error'
@@ -148,19 +148,19 @@ export function CaseStudyModal({ slug, onClose }: Props) {
               href={shareUrl}
               target="_blank"
               rel="noreferrer"
-              className="h-9 px-3 rounded-full bg-background/80 backdrop-blur border border-border flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="h-8 px-3 rounded-[6px] bg-muted border border-border flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-xs font-medium focus-visible:outline-2 focus-visible:outline-accent whitespace-nowrap"
             >
-              Open link
-              <span className="material-icons text-base" aria-hidden>open_in_new</span>
+              <span>Open link</span>
+              <span className="material-icons text-sm" aria-hidden>open_in_new</span>
             </a>
           </div>
           <button
             ref={closeRef}
             onClick={onClose}
-            className="w-9 h-9 rounded-full bg-background/80 backdrop-blur border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="w-8 h-8 rounded-[6px] bg-muted border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-2 focus-visible:outline-accent"
             aria-label="Close"
           >
-            <span className="material-icons text-lg">close</span>
+            <span className="material-icons text-base">close</span>
           </button>
         </div>
         {/* Scrollable body */}
@@ -206,14 +206,14 @@ export function CaseStudyModal({ slug, onClose }: Props) {
               <div>
                 <div className="flex flex-wrap items-center gap-2 mb-3">
                   {study.client && (
-                    <span className="text-primary text-[11px] font-bold uppercase tracking-[0.15em]">
+                    <span className="text-accent text-xs font-mono">
                       {study.client}
                     </span>
                   )}
                   {study.year && (
                     <>
-                      <span className="text-border">·</span>
-                      <span className="text-muted-foreground text-xs">{study.year}</span>
+                      <span className="text-border">/</span>
+                      <span className="text-muted-foreground text-xs font-mono">{study.year}</span>
                     </>
                   )}
                 </div>
@@ -257,10 +257,10 @@ export function CaseStudyModal({ slug, onClose }: Props) {
               <div className="pt-4 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
                 <button
                   onClick={onClose}
-                  className="text-muted-foreground hover:text-foreground transition-colors text-sm flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded"
+                  className="text-muted-foreground hover:text-foreground transition-colors text-xs font-mono flex items-center gap-2 whitespace-nowrap cursor-pointer"
                 >
                   <span className="material-icons text-base">arrow_back</span>
-                  Back to projects
+                  <span>Back to projects</span>
                 </button>
                 <a
                   href="/#contact"

@@ -61,17 +61,16 @@ function CountUp({ raw }: { raw: string }) {
 
 export function Stats() {
   return (
-    <section className="py-12 bg-background">
+    <section className="py-12 bg-background border-b border-border">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {STATS.map(({ value, label }, index) => (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {STATS.map(({ value, label }) => (
             <div
               key={label}
-              className="p-6 md:p-8 rounded-2xl border bg-card border-border/70 text-center shadow-sm animate-zoom-in hover:-translate-y-1 hover:shadow-md hover:border-primary/30 transition-all duration-300"
-              style={{ transitionDelay: `${index * 0.07}s` }}
+              className="p-5 rounded-[10px] border bg-card border-border text-center transition-colors hover:bg-muted/30"
             >
               <CountUp raw={value} />
-              <p className="text-muted-foreground text-sm uppercase tracking-widest font-bold">
+              <p className="font-mono text-xs text-muted-foreground">
                 {label}
               </p>
             </div>
