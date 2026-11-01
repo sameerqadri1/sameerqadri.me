@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { CaseStudyModal } from '@/components/CaseStudyModal';
 import { fetchPublishedCaseStudies } from '@/lib/api';
 import type { CaseStudy } from '@/lib/types';
@@ -66,6 +67,7 @@ export function CaseStudiesSection() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     let cancelled = false;
@@ -120,11 +122,16 @@ export function CaseStudiesSection() {
           {/* Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {items.map((study, index) => (
-              <button
+              <motion.button
                 key={study.id}
                 type="button"
                 onClick={() => setActiveSlug(study.slug)}
-                className="group text-left border border-border bg-card hover:bg-muted/40 hover:-translate-y-1 hover:border-accent/40 transition-[transform,border-color,background-color] duration-200 p-5 sm:p-6 flex flex-col justify-between cursor-pointer focus-visible:outline-2 focus-visible:outline-accent"
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.45, delay: shouldReduceMotion ? 0 : index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={shouldReduceMotion ? undefined : { y: -3 }}
+                className="group text-left border border-border bg-card hover:bg-muted/40 hover:border-accent/40 transition-[border-color,background-color] duration-200 p-5 sm:p-6 flex flex-col justify-between cursor-pointer focus-visible:outline-2 focus-visible:outline-accent"
               >
                 <div>
                   {/* Visual / Cover preview */}
@@ -176,19 +183,21 @@ export function CaseStudiesSection() {
                     </span>
                   </span>
                 </div>
-              </button>
+              </motion.button>
             ))}
           </div>
 
         </div>
       </section>
 
-      {activeSlug && (
-        <CaseStudyModal
-          slug={activeSlug}
-          onClose={() => setActiveSlug(null)}
-        />
-      )}
+      <AnimatePresence>
+        {activeSlug && (
+          <CaseStudyModal
+            slug={activeSlug}
+            onClose={() => setActiveSlug(null)}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 }

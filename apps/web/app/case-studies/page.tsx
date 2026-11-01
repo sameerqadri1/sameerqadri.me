@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useState, useCallback } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Nav } from '@/components/home/Nav';
 import { Footer } from '@/components/home/Footer';
 import { CaseStudyModal } from '@/components/CaseStudyModal';
@@ -41,6 +42,7 @@ function CaseStudiesPageFallback() {
 function CaseStudiesContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const shouldReduceMotion = useReducedMotion();
   const [items, setItems] = useState<CaseStudy[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -269,34 +271,53 @@ function CaseStudiesContent() {
                         role="tab"
                         aria-selected={!selectedTag}
                         onClick={() => handleTagSelect(null)}
-                        className={`px-3 py-1.5 text-xs font-mono transition-colors focus-visible:outline-2 focus-visible:outline-accent ${
+                        className={`relative px-3 py-1.5 text-xs font-mono transition-colors focus-visible:outline-2 focus-visible:outline-accent z-0 border ${
                           !selectedTag
-                            ? 'bg-accent text-accent-foreground font-medium'
-                            : 'bg-muted text-muted-foreground hover:text-foreground border border-border'
+                            ? 'border-accent text-accent-foreground font-medium'
+                            : 'border-border bg-muted text-muted-foreground hover:text-foreground'
                         }`}
                       >
-                        All
-                        <span className="ml-1 opacity-70">({items.length})</span>
+                        {!selectedTag && (
+                          <motion.span
+                            layoutId="active-tag-indicator"
+                            className="absolute inset-0 bg-accent -z-10"
+                            transition={shouldReduceMotion ? { duration: 0 } : { type: 'spring', bounce: 0.12, duration: 0.35 }}
+                          />
+                        )}
+                        <span>
+                          All <span className="opacity-70">({items.length})</span>
+                        </span>
                       </button>
 
                       {/* Top 8 (or all when expanded) */}
-                      {visibleTags.map((tag) => (
-                        <button
-                          key={tag}
-                          type="button"
-                          role="tab"
-                          aria-selected={selectedTag === tag}
-                          onClick={() => handleTagSelect(tag)}
-                          className={`px-3 py-1.5 text-xs font-mono transition-colors focus-visible:outline-2 focus-visible:outline-accent ${
-                            selectedTag === tag
-                              ? 'bg-accent text-accent-foreground font-medium'
-                              : 'bg-muted text-muted-foreground hover:text-foreground border border-border'
-                          }`}
-                        >
-                          {tag}
-                          <span className="ml-1 opacity-60">({tagFrequency[tag] || 0})</span>
-                        </button>
-                      ))}
+                      {visibleTags.map((tag) => {
+                        const isSelected = selectedTag === tag;
+                        return (
+                          <button
+                            key={tag}
+                            type="button"
+                            role="tab"
+                            aria-selected={isSelected}
+                            onClick={() => handleTagSelect(tag)}
+                            className={`relative px-3 py-1.5 text-xs font-mono transition-colors focus-visible:outline-2 focus-visible:outline-accent z-0 border ${
+                              isSelected
+                                ? 'border-accent text-accent-foreground font-medium'
+                                : 'border-border bg-muted text-muted-foreground hover:text-foreground'
+                            }`}
+                          >
+                            {isSelected && (
+                              <motion.span
+                                layoutId="active-tag-indicator"
+                                className="absolute inset-0 bg-accent -z-10"
+                                transition={shouldReduceMotion ? { duration: 0 } : { type: 'spring', bounce: 0.12, duration: 0.35 }}
+                              />
+                            )}
+                            <span>
+                              {tag} <span className="opacity-60">({tagFrequency[tag] || 0})</span>
+                            </span>
+                          </button>
+                        );
+                      })}
 
                       {/* Expand / collapse toggle */}
                       {!showAllTags && hiddenCount > 0 && (
@@ -336,10 +357,18 @@ function CaseStudiesContent() {
                   </div>
                 ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {sortedItems.map((study) => (
-                    <button
+                  {sortedItems.map((study, idx) => (
+                    <motion.button
                       key={study.id}
                       type="button"
+                      layout
+                      initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 0.35,
+                        delay: shouldReduceMotion ? 0 : Math.min(idx * 0.05, 0.3),
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
                       onClick={() => handleOpen(study.slug)}
                       className="group cursor-pointer text-left border border-border bg-card overflow-hidden hover:bg-muted/40 transition-colors focus-visible:outline-2 focus-visible:outline-accent flex flex-col justify-between"
                     >
@@ -392,7 +421,7 @@ function CaseStudiesContent() {
                           <span className="material-icons text-sm" aria-hidden>arrow_forward</span>
                         </span>
                       </div>
-                    </button>
+                    </motion.button>
                   ))}
                 </div>
                 )}
@@ -456,9 +485,11 @@ function CaseStudiesContent() {
       </main>
       <Footer />
 
-      {activeSlug && (
-        <CaseStudyModal slug={activeSlug} onClose={handleClose} />
-      )}
+      <AnimatePresence>
+        {activeSlug && (
+          <CaseStudyModal slug={activeSlug} onClose={handleClose} />
+        )}
+      </AnimatePresence>
     </>
   );
 }

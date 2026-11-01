@@ -1,3 +1,7 @@
+'use client';
+
+import { motion, useReducedMotion } from 'framer-motion';
+
 const STEPS = [
   {
     num: '01',
@@ -26,6 +30,8 @@ const STEPS = [
 ];
 
 export function Process() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section className="py-20 bg-background border-b border-border" id="process">
       <div className="container mx-auto px-6 max-w-6xl">
@@ -39,9 +45,17 @@ export function Process() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-border bg-border gap-[1px]">
-          {STEPS.map(({ num, title, description }) => (
-            <div
+          {STEPS.map(({ num, title, description }, idx) => (
+            <motion.div
               key={title}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{
+                duration: 0.45,
+                delay: shouldReduceMotion ? 0 : idx * 0.08,
+                ease: [0.16, 1, 0.3, 1],
+              }}
               className="border-none bg-card p-6 flex flex-col justify-between hover:bg-muted/40 transition-colors"
             >
               <div>
@@ -53,7 +67,7 @@ export function Process() {
                   {description}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

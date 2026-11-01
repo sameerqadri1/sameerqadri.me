@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
 const FAQS = [
   {
@@ -32,6 +33,7 @@ const FAQS = [
 
 export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <section className="py-20 md:py-24 border-b border-border bg-background scroll-mt-16" id="faq">
@@ -83,6 +85,7 @@ export function FAQ() {
                   className="border border-border bg-card overflow-hidden transition-colors hover:border-accent/30"
                 >
                   <button
+                    type="button"
                     className="w-full flex items-center justify-between gap-4 px-6 py-4.5 text-left hover:bg-muted/40 transition-colors cursor-pointer"
                     onClick={() => setOpenIndex(isOpen ? null : index)}
                     aria-expanded={isOpen}
@@ -100,16 +103,25 @@ export function FAQ() {
                     </span>
                   </button>
 
-                  <div
-                    className="faq-accordion"
-                    data-open={String(isOpen)}
-                  >
-                    <div className="overflow-hidden">
-                      <p className="px-6 pb-5 pt-1 text-muted-foreground text-xs sm:text-sm leading-relaxed border-t border-border/40">
-                        {answer}
-                      </p>
-                    </div>
-                  </div>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        key="content"
+                        initial={shouldReduceMotion ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={shouldReduceMotion ? { opacity: 0, height: 0 } : { opacity: 0, height: 0 }}
+                        transition={{
+                          duration: shouldReduceMotion ? 0 : 0.25,
+                          ease: [0.16, 1, 0.3, 1],
+                        }}
+                        className="overflow-hidden"
+                      >
+                        <p className="px-6 pb-5 pt-1 text-muted-foreground text-xs sm:text-sm leading-relaxed border-t border-border/40">
+                          {answer}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               );
             })}

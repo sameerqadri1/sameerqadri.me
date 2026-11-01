@@ -1,9 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { checkBackendHealth } from '@/lib/api';
 
 export function Hero() {
+  const shouldReduceMotion = useReducedMotion();
   const [health, setHealth] = useState<{
     online: boolean;
     database: string;
@@ -30,16 +32,44 @@ export function Hero() {
     }
   }
 
+  const containerVariants = {
+    hidden: { opacity: shouldReduceMotion ? 1 : 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: shouldReduceMotion ? 0 : 0.08,
+        delayChildren: shouldReduceMotion ? 0 : 0.05,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 12 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] as const },
+    },
+  };
+
   return (
     <section className="relative pt-24 pb-16 md:pt-28 md:pb-20 border-b border-border bg-background min-h-[calc(100dvh-4rem)] flex items-center">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
           {/* Left Column: Posture & Content */}
-          <div className="lg:col-span-6 flex flex-col justify-center">
+          <motion.div
+            className="lg:col-span-6 flex flex-col justify-center"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             
             {/* Live Backend Telemetry Pill */}
-            <div className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-border bg-card/60 backdrop-blur-sm font-mono text-xs text-muted-foreground mb-6 w-fit">
+            <motion.div
+              variants={itemVariants}
+              className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-border bg-card/60 backdrop-blur-sm font-mono text-xs text-muted-foreground mb-6 w-fit"
+            >
               <span className="relative flex h-2 w-2">
                 <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${health.online ? 'bg-accent' : 'bg-destructive'}`} />
                 <span className={`relative inline-flex rounded-full h-2 w-2 ${health.online ? 'bg-accent' : 'bg-destructive'}`} />
@@ -49,34 +79,42 @@ export function Hero() {
               <span>Neon PostgreSQL {health.database === 'connected' ? 'Connected' : health.database}</span>
               <span className="text-muted-foreground/60">/</span>
               <span className="text-accent">{health.latencyMs}ms</span>
-            </div>
+            </motion.div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight text-foreground leading-[1] mb-5 uppercase">
+            <motion.h1
+              variants={itemVariants}
+              className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight text-foreground leading-[1] mb-5 uppercase"
+            >
               Headless systems, AI agents, and production SaaS.
-            </h1>
+            </motion.h1>
 
-            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl">
+            <motion.p
+              variants={itemVariants}
+              className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl"
+            >
               I build reliable web platforms, autonomous LLM pipelines, and high-conversion storefronts.
-            </p>
+            </motion.p>
 
-            <div className="flex flex-wrap items-center gap-3 mb-10">
-              <button
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3 mb-10">
+              <motion.button
+                whileTap={{ scale: 0.98 }}
                 onClick={() => scrollTo('contact')}
                 className="px-6 py-3 bg-accent text-accent-foreground text-xs sm:text-sm font-medium hover:opacity-90 transition-opacity flex items-center gap-2 cursor-pointer whitespace-nowrap"
               >
                 <span className="whitespace-nowrap">Start a Project</span>
                 <span className="material-icons text-sm" aria-hidden="true">arrow_forward</span>
-              </button>
-              <button
+              </motion.button>
+              <motion.button
+                whileTap={{ scale: 0.98 }}
                 onClick={() => scrollTo('projects')}
                 className="px-6 py-3 border border-border bg-transparent text-foreground text-xs sm:text-sm font-medium hover:bg-muted transition-colors cursor-pointer whitespace-nowrap"
               >
                 <span className="whitespace-nowrap">Inspect Case Studies</span>
-              </button>
-            </div>
+              </motion.button>
+            </motion.div>
 
             {/* Telemetry bar in measured face */}
-            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-border/80">
+            <motion.div variants={itemVariants} className="grid grid-cols-3 gap-4 pt-6 border-t border-border/80">
               <div>
                 <p className="font-mono text-xs text-muted-foreground mb-1">Experience</p>
                 <p className="font-mono text-sm sm:text-base text-foreground font-medium">3+ Years</p>
@@ -89,11 +127,16 @@ export function Hero() {
                 <p className="font-mono text-xs text-muted-foreground mb-1">Mean PageSpeed</p>
                 <p className="font-mono text-sm sm:text-base text-accent font-medium">96 / 100</p>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Right Column: Architectural Telemetry Artifact */}
-          <div className="lg:col-span-6">
+          <motion.div
+            className="lg:col-span-6"
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: shouldReduceMotion ? 0 : 0.2, ease: [0.16, 1, 0.3, 1] }}
+          >
             <div className="border border-border bg-card overflow-hidden">
               {/* Header */}
               <div className="px-4 py-3 border-b border-border bg-muted/60 flex items-center justify-between font-mono text-xs text-muted-foreground">
@@ -161,7 +204,7 @@ export function Hero() {
                 <span>stack: nextjs // node // neon postgres // pgvector</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>

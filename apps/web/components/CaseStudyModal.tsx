@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback, useRef } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import type { CaseStudy } from '@/lib/types';
 import { API_URL } from '@/lib/api';
 
@@ -83,6 +84,8 @@ export function CaseStudyModal({ slug, onClose }: Props) {
     if (scrollBodyRef.current) scrollBodyRef.current.scrollTop = 0;
   }, [slug, study]);
 
+  const shouldReduceMotion = useReducedMotion();
+
   if (!slug) return null;
 
   const shareUrl = typeof window !== 'undefined'
@@ -117,14 +120,24 @@ export function CaseStudyModal({ slug, onClose }: Props) {
   return (
     <div className="fixed inset-0 z-[60] flex items-start justify-center" role="dialog" aria-modal="true" aria-labelledby="case-study-title">
       {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-background/95 modal-backdrop-animate"
+      <motion.div
+        className="absolute inset-0 bg-background/95"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
         onClick={onClose}
         aria-hidden
       />
 
       {/* Panel: flex column so close button stays visible; only body scrolls */}
-      <div className="relative z-10 flex w-full max-w-3xl max-h-[85vh] mx-4 my-8 sm:my-16 flex-col border border-border bg-card modal-dialog-animate overflow-hidden">
+      <motion.div
+        className="relative z-10 flex w-full max-w-3xl max-h-[85vh] mx-4 my-8 sm:my-16 flex-col border border-border bg-card overflow-hidden"
+        initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.98, y: 10 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={shouldReduceMotion ? undefined : { opacity: 0, scale: 0.98, y: 10 }}
+        transition={{ duration: shouldReduceMotion ? 0 : 0.25, ease: [0.16, 1, 0.3, 1] }}
+      >
         {/* Header actions */}
         <div className="flex flex-none items-start justify-between gap-3 p-4 pb-0">
           <div className="flex items-center gap-2">
@@ -280,7 +293,7 @@ export function CaseStudyModal({ slug, onClose }: Props) {
           </div>
         )}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

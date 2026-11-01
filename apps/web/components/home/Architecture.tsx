@@ -1,4 +1,10 @@
+'use client';
+
+import { motion, useReducedMotion } from 'framer-motion';
+
 export function Architecture() {
+  const shouldReduceMotion = useReducedMotion();
+
   const PILLARS = [
     {
       num: '01',
@@ -42,9 +48,17 @@ export function Architecture() {
 
         {/* 3-Column Hairline Panel Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 border border-border bg-border overflow-hidden gap-[1px]">
-          {PILLARS.map((pillar) => (
-            <div
+          {PILLARS.map((pillar, idx) => (
+            <motion.div
               key={pillar.title}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{
+                duration: 0.45,
+                delay: shouldReduceMotion ? 0 : idx * 0.1,
+                ease: [0.16, 1, 0.3, 1],
+              }}
               className="bg-card p-6 sm:p-8 flex flex-col justify-between"
             >
               <div>
@@ -72,7 +86,7 @@ export function Architecture() {
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
@@ -80,4 +94,3 @@ export function Architecture() {
     </section>
   );
 }
-

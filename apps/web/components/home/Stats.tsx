@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 
 const STATS = [
   { value: '50+', label: 'Projects Delivered' },
@@ -60,20 +61,30 @@ function CountUp({ raw }: { raw: string }) {
 }
 
 export function Stats() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section className="py-12 bg-background border-b border-border">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 border border-border bg-border gap-[1px]">
-          {STATS.map(({ value, label }) => (
-            <div
+          {STATS.map(({ value, label }, idx) => (
+            <motion.div
               key={label}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-20px' }}
+              transition={{
+                duration: 0.4,
+                delay: shouldReduceMotion ? 0 : idx * 0.08,
+                ease: [0.16, 1, 0.3, 1],
+              }}
               className="p-6 sm:p-8 bg-card text-center transition-colors hover:bg-muted/40"
             >
               <CountUp raw={value} />
               <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                 {label}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
