@@ -42,14 +42,14 @@ export function Testimonials() {
           {QUOTES.map(({ quote, name, role, initials }) => (
             <div
               key={name}
-              className="rounded-[10px] border border-border bg-card p-6 sm:p-7 flex flex-col justify-between"
+              className="border border-border bg-card p-6 sm:p-7 flex flex-col justify-between"
             >
               <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
                 &ldquo;{quote}&rdquo;
               </p>
 
               <div className="pt-4 border-t border-border/80 flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full border border-border bg-muted flex items-center justify-center font-mono text-xs text-foreground font-medium">
+                <div className="w-9 h-9 border border-border bg-muted flex items-center justify-center font-mono text-xs text-foreground font-medium">
                   {initials}
                 </div>
                 <div>

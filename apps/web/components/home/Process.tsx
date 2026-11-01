@@ -38,11 +38,11 @@ export function Process() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-border bg-border gap-[1px]">
           {STEPS.map(({ num, title, description }) => (
             <div
               key={title}
-              className="rounded-[10px] border border-border bg-card p-6 flex flex-col justify-between hover:bg-muted/40 transition-colors"
+              className="border-none bg-card p-6 flex flex-col justify-between hover:bg-muted/40 transition-colors"
             >
               <div>
                 <span className="font-mono text-xs text-accent mb-3 block">STAGE // {num}</span>

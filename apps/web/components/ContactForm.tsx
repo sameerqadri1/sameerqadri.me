@@ -25,7 +25,7 @@ export function ContactSuccessView({ name }: { name?: string }) {
           discovery call below, and let&apos;s talk through your project.
         </p>
       </div>
-      <div className="max-w-2xl mx-auto rounded-[10px] overflow-hidden border border-border">
+      <div className="max-w-2xl mx-auto overflow-hidden border border-border">
         <iframe
           src={CALENDLY_URL}
           width="100%"
@@ -59,9 +59,9 @@ interface ContactFormProps {
 const defaultLabelClass = 'text-xs font-medium text-muted-foreground mb-1 block';
 const compactLabelClass = 'block text-xs font-medium text-muted-foreground mb-1';
 const defaultInputClass =
-  'w-full bg-muted border border-border rounded-[6px] px-3.5 py-2.5 text-foreground outline-none transition-colors text-sm focus:border-accent focus-visible:outline-2 focus-visible:outline-accent';
+  'w-full bg-muted border border-border px-3.5 py-2.5 text-foreground outline-none transition-colors text-sm focus:border-accent focus-visible:outline-2 focus-visible:outline-accent';
 const compactInputClass =
-  'w-full rounded-[6px] border border-border bg-card px-3.5 py-2.5 text-foreground outline-none transition-colors text-sm focus:border-accent focus-visible:outline-2 focus-visible:outline-accent';
+  'w-full border border-border bg-card px-3.5 py-2.5 text-foreground outline-none transition-colors text-sm focus:border-accent focus-visible:outline-2 focus-visible:outline-accent';
 
 export function ContactForm({
   idPrefix = 'contact',
@@ -325,7 +325,7 @@ export function ContactForm({
       </div>
 
       {error && (
-        <p className="text-sm text-red-400 bg-red-400/10 border border-red-400/20 rounded-[6px] px-4 py-3" role="alert">
+        <p className="text-sm text-red-400 bg-red-400/10 border border-red-400/20 px-4 py-3" role="alert">
           {error}
         </p>
       )}
@@ -333,7 +333,7 @@ export function ContactForm({
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-3.5 bg-primary text-primary-foreground font-medium rounded-[6px] hover:opacity-90 transition-opacity flex items-center justify-center gap-2 text-sm disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-accent"
+        className="w-full py-3.5 bg-accent text-accent-foreground font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2 text-sm disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-accent cursor-pointer"
       >
         {loading ? (
           <>

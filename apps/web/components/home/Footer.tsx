@@ -49,8 +49,8 @@ export function Footer() {
               Engineering headless architectures, autonomous LLM pipelines, and scalable multi-tenant SaaS products.
             </p>
 
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-[6px] border border-border bg-muted/60 text-xs font-mono text-muted-foreground">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 border border-border bg-muted/60 text-xs font-mono text-muted-foreground">
+              <span className="w-1.5 h-1.5 bg-accent" />
               <span>Available for new projects</span>
             </div>
           </div>

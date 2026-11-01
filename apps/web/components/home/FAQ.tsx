@@ -42,7 +42,7 @@ export function FAQ() {
           <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-6">
             <div>
               <div className="inline-flex items-center gap-2 font-mono text-xs text-accent mb-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                <span className="w-1.5 h-1.5 bg-accent" />
                 <span>engineering scope // SLAs</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-medium text-foreground tracking-tight mb-3">
@@ -54,7 +54,7 @@ export function FAQ() {
             </div>
 
             {/* Direct Consultation Box */}
-            <div className="p-5 rounded-[10px] border border-border bg-card space-y-3">
+            <div className="p-5 border border-border bg-card space-y-3">
               <h3 className="text-sm font-medium text-foreground">
                 Have a different question or custom requirement?
               </h3>
@@ -80,7 +80,7 @@ export function FAQ() {
               return (
                 <div
                   key={question}
-                  className="rounded-[10px] border border-border bg-card overflow-hidden transition-colors hover:border-accent/30"
+                  className="border border-border bg-card overflow-hidden transition-colors hover:border-accent/30"
                 >
                   <button
                     className="w-full flex items-center justify-between gap-4 px-6 py-4.5 text-left hover:bg-muted/40 transition-colors cursor-pointer"

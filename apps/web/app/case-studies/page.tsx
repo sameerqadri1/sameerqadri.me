@@ -28,7 +28,7 @@ function CaseStudiesPageFallback() {
           </header>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" aria-busy="true">
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="h-80 rounded-[10px] bg-card border border-border animate-pulse" />
+              <div key={i} className="h-80 bg-card border border-border animate-pulse" />
             ))}
           </div>
         </div>
@@ -206,13 +206,13 @@ function CaseStudiesContent() {
                 <button
                   type="button"
                   onClick={fetchCaseStudies}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   Retry
                 </button>
                 <a
                   href="/#contact"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border bg-card font-semibold text-foreground hover:bg-muted/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-border bg-card font-semibold text-foreground hover:bg-muted/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   Get in touch
                 </a>
@@ -231,7 +231,7 @@ function CaseStudiesContent() {
                       <button
                         type="button"
                         onClick={() => handleTagSelect(null)}
-                        className="ml-2 inline-flex items-center gap-1 text-primary hover:text-primary/80 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
+                        className="ml-2 inline-flex items-center gap-1 text-primary hover:text-primary/80 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                         aria-label="Clear tag filter"
                       >
                         <span className="material-icons text-sm leading-none">close</span>
@@ -247,7 +247,7 @@ function CaseStudiesContent() {
                       id="sort-case-studies"
                       value={sort}
                       onChange={(e) => handleSortChange(e.target.value as SortOption)}
-                      className="rounded-[6px] border border-border bg-card px-3 py-1.5 text-xs font-mono text-foreground focus:border-accent focus-visible:outline-2 focus-visible:outline-accent"
+                      className="border border-border bg-card px-3 py-1.5 text-xs font-mono text-foreground focus:border-accent focus-visible:outline-2 focus-visible:outline-accent"
                     >
                       <option value="newest">Newest first</option>
                       <option value="oldest">Oldest first</option>
@@ -269,9 +269,9 @@ function CaseStudiesContent() {
                         role="tab"
                         aria-selected={!selectedTag}
                         onClick={() => handleTagSelect(null)}
-                        className={`px-3 py-1.5 rounded-[6px] text-xs font-mono transition-colors focus-visible:outline-2 focus-visible:outline-accent ${
+                        className={`px-3 py-1.5 text-xs font-mono transition-colors focus-visible:outline-2 focus-visible:outline-accent ${
                           !selectedTag
-                            ? 'bg-primary text-primary-foreground font-medium'
+                            ? 'bg-accent text-accent-foreground font-medium'
                             : 'bg-muted text-muted-foreground hover:text-foreground border border-border'
                         }`}
                       >
@@ -287,9 +287,9 @@ function CaseStudiesContent() {
                           role="tab"
                           aria-selected={selectedTag === tag}
                           onClick={() => handleTagSelect(tag)}
-                          className={`px-3 py-1.5 rounded-[6px] text-xs font-mono transition-colors focus-visible:outline-2 focus-visible:outline-accent ${
+                          className={`px-3 py-1.5 text-xs font-mono transition-colors focus-visible:outline-2 focus-visible:outline-accent ${
                             selectedTag === tag
-                              ? 'bg-primary text-primary-foreground font-medium'
+                              ? 'bg-accent text-accent-foreground font-medium'
                               : 'bg-muted text-muted-foreground hover:text-foreground border border-border'
                           }`}
                         >
@@ -303,7 +303,7 @@ function CaseStudiesContent() {
                         <button
                           type="button"
                           onClick={() => setShowAllTags(true)}
-                          className="px-3 py-1.5 rounded-[6px] text-xs font-mono bg-muted text-muted-foreground hover:text-foreground border border-border transition-colors focus-visible:outline-2 focus-visible:outline-accent"
+                          className="px-3 py-1.5 text-xs font-mono bg-muted text-muted-foreground hover:text-foreground border border-border transition-colors focus-visible:outline-2 focus-visible:outline-accent"
                         >
                           + {hiddenCount} more
                         </button>
@@ -312,7 +312,7 @@ function CaseStudiesContent() {
                         <button
                           type="button"
                           onClick={() => setShowAllTags(false)}
-                          className="px-3 py-1.5 rounded-[6px] text-xs font-mono bg-muted text-muted-foreground hover:text-foreground border border-border transition-colors focus-visible:outline-2 focus-visible:outline-accent"
+                          className="px-3 py-1.5 text-xs font-mono bg-muted text-muted-foreground hover:text-foreground border border-border transition-colors focus-visible:outline-2 focus-visible:outline-accent"
                         >
                           Show less
                         </button>
@@ -322,7 +322,7 @@ function CaseStudiesContent() {
                 })()}
 
                 {selectedTag && filteredItems.length === 0 ? (
-                  <div className="py-12 text-center rounded-[10px] border border-border bg-card animate-enter" role="status">
+                  <div className="py-12 text-center border border-border bg-card animate-enter" role="status">
                     <p className="text-muted-foreground mb-2 text-sm">
                       No projects with the &quot;{selectedTag}&quot; tag.
                     </p>
@@ -341,7 +341,7 @@ function CaseStudiesContent() {
                       key={study.id}
                       type="button"
                       onClick={() => handleOpen(study.slug)}
-                      className="group cursor-pointer text-left rounded-[10px] border border-border bg-card overflow-hidden hover:bg-muted/40 transition-colors focus-visible:outline-2 focus-visible:outline-accent flex flex-col justify-between"
+                      className="group cursor-pointer text-left border border-border bg-card overflow-hidden hover:bg-muted/40 transition-colors focus-visible:outline-2 focus-visible:outline-accent flex flex-col justify-between"
                     >
                       <div>
                         <div className="overflow-hidden relative aspect-video bg-muted border-b border-border">
@@ -373,7 +373,7 @@ function CaseStudiesContent() {
                               {(study.tags || []).slice(0, 3).map((tag) => (
                                 <span
                                   key={tag}
-                                  className="px-2 py-0.5 rounded-[4px] border border-border bg-background text-muted-foreground"
+                                  className="px-2 py-0.5 border border-border bg-background text-muted-foreground"
                                 >
                                   {tag}
                                 </span>
@@ -399,13 +399,13 @@ function CaseStudiesContent() {
               </section>
 
               <section className="mt-20 pt-16 border-t border-border animate-enter" aria-labelledby="cta-heading">
-                <div className="rounded-[12px] border border-border bg-card p-8 sm:p-10">
+                <div className="border border-border bg-card p-8 sm:p-10">
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                     
                     {/* Left: Content */}
                     <div className="lg:col-span-8 space-y-4">
                       <div className="inline-flex items-center gap-2 font-mono text-xs text-accent">
-                        <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                        <span className="w-1.5 h-1.5 bg-accent" />
                         <span>engineering consultation</span>
                       </div>
 
@@ -422,13 +422,13 @@ function CaseStudiesContent() {
 
                       {/* Clean technical spec chips without awkward floating bullets */}
                       <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-xs">
-                        <span className="px-2.5 py-1 rounded-[4px] border border-border bg-background text-muted-foreground">
+                        <span className="px-2.5 py-1 border border-border bg-background text-muted-foreground">
                           Headless storefronts
                         </span>
-                        <span className="px-2.5 py-1 rounded-[4px] border border-border bg-background text-muted-foreground">
+                        <span className="px-2.5 py-1 border border-border bg-background text-muted-foreground">
                           Autonomous AI agents
                         </span>
-                        <span className="px-2.5 py-1 rounded-[4px] border border-border bg-background text-muted-foreground">
+                        <span className="px-2.5 py-1 border border-border bg-background text-muted-foreground">
                           Multi-tenant SaaS
                         </span>
                       </div>
@@ -438,7 +438,7 @@ function CaseStudiesContent() {
                     <div className="lg:col-span-4 flex lg:justify-end">
                       <a
                         href="/#contact"
-                        className="w-full sm:w-auto px-6 py-3.5 rounded-[6px] bg-primary text-primary-foreground text-xs sm:text-sm font-medium text-center hover:opacity-90 transition-opacity whitespace-nowrap flex items-center justify-center gap-2 cursor-pointer shadow-sm group"
+                        className="w-full sm:w-auto px-6 py-3.5 bg-accent text-accent-foreground text-xs sm:text-sm font-medium text-center hover:opacity-90 transition-opacity whitespace-nowrap flex items-center justify-center gap-2 cursor-pointer shadow-sm group"
                       >
                         <span>Start a Project Inquiry</span>
                         <span className="material-icons text-sm transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">

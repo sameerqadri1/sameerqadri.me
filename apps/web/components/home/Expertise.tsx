@@ -43,12 +43,12 @@ export function Expertise() {
           {ITEMS.map(({ icon, title, description, tag }) => (
             <div
               key={title}
-              className="rounded-[10px] border border-border bg-card p-6 flex flex-col justify-between hover:bg-muted/40 transition-colors"
+              className="border border-border bg-card p-6 flex flex-col justify-between hover:bg-muted/40 transition-colors"
             >
               <div>
                 <div className="flex items-start justify-between mb-4">
                   <span className="material-symbols-outlined text-xl text-accent">{icon}</span>
-                  <span className="font-mono text-[10px] text-muted-foreground border border-border rounded-[4px] px-2 py-0.5">
+                  <span className="font-mono text-[10px] text-muted-foreground border border-border px-2 py-0.5">
                     {tag}
                   </span>
                 </div>

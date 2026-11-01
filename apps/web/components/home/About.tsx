@@ -17,7 +17,7 @@ export function About() {
 
           {/* Portrait: crisp hairline framing, no glow orbs */}
           <div className="lg:col-span-5 flex justify-center lg:justify-start">
-            <div className="relative w-full max-w-sm rounded-[10px] overflow-hidden border border-border bg-card">
+            <div className="relative w-full max-w-sm overflow-hidden border border-border bg-card">
               <div className="aspect-[4/5] overflow-hidden">
                 <img
                   src="/sameer.jpg"
@@ -56,7 +56,7 @@ export function About() {
                 {STACK.map((item) => (
                   <span
                     key={item}
-                    className="font-mono text-xs px-2.5 py-1 rounded-[4px] border border-border bg-card text-foreground"
+                    className="font-mono text-xs px-2.5 py-1 border border-border bg-card text-foreground"
                   >
                     {item}
                   </span>

@@ -1,7 +1,7 @@
-/* Hallmark · shape: settled · genre: modern-minimal · theme: Console (by request) · redesign: full
- * hero: Settled (/) · nav: Bar · footer: Cap · imagery: product · signature: audit-reading · console: graphite
- * axes: dark/grotesk-sans/chromatic-amber · posture: restrained · contrast: pass · fold: pass · v2.0.0 */
-/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V4 · weakest: V, grounded in Console lab/telemetry tokens and real database benchmarks */
+/* Hallmark · shape: settled · genre: atmospheric · theme: Darkroom (by request) · redesign: full
+ * hero: Settled (/) · nav: Bar · footer: Cap · imagery: photo · signature: darkroom-edition · darkroom: amber
+ * axes: dark/condensed-sans/chromatic-amber · posture: restrained · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 · warm print ground 12.5, hairline Sofia Sans Extra Condensed, amber safelight */
 @import url("./tokens.css");
 @import url("./base.css");
 @import 'tailwindcss';
@@ -256,7 +256,7 @@
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 0px;
   --background: var(--color-paper);
   --foreground: var(--color-ink);
   --card: var(--color-paper-2);
@@ -269,14 +269,14 @@
   --secondary-foreground: var(--color-ink-2);
   --muted: var(--color-paper-3);
   --muted-foreground: var(--color-muted);
-  --accent: var(--color-cool);
-  --accent-foreground: var(--color-paper-3);
+  --accent: var(--color-accent);
+  --accent-foreground: var(--color-accent-ink);
   --destructive: var(--color-bad);
   --border: var(--color-rule);
   --input: var(--color-rule);
   --ring: var(--color-focus);
   --chart-1: var(--color-accent);
-  --chart-2: var(--color-cool);
+  --chart-2: var(--color-accent-deep);
   --chart-3: var(--color-ok);
   --chart-4: var(--color-bad);
   --chart-5: var(--color-muted);
@@ -291,6 +291,7 @@
 }
 
 .dark {
+  --radius: 0px;
   --background: var(--color-paper);
   --foreground: var(--color-ink);
   --card: var(--color-paper-2);
@@ -303,14 +304,14 @@
   --secondary-foreground: var(--color-ink-2);
   --muted: var(--color-paper-3);
   --muted-foreground: var(--color-muted);
-  --accent: var(--color-cool);
-  --accent-foreground: var(--color-paper-3);
+  --accent: var(--color-accent);
+  --accent-foreground: var(--color-accent-ink);
   --destructive: var(--color-bad);
   --border: var(--color-rule);
   --input: var(--color-rule);
   --ring: var(--color-focus);
   --chart-1: var(--color-accent);
-  --chart-2: var(--color-cool);
+  --chart-2: var(--color-accent-deep);
   --chart-3: var(--color-ok);
   --chart-4: var(--color-bad);
   --chart-5: var(--color-muted);

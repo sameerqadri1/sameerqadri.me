@@ -52,7 +52,7 @@ function CountUp({ raw }: { raw: string }) {
   }, [num]);
 
   return (
-    <p ref={ref} className="text-4xl font-bold text-foreground mb-1 tabular-nums">
+    <p ref={ref} className="text-4xl sm:text-5xl lg:text-6xl font-light text-foreground mb-1 tabular-nums font-display tracking-tight">
       {display}
       {suffix}
     </p>
@@ -63,14 +63,14 @@ export function Stats() {
   return (
     <section className="py-12 bg-background border-b border-border">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 border border-border bg-border gap-[1px]">
           {STATS.map(({ value, label }) => (
             <div
               key={label}
-              className="p-5 rounded-[10px] border bg-card border-border text-center transition-colors hover:bg-muted/30"
+              className="p-6 sm:p-8 bg-card text-center transition-colors hover:bg-muted/40"
             >
               <CountUp raw={value} />
-              <p className="font-mono text-xs text-muted-foreground">
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                 {label}
               </p>
             </div>

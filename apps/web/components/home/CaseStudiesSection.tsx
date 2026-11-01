@@ -124,19 +124,19 @@ export function CaseStudiesSection() {
                 key={study.id}
                 type="button"
                 onClick={() => setActiveSlug(study.slug)}
-                className="group text-left rounded-[10px] border border-border bg-card hover:bg-muted/40 hover:-translate-y-1 hover:border-accent/40 transition-[transform,border-color,background-color] duration-200 p-5 sm:p-6 flex flex-col justify-between cursor-pointer focus-visible:outline-2 focus-visible:outline-accent"
+                className="group text-left border border-border bg-card hover:bg-muted/40 hover:-translate-y-1 hover:border-accent/40 transition-[transform,border-color,background-color] duration-200 p-5 sm:p-6 flex flex-col justify-between cursor-pointer focus-visible:outline-2 focus-visible:outline-accent"
               >
                 <div>
                   {/* Visual / Cover preview */}
                   {study.coverImageUrl ? (
-                    <div className="relative aspect-video rounded-[6px] overflow-hidden border border-border mb-4 bg-muted">
+                    <div className="relative aspect-video overflow-hidden border border-border mb-4 bg-muted">
                       <img
                         alt={study.title}
                         src={study.coverImageUrl}
                         loading={index === 0 ? 'eager' : 'lazy'}
                         fetchPriority={index === 0 ? 'high' : 'auto'}
                         decoding="async"
-                        className="w-full h-full object-cover grayscale contrast-110 group-hover:grayscale-0 transition-[filter] duration-300"
+                        className="w-full h-full object-cover grayscale contrast-110 group-hover:contrast-125 transition-[filter] duration-300"
                       />
                     </div>
                   ) : null}
@@ -162,7 +162,7 @@ export function CaseStudiesSection() {
                     {(study.tags || []).slice(0, 3).map((tag) => (
                       <span
                         key={tag}
-                        className="font-mono text-[10px] px-2 py-0.5 rounded-[4px] border border-border bg-background text-muted-foreground"
+                        className="font-mono text-[10px] px-2 py-0.5 border border-border bg-background text-muted-foreground"
                       >
                         {tag}
                       </span>

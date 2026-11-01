@@ -39,10 +39,10 @@ export function Hero() {
           <div className="lg:col-span-6 flex flex-col justify-center">
             
             {/* Live Backend Telemetry Pill */}
-            <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-[6px] border border-border bg-card/60 backdrop-blur-sm font-mono text-xs text-muted-foreground mb-6 w-fit">
+            <div className="inline-flex items-center gap-2.5 px-3 py-1.5 border border-border bg-card/60 backdrop-blur-sm font-mono text-xs text-muted-foreground mb-6 w-fit">
               <span className="relative flex h-2 w-2">
-                <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${health.online ? 'bg-emerald-400' : 'bg-amber-400'}`} />
-                <span className={`relative inline-flex rounded-full h-2 w-2 ${health.online ? 'bg-emerald-500' : 'bg-amber-500'}`} />
+                <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${health.online ? 'bg-accent' : 'bg-destructive'}`} />
+                <span className={`relative inline-flex rounded-full h-2 w-2 ${health.online ? 'bg-accent' : 'bg-destructive'}`} />
               </span>
               <span className="text-foreground font-medium">Backend: {health.online ? 'Online' : 'Reconnecting'}</span>
               <span className="text-muted-foreground/60">/</span>
@@ -51,7 +51,7 @@ export function Hero() {
               <span className="text-accent">{health.latencyMs}ms</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight text-foreground leading-[1.06] mb-5">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight text-foreground leading-[1] mb-5 uppercase">
               Headless systems, AI agents, and production SaaS.
             </h1>
 
@@ -62,14 +62,14 @@ export function Hero() {
             <div className="flex flex-wrap items-center gap-3 mb-10">
               <button
                 onClick={() => scrollTo('contact')}
-                className="px-5 py-3 rounded-[6px] bg-primary text-primary-foreground text-xs sm:text-sm font-medium hover:opacity-90 transition-opacity flex items-center gap-2 cursor-pointer whitespace-nowrap"
+                className="px-6 py-3 bg-accent text-accent-foreground text-xs sm:text-sm font-medium hover:opacity-90 transition-opacity flex items-center gap-2 cursor-pointer whitespace-nowrap"
               >
                 <span className="whitespace-nowrap">Start a Project</span>
                 <span className="material-icons text-sm" aria-hidden="true">arrow_forward</span>
               </button>
               <button
                 onClick={() => scrollTo('projects')}
-                className="px-5 py-3 rounded-[6px] border border-border bg-card text-foreground text-xs sm:text-sm font-medium hover:bg-muted transition-colors cursor-pointer whitespace-nowrap"
+                className="px-6 py-3 border border-border bg-transparent text-foreground text-xs sm:text-sm font-medium hover:bg-muted transition-colors cursor-pointer whitespace-nowrap"
               >
                 <span className="whitespace-nowrap">Inspect Case Studies</span>
               </button>
@@ -94,11 +94,11 @@ export function Hero() {
 
           {/* Right Column: Architectural Telemetry Artifact */}
           <div className="lg:col-span-6">
-            <div className="rounded-[10px] border border-border bg-card overflow-hidden">
+            <div className="border border-border bg-card overflow-hidden">
               {/* Header */}
               <div className="px-4 py-3 border-b border-border bg-muted/60 flex items-center justify-between font-mono text-xs text-muted-foreground">
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-accent" />
+                  <span className="w-2 h-2 bg-accent" />
                   <span>runtime.telemetry // production benchmarks</span>
                 </div>
                 <span>verified records</span>
@@ -116,8 +116,8 @@ export function Hero() {
                     Next.js 14 Storefront API over GraphQL with Incremental Static Regeneration.
                   </p>
                   <div className="flex flex-wrap gap-2 font-mono text-[11px]">
-                    <span className="px-2 py-0.5 rounded-[4px] border border-border bg-background text-muted-foreground">PageSpeed 32 → 96</span>
-                    <span className="px-2 py-0.5 rounded-[4px] border border-border bg-background text-accent">+28% mobile orders</span>
+                    <span className="px-2 py-0.5 border border-border bg-background text-muted-foreground">PageSpeed 32 → 96</span>
+                    <span className="px-2 py-0.5 border border-border bg-background text-accent">+28% mobile orders</span>
                   </div>
                 </div>
 
@@ -131,8 +131,8 @@ export function Hero() {
                     GPT-4o agent with Pinecone vector retrieval and real-time inventory synchronization.
                   </p>
                   <div className="flex flex-wrap gap-2 font-mono text-[11px]">
-                    <span className="px-2 py-0.5 rounded-[4px] border border-border bg-background text-muted-foreground">52% ticket reduction</span>
-                    <span className="px-2 py-0.5 rounded-[4px] border border-border bg-background text-primary">$5,800/mo net saving</span>
+                    <span className="px-2 py-0.5 border border-border bg-background text-muted-foreground">52% ticket reduction</span>
+                    <span className="px-2 py-0.5 border border-border bg-background text-accent">$5,800/mo net saving</span>
                   </div>
                 </div>
 
@@ -146,8 +146,8 @@ export function Hero() {
                     PostgreSQL multi-tenant schema with Stripe webhooks and real-time WebSocket state.
                   </p>
                   <div className="flex flex-wrap gap-2 font-mono text-[11px]">
-                    <span className="px-2 py-0.5 rounded-[4px] border border-border bg-background text-muted-foreground">Replaced 5 tools</span>
-                    <span className="px-2 py-0.5 rounded-[4px] border border-border bg-background text-foreground">Stripe Automated</span>
+                    <span className="px-2 py-0.5 border border-border bg-background text-muted-foreground">Replaced 5 tools</span>
+                    <span className="px-2 py-0.5 border border-border bg-background text-foreground">Stripe Automated</span>
                   </div>
                 </div>
               </div>
@@ -155,7 +155,7 @@ export function Hero() {
               {/* Telemetry Footer */}
               <div className="px-4 py-2.5 border-t border-border bg-muted/40 flex items-center justify-between font-mono text-[11px] text-muted-foreground">
                 <span className="flex items-center gap-1.5">
-                  <span className={`w-1.5 h-1.5 rounded-full ${health.online ? 'bg-emerald-400' : 'bg-amber-400'}`} />
+                  <span className={`w-1.5 h-1.5 ${health.online ? 'bg-accent' : 'bg-destructive'}`} />
                   <span>status: operational</span>
                 </span>
                 <span>stack: nextjs // node // neon postgres // pgvector</span>

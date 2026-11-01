@@ -27,9 +27,9 @@ export function Contact() {
               <div className="space-y-3 pt-2">
                 <a
                   href="mailto:hello@sameerqadri.me"
-                  className="flex items-center gap-3 p-3.5 rounded-[10px] border border-border bg-card hover:bg-muted/40 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent active:scale-[0.99]"
+                  className="flex items-center gap-3 p-3.5 border border-border bg-card hover:bg-muted/40 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent active:scale-[0.99]"
                 >
-                  <div className="w-9 h-9 rounded-[6px] border border-border bg-muted flex items-center justify-center text-foreground flex-shrink-0">
+                  <div className="w-9 h-9 border border-border bg-muted flex items-center justify-center text-foreground flex-shrink-0">
                     <span className="material-icons text-base" aria-hidden="true">mail</span>
                   </div>
                   <div>
@@ -40,8 +40,8 @@ export function Contact() {
                   </div>
                 </a>
 
-                <div className="flex items-center gap-3 p-3.5 rounded-[10px] border border-border bg-card">
-                  <div className="w-9 h-9 rounded-[6px] border border-border bg-muted flex items-center justify-center text-foreground flex-shrink-0">
+                <div className="flex items-center gap-3 p-3.5 border border-border bg-card">
+                  <div className="w-9 h-9 border border-border bg-muted flex items-center justify-center text-foreground flex-shrink-0">
                     <span className="material-icons text-base" aria-hidden="true">schedule</span>
                   </div>
                   <div>
@@ -53,14 +53,14 @@ export function Contact() {
                 </div>
               </div>
 
-              <div className="p-4 rounded-[10px] border border-border/80 bg-muted/40 font-mono text-xs text-muted-foreground">
+              <div className="p-4 border border-border/80 bg-muted/40 font-mono text-xs text-muted-foreground">
                 <p className="text-foreground font-medium mb-1">Commercial Engagement</p>
                 <p>Contract, milestone-based delivery, or monthly architecture retainers.</p>
               </div>
             </div>
 
             {/* Right Column: Form in Hairline Panel */}
-            <div className="lg:col-span-7 rounded-[10px] border border-border bg-card p-6 sm:p-8">
+            <div className="lg:col-span-7 border border-border bg-card p-6 sm:p-8">
               <ContactForm
                 idPrefix="contact"
                 showCompany

@@ -41,7 +41,7 @@ export function Architecture() {
         </div>
 
         {/* 3-Column Hairline Panel Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 rounded-[10px] border border-border bg-border overflow-hidden gap-[1px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 border border-border bg-border overflow-hidden gap-[1px]">
           {PILLARS.map((pillar) => (
             <div
               key={pillar.title}
@@ -66,7 +66,7 @@ export function Architecture() {
                 {pillar.tech.map((t) => (
                   <span
                     key={t}
-                    className="px-2 py-0.5 rounded-[4px] border border-border bg-background text-muted-foreground"
+                    className="px-2 py-0.5 border border-border bg-background text-muted-foreground"
                   >
                     {t}
                   </span>

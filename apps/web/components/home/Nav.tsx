@@ -66,8 +66,8 @@ export function Nav() {
               <span className="text-xs text-muted-foreground font-normal">Systems &amp; AI</span>
             </Link>
 
-            <div className="hidden lg:flex items-center gap-2 px-2.5 py-1 rounded-[6px] border border-border bg-muted text-xs text-muted-foreground font-mono">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+            <div className="hidden lg:flex items-center gap-2 px-2.5 py-1 border border-border bg-muted text-xs text-muted-foreground font-mono">
+              <span className="w-1.5 h-1.5 bg-accent" />
               <span>Available for hire</span>
             </div>
           </div>
@@ -79,7 +79,7 @@ export function Nav() {
                 <Link
                   key={label}
                   href="/case-studies"
-                  className="px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors rounded-[6px]"
+                  className="px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {label}
                 </Link>
@@ -87,7 +87,7 @@ export function Nav() {
                 <a
                   key={label}
                   href={`/#${section}`}
-                  className="px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors rounded-[6px]"
+                  className="px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
                   onClick={(e) => navigateToSection(e, section)}
                 >
                   {label}
@@ -101,7 +101,7 @@ export function Nav() {
             <a
               href="/#contact"
               onClick={(e) => navigateToSection(e, 'contact')}
-              className="px-4 py-2 rounded-[6px] text-xs font-medium bg-primary text-primary-foreground hover:opacity-90 transition-opacity cursor-pointer"
+              className="px-4 py-2 text-xs font-medium bg-accent text-accent-foreground hover:opacity-90 transition-opacity cursor-pointer"
             >
               Start a Project
             </a>
@@ -112,7 +112,7 @@ export function Nav() {
             <a
               href="/#contact"
               onClick={(e) => navigateToSection(e, 'contact')}
-              className="px-3 py-1.5 rounded-[6px] text-xs font-medium bg-primary text-primary-foreground cursor-pointer"
+              className="px-3 py-1.5 text-xs font-medium bg-accent text-accent-foreground cursor-pointer"
             >
               Start
             </a>
@@ -120,7 +120,7 @@ export function Nav() {
               onClick={() => setMenuOpen((v) => !v)}
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={menuOpen}
-              className="w-8 h-8 flex flex-col items-center justify-center gap-1 rounded-[6px] border border-border bg-card text-foreground"
+              className="w-8 h-8 flex flex-col items-center justify-center gap-1 border border-border bg-card text-foreground"
             >
               <span
                 className={`block h-0.5 w-4 bg-foreground transition-transform duration-200 ${
